@@ -1,0 +1,4 @@
+[
+  "tests/test_sgx_structs/bench_hello.py::test_my_stuff",
+  "tests/test_sgx_structs/bench_hello.py::test_my_stuff_different_arg"
+]
