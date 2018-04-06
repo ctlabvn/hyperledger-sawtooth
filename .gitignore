@@ -59,7 +59,7 @@
 /coverage
 /coverage/html
 /**/.coverage
-
+/**/__pycache__
 /docs/build/
 /docs/source/_autogen/
 /docs/source/cli/output/
