@@ -1,4 +1,5 @@
 import time
+from sawtooth_poet_common import sgx_structs
 
 def something(duration=0.000001):
     """

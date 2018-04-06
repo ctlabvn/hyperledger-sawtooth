@@ -23,6 +23,7 @@ services:
     volumes:
       - ../sawtooth-core:/project
       - ./tests:/usr/bin/tests
+      - ./benchs:/usr/bin/benchs
     tty: true
     command: /bin/bash
     working_dir: /project    

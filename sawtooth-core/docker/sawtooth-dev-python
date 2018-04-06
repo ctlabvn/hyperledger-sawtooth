@@ -85,6 +85,7 @@ RUN echo "deb [arch=amd64] http://repo.sawtooth.me/ubuntu/ci xenial universe" >>
  && pip3 install \
     pylint \
     pycodestyle \
+    pytest-benchmark \
     bandit \
     coverage --upgrade
 
