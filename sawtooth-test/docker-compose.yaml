@@ -24,11 +24,15 @@ services:
       - ../sawtooth-core:/project
     tty: true
     command: /bin/bash
+    working_dir: /project
     # command: nose2-3
-    #     -c /project/validator/nose2.cfg
+    #     -c validator/nose2.cfg
     #     -v
-    #     -s /project/validator/tests
+    #     -s validator/tests
     environment:
         PYTHONPATH: "/project/signing:\
+            /project/consensus/poet/common:\
+            /project/consensus/poet/core:\
+            /project/consensus/poet/simulator:\
             /project/core:\
             /project/validator"
