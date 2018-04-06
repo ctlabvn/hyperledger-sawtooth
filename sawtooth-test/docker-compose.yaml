@@ -18,7 +18,7 @@ version: "3"
 services:
 
   unit-validator:
-    image: sawtooth-dev-python
+    image: thanhtu/sawtooth-dev-python
     container_name: unit-validator
     volumes:
       - ../sawtooth-core:/project
