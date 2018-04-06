@@ -1,0 +1,4 @@
+START_DIR=$1
+: ${CONFIG_FILE:=`dirname $START_DIR`/nose2.cfg}
+
+nose2-3 -v -s $START_DIR -c $CONFIG_FILE

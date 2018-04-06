@@ -22,6 +22,7 @@ services:
     container_name: unit-validator
     volumes:
       - ../sawtooth-core:/project
+      - ./tests:/usr/bin/tests
     tty: true
     command: /bin/bash
     working_dir: /project
@@ -29,6 +30,7 @@ services:
     #     -c validator/nose2.cfg
     #     -v
     #     -s validator/tests
+    # command: tests -s validator/tests
     environment:
         PYTHONPATH: "/project/signing:\
             /project/consensus/poet/common:\

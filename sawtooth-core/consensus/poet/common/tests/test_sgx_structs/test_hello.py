@@ -4,9 +4,9 @@ from sawtooth_poet_common import sgx_structs
 class TestStringMethods(unittest.TestCase):
 
     def test_split(self):
-        s = 'hello world'
+        s = '\nhello world'
         sgx_cpu_svn = sgx_structs.SgxCpuSvn()
-
+        print(s)
         self.assertEqual(s.split(), ['hello', 'world'])
         # check that s.split fails when the separator is not a string
         with self.assertRaises(TypeError):
