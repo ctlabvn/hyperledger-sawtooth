@@ -14,6 +14,3 @@
 # ------------------------------------------------------------------------------
 
 __all__ = []
-
-import sys
-sys.path.append('./consensus/poet/core/sawtooth_poet')

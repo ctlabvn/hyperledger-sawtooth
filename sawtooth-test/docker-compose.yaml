@@ -25,16 +25,25 @@ services:
       - ./tests:/usr/bin/tests
     tty: true
     command: /bin/bash
-    working_dir: /project
-    # command: nose2-3
-    #     -c validator/nose2.cfg
-    #     -v
-    #     -s validator/tests
+    working_dir: /project    
     # command: tests -s validator/tests
     environment:
         PYTHONPATH: "/project/signing:\
             /project/consensus/poet/common:\
             /project/consensus/poet/core:\
+            /project/consensus/poet/sgx:\
             /project/consensus/poet/simulator:\
+            /project/consensus/poet/families:\
+            /project/families/battleship:\            
+            /project/families/block_info:\
+            /project/families/indentity:\
+            /project/families/settings:\
+            /project/sdk/python:\
+            /project/integration:\
+            /project/signing:\
             /project/core:\
+            /project/utility/ias_client:\
+            /project/utility/ias_proxy:\
             /project/validator"
+
+            
