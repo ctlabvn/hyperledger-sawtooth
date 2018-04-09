@@ -10,5 +10,5 @@ docker-compose up -d
 ```sh
 docker exec -it sawtooth-test bash
 tests consensus/poet/common/tests
-benchs consensus/poet/common/tests/test_sgx_structs/bench_hello.py
+benchs consensus/poet/common/tests/test_sgx_structs/bench_hello.py --benchmark-json=/result/bench_secp256k1_signer.json
 ```

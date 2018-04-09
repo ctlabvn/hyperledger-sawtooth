@@ -24,6 +24,7 @@ services:
       - ../sawtooth-core:/project
       - ./tests:/usr/bin/tests
       - ./benchs:/usr/bin/benchs
+      - ./result:/result
     tty: true
     command: /bin/bash
     working_dir: /project    
