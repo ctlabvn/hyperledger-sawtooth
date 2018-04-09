@@ -1,12 +1,14 @@
-### Start environment ###
+### Start environment
 
 ```sh
+cd sawtooth-test
 docker-compose up -d
 ```
 
-### Run test & benchmark ###
+### Run test & benchmark
 
 ```sh
+docker exec -it sawtooth-test bash
 tests consensus/poet/common/tests
 benchs consensus/poet/common/tests/test_sgx_structs/bench_hello.py
 ```

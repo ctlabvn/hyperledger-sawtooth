@@ -19,7 +19,7 @@ services:
 
   unit-validator:
     image: thanhtu/sawtooth-dev-python
-    container_name: unit-validator
+    container_name: sawtooth-test
     volumes:
       - ../sawtooth-core:/project
       - ./tests:/usr/bin/tests
