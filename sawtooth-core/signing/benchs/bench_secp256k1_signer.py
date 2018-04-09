@@ -50,94 +50,21 @@ def test_hex_key(benchmark):
     assert priv_key.get_algorithm_name() == "secp256k1"
     assert priv_key.as_hex() == KEY1_PRIV_HEX
 
+# 91 us per operation, 11k ops/s
+def test_single_key_signing(benchmark):
+    context = create_context("secp256k1")
+    factory = CryptoFactory(context)
+    priv_key = Secp256k1PrivateKey.from_hex(KEY1_PRIV_HEX)    
+    signer = factory.new_signer(priv_key)
+    signature = benchmark(signer.sign, MSG1.encode())
     
+    assert signature == MSG1_KEY1_SIG
 
-#     def test_priv_to_public_key(self):
-#         context = create_context("secp256k1")
-#         self.assertEqual(context.get_algorithm_name(), "secp256k1")
+# 77 us per operation, 13k ops/s
+def test_verification(benchmark):
+    context = create_context("secp256k1")
+    factory = CryptoFactory(context)
+    pub_key1 = Secp256k1PublicKey.from_hex(KEY1_PUB_HEX)
+    result = benchmark(context.verify, MSG1_KEY1_SIG, MSG1.encode(), pub_key1)
+    assert result == True
 
-#         priv_key1 = Secp256k1PrivateKey.from_hex(KEY1_PRIV_HEX)
-#         self.assertEqual(priv_key1.get_algorithm_name(), "secp256k1")
-#         self.assertEqual(priv_key1.as_hex(), KEY1_PRIV_HEX)
-
-#         public_key1 = context.get_public_key(priv_key1)
-#         self.assertEqual(public_key1.as_hex(), KEY1_PUB_HEX)
-
-#         priv_key2 = Secp256k1PrivateKey.from_hex(KEY2_PRIV_HEX)
-#         self.assertEqual(priv_key2.get_algorithm_name(), "secp256k1")
-#         self.assertEqual(priv_key2.as_hex(), KEY2_PRIV_HEX)
-
-#         public_key2 = context.get_public_key(priv_key2)
-#         self.assertEqual(public_key2.as_hex(), KEY2_PUB_HEX)
-
-#     def test_check_invalid_digit(self):
-#         priv_chars = list(KEY1_PRIV_HEX)
-#         priv_chars[3] = 'i'
-#         with self.assertRaises(ParseError):
-#             Secp256k1PrivateKey.from_hex(''.join(priv_chars))
-
-#         pub_chars = list(KEY1_PUB_HEX)
-#         pub_chars[3] = 'i'
-#         with self.assertRaises(ParseError):
-#             Secp256k1PublicKey.from_hex(''.join(pub_chars))
-
-#     def test_single_key_signing(self):
-#         context = create_context("secp256k1")
-#         self.assertEqual(context.get_algorithm_name(), "secp256k1")
-
-#         factory = CryptoFactory(context)
-#         self.assertEqual(factory.context.get_algorithm_name(),
-#                          "secp256k1")
-
-#         priv_key = Secp256k1PrivateKey.from_hex(KEY1_PRIV_HEX)
-#         self.assertEqual(priv_key.get_algorithm_name(), "secp256k1")
-#         self.assertEqual(priv_key.as_hex(), KEY1_PRIV_HEX)
-
-#         signer = factory.new_signer(priv_key)
-#         signature = signer.sign(MSG1.encode())
-#         self.assertEqual(signature, MSG1_KEY1_SIG)
-
-#     def test_many_key_signing(self):
-#         context = create_context("secp256k1")
-#         self.assertEqual(context.get_algorithm_name(), "secp256k1")
-
-#         priv_key1 = Secp256k1PrivateKey.from_hex(KEY1_PRIV_HEX)
-#         self.assertEqual(priv_key1.get_algorithm_name(), "secp256k1")
-#         self.assertEqual(priv_key1.as_hex(), KEY1_PRIV_HEX)
-
-#         priv_key2 = Secp256k1PrivateKey.from_hex(KEY2_PRIV_HEX)
-#         self.assertEqual(priv_key2.get_algorithm_name(), "secp256k1")
-#         self.assertEqual(priv_key2.as_hex(), KEY2_PRIV_HEX)
-
-#         signature = context.sign(
-#             MSG1.encode(),
-#             priv_key1)
-#         self.assertEqual(signature, MSG1_KEY1_SIG)
-
-#         signature = context.sign(
-#             MSG2.encode(),
-#             priv_key2)
-#         self.assertEqual(signature, MSG2_KEY2_SIG)
-
-#     def test_verification(self):
-#         context = create_context("secp256k1")
-#         self.assertEqual(context.get_algorithm_name(), "secp256k1")
-
-#         pub_key1 = Secp256k1PublicKey.from_hex(KEY1_PUB_HEX)
-#         self.assertEqual(pub_key1.get_algorithm_name(), "secp256k1")
-#         self.assertEqual(pub_key1.as_hex(), KEY1_PUB_HEX)
-
-#         result = context.verify(MSG1_KEY1_SIG, MSG1.encode(), pub_key1)
-#         self.assertEqual(result, True)
-
-#     def test_verification_error(self):
-#         context = create_context("secp256k1")
-#         self.assertEqual(context.get_algorithm_name(), "secp256k1")
-
-#         pub_key1 = Secp256k1PublicKey.from_hex(KEY1_PUB_HEX)
-#         self.assertEqual(pub_key1.get_algorithm_name(), "secp256k1")
-#         self.assertEqual(pub_key1.as_hex(), KEY1_PUB_HEX)
-
-#         # This signature doesn't match for MSG1/KEY1
-#         result = context.verify(MSG2_KEY2_SIG, MSG1.encode(), pub_key1)
-#         self.assertEqual(result, False)
