@@ -133,6 +133,7 @@
 /perf/intkey_workload/Cargo.lock
 /perf/intkey_workload/target
 
+**/node_modules
 **/.cache
 *.batch
 *.pyc
