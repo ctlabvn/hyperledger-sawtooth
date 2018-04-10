@@ -1,1 +1,1 @@
-py.test --benchmark-columns=min,max,mean,rounds,iterations $@
+py.test --benchmark-columns=min,max,mean,ops,rounds,iterations $@
