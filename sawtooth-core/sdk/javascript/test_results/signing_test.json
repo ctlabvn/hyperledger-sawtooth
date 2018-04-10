@@ -1,0 +1,34 @@
+{
+ "benchmarks": [
+  {
+   "name": "test_parsing",
+   "ops": "1757752",
+   "cycles": 86,
+   "tpo(μs)": "0.57"
+  },
+  {
+   "name": "test_private to public",
+   "ops": "29288",
+   "cycles": 83,
+   "tpo(μs)": "34.14"
+  },
+  {
+   "name": "test_single_signing",
+   "ops": "14923",
+   "cycles": 85,
+   "tpo(μs)": "67.01"
+  },
+  {
+   "name": "test_multiple_signing",
+   "ops": "14886",
+   "cycles": 84,
+   "tpo(μs)": "67.18"
+  },
+  {
+   "name": "test_verification",
+   "ops": "10013",
+   "cycles": 84,
+   "tpo(μs)": "99.87"
+  }
+ ]
+}

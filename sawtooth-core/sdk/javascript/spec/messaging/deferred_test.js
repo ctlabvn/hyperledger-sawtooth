@@ -54,9 +54,9 @@ describe('Deferred', () => {
         assert.equal(undefined, e)
         done()
       })
-      .then(() => {
-        assert.ok(false, 'Did not catch')
-      })
+        .then(() => {
+          assert.ok(false, 'Did not catch')
+        })
 
       deferred.reject()
     })
@@ -68,9 +68,9 @@ describe('Deferred', () => {
         assert.equal('my error msg', e.message)
         done()
       })
-      .then(() => {
-        assert.ok(false, 'Did not catch')
-      })
+        .then(() => {
+          assert.ok(false, 'Did not catch')
+        })
 
       deferred.reject(new Error('my error msg'))
     })

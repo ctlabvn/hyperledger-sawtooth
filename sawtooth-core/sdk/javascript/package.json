@@ -13,13 +13,15 @@
   "repository": "https://github.com/hyperledger/sawtooth-core.git",
   "main": "index.js",
   "scripts": {
-    "test": "standard && node_modules/mocha/bin/mocha --recursive spec",
+    "test": "node_modules/mocha/bin/mocha --recursive spec",
     "compile_protobuf": "node compile_protobuf.js > protobuf/protobuf_bundle.json",
     "prepublish": "npm run compile_protobuf && npm test"
   },
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
+    "benchmark": "^2.1.4",
+    "fs": "0.0.1-security",
     "protobufjs": "^6.7.3",
     "secp256k1": "^3.2.5",
     "uuid": "^3.0.1",

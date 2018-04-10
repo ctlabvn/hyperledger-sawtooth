@@ -1,0 +1,16 @@
+{
+ "benchmarks": [
+  {
+   "name": "test_generate_id",
+   "ops": "188346",
+   "cycles": 81,
+   "tpo(μs)": "5"
+  },
+  {
+   "name": "test_encode_message",
+   "ops": "1049674",
+   "cycles": 84,
+   "tpo(μs)": "1"
+  }
+ ]
+}
