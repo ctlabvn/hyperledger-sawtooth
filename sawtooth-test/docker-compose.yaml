@@ -36,10 +36,10 @@ services:
             /project/consensus/poet/sgx:\
             /project/consensus/poet/simulator:\
             /project/consensus/poet/families:\
-            /project/families/battleship/sawtooth_battleship:\            
-            /project/families/block_info/sawtooth_block_info:\
-            /project/families/indentity/sawtooth_identity:\
-            /project/families/settings/sawtooth_settings:\
+            /project/families/battleship:\            
+            /project/families/block_info:\
+            /project/families/indentity:\
+            /project/families/settings:\
             /project/sdk/python:\
             /project/integration:\
             /project/signing:\
