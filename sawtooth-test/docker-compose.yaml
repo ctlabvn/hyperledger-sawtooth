@@ -36,7 +36,7 @@ services:
             /project/consensus/poet/sgx:\
             /project/consensus/poet/simulator:\
             /project/consensus/poet/families:\
-            /project/families/battleship:\            
+            /project/families/battleship:\
             /project/families/block_info:\
             /project/families/indentity:\
             /project/families/settings:\
