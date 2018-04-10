@@ -1,21 +1,27 @@
 const Benchmark = require('benchmark');
-const {
-  Stream,
-  _encodeMessage,
-  _generateId
-} = require('../../messaging/stream');
+const { TransactionProcessor } = require('../../processor/index');
 const { exportToFile } = require('../../utils');
-
+const { JSONHandler } = require('./handler');
 var suite = new Benchmark.Suite();
 var results = [];
 
 suite
-  .add('test_generate_id', function() {
-    _generateId();
-  })
-  .add('test_encode_message', function() {
-    _encodeMessage(1234, '1234', Buffer.from('abc'));
-  })
+  .add(
+    'start stream',
+    function() {
+      const VALIDATOR_URL = 'tcp://localhost:4004';
+
+      // Initialize Transaction Processor
+      const tp = new TransactionProcessor(VALIDATOR_URL);
+      tp.addHandler(new JSONHandler());
+      tp.start();
+    }
+    // {
+    //   maxTime: 2,
+    //   async: false,
+    //   delay: 1
+    // }
+  )
   .on('cycle', function(event) {
     var jsonEvent = JSON.parse(JSON.stringify(event.target));
     results.push({
@@ -35,6 +41,6 @@ suite
     console.log('Fastest is ' + this.filter('fastest').map('name'));
     let finalResult = {};
     finalResult.benchmarks = results;
-    exportToFile('messaging_test', finalResult);
+    exportToFile('processor_index_test', finalResult);
   })
   .run({ async: true });
