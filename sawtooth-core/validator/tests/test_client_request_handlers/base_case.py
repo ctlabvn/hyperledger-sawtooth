@@ -82,18 +82,3 @@ class ClientHandlerTestCase(unittest.TestCase):
         for base_id in base_ids:
             self._store.add_block(base_id)
 
-    def assert_all_instances(self, items, cls):
-        """Checks that all items in a collection are instances of a class
-        """
-        for item in items:
-            self.assertIsInstance(item, cls)
-
-    def assert_valid_paging(self, response, start, limit, next_id=''):
-        """Checks that a response's ClientPagingResponse is set properly.
-        Defaults to expecting a single page with all mock resources.
-        """
-        self.assertIsInstance(
-            response.paging, client_list_control_pb2.ClientPagingResponse)
-        self.assertEqual(response.paging.start, start)
-        self.assertEqual(response.paging.limit, limit)
-        self.assertEqual(response.paging.next, next_id)
