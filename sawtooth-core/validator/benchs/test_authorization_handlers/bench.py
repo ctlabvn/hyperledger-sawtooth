@@ -1,25 +1,32 @@
 import time
 from sawtooth_poet_common import sgx_structs
+
+import sys
+sys.path.append("/project/families/block_info")
+
+
 from sawtooth_block_info.protobuf.block_info_pb2 import BlockInfo
+print (sys.path)
 
-def something(duration=0.000001):
-    """
-    Function that needs some serious benchmarking.
-    """
-    time.sleep(duration)
-    # You may return anything you want, like the result of a computation
-    return 123
 
-def test_my_stuff(benchmark):
-    # benchmark something
-    result = benchmark(something)
+# def something(duration=0.000001):
+#     """
+#     Function that needs some serious benchmarking.
+#     """
+#     time.sleep(duration)
+#     # You may return anything you want, like the result of a computation
+#     return 123
 
-    # Extra code, to verify that the run completed correctly.
-    # Sometimes you may want to check the result, fast functions
-    # are no good if they return incorrect results :-)
-    assert result == 123
+# def test_my_stuff(benchmark):
+#     # benchmark something
+#     result = benchmark(something)
 
-def test_my_stuff_different_arg(benchmark):
-    # benchmark something, but add some arguments
-    result = benchmark(something, 0.001)
-    assert result == 123
+#     # Extra code, to verify that the run completed correctly.
+#     # Sometimes you may want to check the result, fast functions
+#     # are no good if they return incorrect results :-)
+#     assert result == 123
+
+# def test_my_stuff_different_arg(benchmark):
+#     # benchmark something, but add some arguments
+#     result = benchmark(something, 0.001)
+#     assert result == 123
