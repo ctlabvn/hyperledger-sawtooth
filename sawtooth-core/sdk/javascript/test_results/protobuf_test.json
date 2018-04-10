@@ -1,0 +1,16 @@
+{
+ "benchmarks": [
+  {
+   "name": "test_encode_messages",
+   "ops": "1092187",
+   "cycles": 87,
+   "tpo(μs)": "0.92"
+  },
+  {
+   "name": "test_decode_messages",
+   "ops": "2850296",
+   "cycles": 86,
+   "tpo(μs)": "0.35"
+  }
+ ]
+}

@@ -25,9 +25,10 @@ const fs = require('fs')
 
 let root = new protobuf.Root()
 
-let files = fs.readdirSync('../../protos')
-              .map(f => path.resolve('../../protos', f))
-              .filter(f => f.endsWith('.proto'))
+let files = fs
+  .readdirSync('../../protos')
+  .map(f => path.resolve('../../protos', f))
+  .filter(f => f.endsWith('.proto'))
 
 try {
   root = root.loadSync(files)
