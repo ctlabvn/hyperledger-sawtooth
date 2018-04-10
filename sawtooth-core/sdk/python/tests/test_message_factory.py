@@ -121,7 +121,7 @@ def test__validate_addresses(benchmark):
 	context = create_context("secp256k1")
 	publicKey = battleshipMessage.get_public_key()
 	address = battleshipMessage.namespaces[0] + MessageFactory.sha256(publicKey.encode("utf-8"))
-	benchmark(MessageFactory._validate_addresses, address)
+	benchmark(MessageFactory._validate_addresses, [address])
 	return
 
 def test_create_tp_process_request(benchmark):
@@ -143,7 +143,7 @@ def test_create_get_request(benchmark):
 	context = create_context("secp256k1")
 	publicKey = battleshipMessage.get_public_key()
 	address = battleshipMessage.namespaces[0] + MessageFactory.sha256(publicKey.encode("utf-8"))
-	benchmark(MessageFactory.create_get_request, battleshipMessage, address)	
+	benchmark(MessageFactory.create_get_request, battleshipMessage, [address])	
 	return
 
 def test_create_get_response(benchmark):
@@ -169,7 +169,7 @@ def test_create_set_response(benchmark):
 	context = create_context("secp256k1")
 	publicKey = battleshipMessage.get_public_key()
 	address = battleshipMessage.namespaces[0] + MessageFactory.sha256(publicKey.encode("utf-8"))
-	benchmark(MessageFactory.create_set_response, battleshipMessage, address)	
+	benchmark(MessageFactory.create_set_response, battleshipMessage, [address])	
 	return
 
 def test_create_delete_request(benchmark):
@@ -177,7 +177,7 @@ def test_create_delete_request(benchmark):
 	context = create_context("secp256k1")
 	publicKey = battleshipMessage.get_public_key()
 	address = battleshipMessage.namespaces[0] + MessageFactory.sha256(publicKey.encode("utf-8"))
-	benchmark(MessageFactory.create_delete_request, battleshipMessage, address)	
+	benchmark(MessageFactory.create_delete_request, battleshipMessage, [address])	
 	return
 
 def test_create_delete_response(benchmark):
@@ -185,7 +185,7 @@ def test_create_delete_response(benchmark):
 	context = create_context("secp256k1")
 	publicKey = battleshipMessage.get_public_key()
 	address = battleshipMessage.namespaces[0] + MessageFactory.sha256(publicKey.encode("utf-8"))
-	benchmark(MessageFactory.create_delete_response, battleshipMessage, address)	
+	benchmark(MessageFactory.create_delete_response, battleshipMessage, [address])	
 	return
 
 def test_create_add_event_request(benchmark):
