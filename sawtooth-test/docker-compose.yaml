@@ -24,6 +24,7 @@ services:
       - ../sawtooth-core:/project
       - ./tests:/usr/bin/tests
       - ./benchs:/usr/bin/benchs
+      - ./result:/result
     tty: true
     command: /bin/bash
     working_dir: /project    
@@ -35,14 +36,13 @@ services:
             /project/consensus/poet/sgx:\
             /project/consensus/poet/simulator:\
             /project/consensus/poet/families:\
-            /project/families/battleship:\            
+            /project/families/battleship:\
             /project/families/block_info:\
             /project/families/indentity:\
             /project/families/settings:\
             /project/sdk/python:\
             /project/integration:\
             /project/signing:\
-            /project/core:\
             /project/utility/ias_client:\
             /project/utility/ias_proxy:\
             /project/validator"

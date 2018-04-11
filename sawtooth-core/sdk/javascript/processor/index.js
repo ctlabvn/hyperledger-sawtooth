@@ -15,7 +15,7 @@
  * ------------------------------------------------------------------------------
  */
 
-'use strict'
+'use strict';
 
 const {
   TpRegisterRequest,
@@ -25,18 +25,18 @@ const {
   TpProcessResponse,
   PingResponse,
   Message
-} = require('../protobuf')
+} = require('../protobuf');
 
 const {
   InternalError,
   AuthorizationException,
   InvalidTransaction,
   ValidatorConnectionError
-} = require('./exceptions')
+} = require('./exceptions');
 
-const Context = require('./context')
+const Context = require('./context');
 
-const { Stream } = require('../messaging/stream')
+const { Stream } = require('../messaging/stream');
 
 /**
  * TransactionProcessor is a generic class for communicating with a
@@ -47,9 +47,9 @@ const { Stream } = require('../messaging/stream')
  * @param {string} url - the URL of the validator
  */
 class TransactionProcessor {
-  constructor (url) {
-    this._stream = new Stream(url)
-    this._handlers = []
+  constructor(url) {
+    this._stream = new Stream(url);
+    this._handlers = [];
   }
 
   /**
@@ -59,8 +59,8 @@ class TransactionProcessor {
    *
    * @param {TransactionHandler} handler - a handler to be added
    */
-  addHandler (handler) {
-    this._handlers.push(handler)
+  addHandler(handler) {
+    this._handlers.push(handler);
   }
 
   /**
@@ -68,144 +68,172 @@ class TransactionProcessor {
    * starts listening for requests and routing them to an appropriate
    * handler.
    */
-  start () {
+  start() {
     this._stream.connect(() => {
       this._stream.onReceive(message => {
         if (message.messageType !== Message.MessageType.TP_PROCESS_REQUEST) {
           if (message.messageType === Message.MessageType.PING_REQUEST) {
-            console.log(`Received Ping`)
-            let pingResponse = PingResponse.create()
+            console.log(`Received Ping`);
+            let pingResponse = PingResponse.create();
             this._stream.sendBack(
               Message.MessageType.PING_RESPONSE,
               message.correlationId,
               PingResponse.encode(pingResponse).finish()
-            )
-            return
+            );
+            return;
           }
           console.log(
             `Ignoring ${Message.MessageType.stringValue(message.messageType)}`
-          )
-          return
+          );
+          return;
         }
 
         const request = TpProcessRequest.toObject(
           TpProcessRequest.decode(message.content),
           { defaults: false }
-        )
-        const context = new Context(this._stream, request.contextId)
+        );
+        const context = new Context(this._stream, request.contextId);
 
         if (this._handlers.length > 0) {
-          let txnHeader = request.header
+          let txnHeader = request.header;
 
           let handler = this._handlers.find(
-            (candidate) =>
+            candidate =>
               candidate.transactionFamilyName === txnHeader.familyName &&
-              candidate.versions.includes(txnHeader.familyVersion))
+              candidate.versions.includes(txnHeader.familyVersion)
+          );
 
           if (handler) {
-            let applyPromise
+            let applyPromise;
             try {
-              applyPromise = Promise.resolve(handler.apply(request, context))
-            } catch(err) {
-              applyPromise = Promise.reject(err)
+              applyPromise = Promise.resolve(handler.apply(request, context));
+            } catch (err) {
+              applyPromise = Promise.reject(err);
             }
             applyPromise
-            .then(() =>
-              TpProcessResponse.create({
-                status: TpProcessResponse.Status.OK
+              .then(() =>
+                TpProcessResponse.create({
+                  status: TpProcessResponse.Status.OK
+                })
+              )
+              .catch(e => {
+                if (e instanceof InvalidTransaction) {
+                  console.log(e);
+                  return TpProcessResponse.create({
+                    status: TpProcessResponse.Status.INVALID_TRANSACTION,
+                    message: e.message,
+                    extendedData: e.extendedData
+                  });
+                } else if (e instanceof InternalError) {
+                  console.log('Internal Error Occurred', e);
+                  return TpProcessResponse.create({
+                    status: TpProcessResponse.Status.INTERNAL_ERROR,
+                    message: e.message,
+                    extendedData: e.extendedData
+                  });
+                } else if (e instanceof ValidatorConnectionError) {
+                  console.log('Validator disconnected.  Ignoring.');
+                } else if (e instanceof AuthorizationException) {
+                  console.log(e);
+                  return TpProcessResponse.create({
+                    status: TpProcessResponse.Status.INVALID_TRANSACTION,
+                    message: e.message,
+                    extendedData: e.extendedData
+                  });
+                } else {
+                  console.log(
+                    'Unhandled exception, returning INTERNAL_ERROR',
+                    e
+                  );
+                  return TpProcessResponse.create({
+                    status: TpProcessResponse.Status.INTERNAL_ERROR,
+                    message: `Unhandled exception in ${txnHeader.familyName} ${txnHeader.familyVersion}`
+                  });
+                }
               })
-            )
-            .catch(e => {
-              if (e instanceof InvalidTransaction) {
-                console.log(e)
-                return TpProcessResponse.create({
-                  status: TpProcessResponse.Status.INVALID_TRANSACTION,
-                  message: e.message,
-                  extendedData: e.extendedData
-                })
-              } else if (e instanceof InternalError) {
-                console.log('Internal Error Occurred', e)
-                return TpProcessResponse.create({
-                  status: TpProcessResponse.Status.INTERNAL_ERROR,
-                  message: e.message,
-                  extendedData: e.extendedData
-                })
-              } else if (e instanceof ValidatorConnectionError) {
-                console.log('Validator disconnected.  Ignoring.')
-              } else if (e instanceof AuthorizationException) {
-                console.log(e)
-                return TpProcessResponse.create({
-                  status: TpProcessResponse.Status.INVALID_TRANSACTION,
-                  message: e.message,
-                  extendedData: e.extendedData
-                })
-              } else {
-                console.log('Unhandled exception, returning INTERNAL_ERROR', e)
-                return TpProcessResponse.create({
-                  status: TpProcessResponse.Status.INTERNAL_ERROR,
-                  message: `Unhandled exception in ${txnHeader.familyName} ${txnHeader.familyVersion}`
-                })
-              }
-            })
-            .then((response) => {
-              if (response) {
-                this._stream.sendBack(
-                  Message.MessageType.TP_PROCESS_RESPONSE,
-                  message.correlationId,
-                  TpProcessResponse.encode(response).finish()
-                )
-              }
-            })
-            .catch(e => console.log('Unhandled error on sendBack', e))
+              .then(response => {
+                if (response) {
+                  this._stream.sendBack(
+                    Message.MessageType.TP_PROCESS_RESPONSE,
+                    message.correlationId,
+                    TpProcessResponse.encode(response).finish()
+                  );
+                }
+              })
+              .catch(e => console.log('Unhandled error on sendBack', e));
           }
         }
-      })
+      });
 
       this._handlers.forEach(handler => {
         handler.versions.forEach(version => {
-          this._stream.send(
-            Message.MessageType.TP_REGISTER_REQUEST,
-            TpRegisterRequest.encode({
-              family: handler.transactionFamilyName,
-              version: version,
-              namespaces: handler.namespaces
-            }).finish())
+          this._stream
+            .send(
+              Message.MessageType.TP_REGISTER_REQUEST,
+              TpRegisterRequest.encode({
+                family: handler.transactionFamilyName,
+                version: version,
+                namespaces: handler.namespaces
+              }).finish()
+            )
             .then(content => TpRegisterResponse.decode(content))
             .then(ack => {
-              let { transactionFamilyName: familyName } = handler
+              let { transactionFamilyName: familyName } = handler;
               let status =
                 ack.status === TpRegisterResponse.Status.OK
                   ? 'succeeded'
-                  : 'failed'
+                  : 'failed';
               console.log(
                 `Registration of [${familyName} ${version}] ${status}`
-              )
+              );
             })
             .catch(e => {
-              let { transactionFamilyName: familyName } = handler
+              let { transactionFamilyName: familyName } = handler;
               console.log(
                 `Registration of [${familyName} ${version}] Failed!`,
                 e
-              )
-            })
-        })
-      })
-    })
+              );
+            });
+        });
+      });
+    });
 
-    process.on('SIGINT', () => this._handleShutdown())
-    process.on('SIGTERM', () => this._handleShutdown())
+    process.on('SIGINT', () => this._handleShutdown());
+    process.on('SIGTERM', () => this._handleShutdown());
   }
 
-  _handleShutdown () {
-    console.log('Unregistering transaction processor')
+  _handleShutdown() {
+    console.log('Unregistering transaction processor');
     this._stream.send(
       Message.MessageType.TP_UNREGISTER_REQUEST,
       TpUnregisterRequest.encode().finish()
-    )
-    process.exit()
+    );
+    process.exit();
+  }
+}
+
+const _readOnlyProperty = (instance, propertyName, value) =>
+  Object.defineProperty(instance, propertyName, {
+    writeable: false,
+    enumerable: true,
+    congigurable: true,
+    value
+  });
+
+class TransactionHandler {
+  constructor(transactionFamilyName, version, encoding, namespaces) {
+    _readOnlyProperty(this, 'transactionFamilyName', transactionFamilyName);
+    _readOnlyProperty(this, 'version', version);
+    _readOnlyProperty(this, 'encoding', encoding);
+    _readOnlyProperty(this, 'namespaces', namespaces);
+  }
+
+  apply(transactionProcessRequest, state) {
+    throw new Error('apply(TpProcessRequest, state) not implemented');
   }
 }
 
 module.exports = {
-  TransactionProcessor
-}
+  TransactionProcessor,
+  TransactionHandler
+};

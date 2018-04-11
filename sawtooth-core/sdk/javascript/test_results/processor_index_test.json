@@ -1,0 +1,10 @@
+{
+ "benchmarks": [
+  {
+   "name": "start stream",
+   "ops": 0,
+   "cycles": 0,
+   "tpo(μs)": 0
+  }
+ ]
+}
