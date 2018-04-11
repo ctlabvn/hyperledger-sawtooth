@@ -1,0 +1,69 @@
+{
+    "datetime": "2018-04-10T16:46:34.338656",
+    "version": "3.1.1",
+    "benchmarks": [
+        {
+            "name": "test_create_block_address",
+            "extra_info": {},
+            "param": null,
+            "group": null,
+            "stats": {
+                "outliers": "1;0",
+                "median": 1.5186000382527708e-06,
+                "mean": 1.601999974809587e-06,
+                "iterations": 5,
+                "stddev": 5.861669072800214e-07,
+                "iqr": 8.725501174922101e-07,
+                "hd15iqr": 2.2254000214161353e-06,
+                "total": 4.805999924428761e-06,
+                "ld15iqr": 1.061999864759855e-06,
+                "q1": 1.176149908133084e-06,
+                "q3": 2.048700025625294e-06,
+                "max": 2.2254000214161353e-06,
+                "min": 1.061999864759855e-06,
+                "stddev_outliers": 1,
+                "iqr_outliers": 0,
+                "rounds": 3,
+                "ops": 624219.7351587721
+            },
+            "options": {
+                "disable_gc": false,
+                "warmup": false,
+                "timer": "perf_counter",
+                "max_time": 1.0,
+                "min_rounds": 5,
+                "min_time": 5e-06
+            },
+            "params": null,
+            "fullname": "benchs/bench_block_info_common.py::test_create_block_address"
+        }
+    ],
+    "commit_info": {
+        "id": "unversioned",
+        "dirty": false,
+        "author_time": null,
+        "project": "benchs",
+        "branch": "(unknown)",
+        "time": null
+    },
+    "machine_info": {
+        "system": "Linux",
+        "python_implementation_version": "3.5.2",
+        "python_implementation": "CPython",
+        "python_compiler": "GCC 5.4.0 20160609",
+        "node": "5166e9086b87",
+        "python_build": [
+            "default",
+            "Nov 23 2017 16:37:01"
+        ],
+        "release": "4.9.87-linuxkit-aufs",
+        "cpu": {
+            "hardware": "unknown",
+            "vendor_id": "GenuineIntel",
+            "brand": "Intel(R) Core(TM) i5-5257U CPU @ 2.70GHz"
+        },
+        "processor": "x86_64",
+        "machine": "x86_64",
+        "python_version": "3.5.2"
+    }
+}

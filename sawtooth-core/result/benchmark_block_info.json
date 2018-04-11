@@ -1,0 +1,114 @@
+{
+    "commit_info": {
+        "time": null,
+        "branch": "(unknown)",
+        "id": "unversioned",
+        "author_time": null,
+        "dirty": false,
+        "project": "benchs"
+    },
+    "machine_info": {
+        "python_build": [
+            "default",
+            "Nov 23 2017 16:37:01"
+        ],
+        "release": "4.9.87-linuxkit-aufs",
+        "python_implementation": "CPython",
+        "python_compiler": "GCC 5.4.0 20160609",
+        "node": "5166e9086b87",
+        "cpu": {
+            "vendor_id": "GenuineIntel",
+            "brand": "Intel(R) Core(TM) i5-5257U CPU @ 2.70GHz",
+            "hardware": "unknown"
+        },
+        "python_implementation_version": "3.5.2",
+        "processor": "x86_64",
+        "python_version": "3.5.2",
+        "machine": "x86_64",
+        "system": "Linux"
+    },
+    "version": "3.1.1",
+    "datetime": "2018-04-10T16:05:06.682191",
+    "benchmarks": [
+        {
+            "param": null,
+            "fullname": "benchs/benchmark_block_info.py::test_create_console_handler",
+            "options": {
+                "max_time": 1.0,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "warmup": false,
+                "min_time": 5e-06,
+                "disable_gc": false
+            },
+            "extra_info": {},
+            "group": null,
+            "stats": {
+                "q1": 6.871800019325746e-06,
+                "median": 7.808999998815126e-06,
+                "data": [
+                    1.5906400039966685e-05,
+                    7.808999998815126e-06,
+                    6.55940002616262e-06
+                ],
+                "hd15iqr": 1.5906400039966685e-05,
+                "total": 3.0274800064944432e-05,
+                "rounds": 3,
+                "iterations": 5,
+                "ops": 99092.3141875258,
+                "min": 6.55940002616262e-06,
+                "stddev_outliers": 1,
+                "max": 1.5906400039966685e-05,
+                "iqr_outliers": 0,
+                "q3": 1.3882050029678795e-05,
+                "ld15iqr": 6.55940002616262e-06,
+                "outliers": "1;0",
+                "iqr": 7.010250010353049e-06,
+                "stddev": 5.07437675608456e-06,
+                "mean": 1.0091600021648143e-05
+            },
+            "params": null,
+            "name": "test_create_console_handler"
+        },
+        {
+            "param": null,
+            "fullname": "benchs/benchmark_block_info.py::test_processor_create_parser",
+            "options": {
+                "max_time": 1.0,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "warmup": false,
+                "min_time": 5e-06,
+                "disable_gc": false
+            },
+            "extra_info": {},
+            "group": null,
+            "stats": {
+                "q1": 0.043146943200054015,
+                "median": 0.04349874360004833,
+                "data": [
+                    0.04672392099992066,
+                    0.04349874360004833,
+                    0.04302967640005591
+                ],
+                "hd15iqr": 0.04672392099992066,
+                "total": 0.13325234100002492,
+                "rounds": 3,
+                "iterations": 5,
+                "ops": 22.513675763485754,
+                "min": 0.04302967640005591,
+                "stddev_outliers": 1,
+                "max": 0.04672392099992066,
+                "iqr_outliers": 0,
+                "q3": 0.045917626649952574,
+                "ld15iqr": 0.04302967640005591,
+                "outliers": "1;0",
+                "iqr": 0.002770683449898559,
+                "stddev": 0.0020111868992540157,
+                "mean": 0.0444174470000083
+            },
+            "params": null,
+            "name": "test_processor_create_parser"
+        }
+    ]
+}

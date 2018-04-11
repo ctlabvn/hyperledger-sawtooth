@@ -38,7 +38,7 @@ services:
             /project/consensus/poet/families:\
             /project/families/battleship:\
             /project/families/block_info:\
-            /project/families/indentity:\
+            /project/families/identity:\
             /project/families/settings:\
             /project/sdk/python:\
             /project/integration:\
@@ -46,6 +46,7 @@ services:
             /project/core:\
             /project/utility/ias_client:\
             /project/utility/ias_proxy:\
+            /project/validator/tests:\
             /project/validator"
 
             

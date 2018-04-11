@@ -1,0 +1,174 @@
+{
+    "benchmarks": [
+        {
+            "fullname": "benchs/bench_block_info_processor.py::test_create_console_handler",
+            "group": null,
+            "stats": {
+                "iterations": 5,
+                "total": 3.0078800045885144e-05,
+                "outliers": "1;0",
+                "stddev_outliers": 1,
+                "iqr": 6.68835000396939e-06,
+                "ops": 99738.02131147208,
+                "rounds": 3,
+                "q3": 1.364710001325875e-05,
+                "mean": 1.0026266681961714e-05,
+                "iqr_outliers": 0,
+                "q1": 6.95875000928936e-06,
+                "min": 6.673999996564816e-06,
+                "hd15iqr": 1.5591800001857335e-05,
+                "ld15iqr": 6.673999996564816e-06,
+                "median": 7.813000047462993e-06,
+                "max": 1.5591800001857335e-05,
+                "stddev": 4.853421589985542e-06
+            },
+            "extra_info": {},
+            "options": {
+                "max_time": 1.0,
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_time": 5e-06,
+                "warmup": false,
+                "min_rounds": 5
+            },
+            "name": "test_create_console_handler",
+            "params": null,
+            "param": null
+        },
+        {
+            "fullname": "benchs/bench_block_info_processor.py::test_processor_create_parser",
+            "group": null,
+            "stats": {
+                "iterations": 5,
+                "total": 0.16113231819999782,
+                "outliers": "1;0",
+                "stddev_outliers": 1,
+                "iqr": 0.0070611696000923985,
+                "ops": 18.618238932529927,
+                "rounds": 3,
+                "q3": 0.05721440295005777,
+                "mean": 0.05371077273333261,
+                "iqr_outliers": 0,
+                "q1": 0.050153233349965375,
+                "min": 0.048895507999986876,
+                "hd15iqr": 0.058310400800110074,
+                "ld15iqr": 0.048895507999986876,
+                "median": 0.05392640939990088,
+                "max": 0.058310400800110074,
+                "stddev": 0.00471114911549501
+            },
+            "extra_info": {},
+            "options": {
+                "max_time": 1.0,
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_time": 5e-06,
+                "warmup": false,
+                "min_rounds": 5
+            },
+            "name": "test_processor_create_parser",
+            "params": null,
+            "param": null
+        },
+        {
+            "fullname": "benchs/bench_block_info_processor.py::test_create_block_info_config",
+            "group": null,
+            "stats": {
+                "iterations": 5,
+                "total": 5.8025800171890296e-05,
+                "outliers": "1;0",
+                "stddev_outliers": 1,
+                "iqr": 1.2339750128376181e-05,
+                "ops": 51701.13968464159,
+                "rounds": 3,
+                "q3": 2.6119700123672374e-05,
+                "mean": 1.93419333906301e-05,
+                "iqr_outliers": 0,
+                "q1": 1.3779949995296192e-05,
+                "min": 1.3546999980462715e-05,
+                "hd15iqr": 3.0000000151630957e-05,
+                "ld15iqr": 1.3546999980462715e-05,
+                "median": 1.4478800039796624e-05,
+                "max": 3.0000000151630957e-05,
+                "stddev": 9.241907441059295e-06
+            },
+            "extra_info": {},
+            "options": {
+                "max_time": 1.0,
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_time": 5e-06,
+                "warmup": false,
+                "min_rounds": 5
+            },
+            "name": "test_create_block_info_config",
+            "params": null,
+            "param": null
+        },
+        {
+            "fullname": "benchs/bench_block_info_processor.py::test_setup_loggers",
+            "group": null,
+            "stats": {
+                "iterations": 5,
+                "total": 0.0006581175999599509,
+                "outliers": "1;0",
+                "stddev_outliers": 1,
+                "iqr": 9.980085001188855e-05,
+                "ops": 4558.455814253504,
+                "rounds": 3,
+                "q3": 0.00026730535000751843,
+                "mean": 0.00021937253331998362,
+                "iqr_outliers": 0,
+                "q1": 0.00016750449999562987,
+                "min": 0.00014496820003842003,
+                "hd15iqr": 0.0002780360000542714,
+                "ld15iqr": 0.00014496820003842003,
+                "median": 0.00023511339986725943,
+                "max": 0.0002780360000542714,
+                "stddev": 6.791605855767114e-05
+            },
+            "extra_info": {},
+            "options": {
+                "max_time": 1.0,
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_time": 5e-06,
+                "warmup": false,
+                "min_rounds": 5
+            },
+            "name": "test_setup_loggers",
+            "params": null,
+            "param": null
+        }
+    ],
+    "commit_info": {
+        "dirty": false,
+        "id": "unversioned",
+        "project": "benchs",
+        "time": null,
+        "branch": "(unknown)",
+        "author_time": null
+    },
+    "datetime": "2018-04-10T16:47:48.272363",
+    "version": "3.1.1",
+    "machine_info": {
+        "processor": "x86_64",
+        "python_implementation_version": "3.5.2",
+        "cpu": {
+            "vendor_id": "GenuineIntel",
+            "brand": "Intel(R) Core(TM) i5-5257U CPU @ 2.70GHz",
+            "hardware": "unknown"
+        },
+        "python_version": "3.5.2",
+        "node": "5166e9086b87",
+        "release": "4.9.87-linuxkit-aufs",
+        "system": "Linux",
+        "python_implementation": "CPython",
+        "python_build": [
+            "default",
+            "Nov 23 2017 16:37:01"
+        ],
+        "python_compiler": "GCC 5.4.0 20160609",
+        "machine": "x86_64"
+    }
+}
