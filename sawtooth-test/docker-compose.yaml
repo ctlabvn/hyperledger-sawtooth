@@ -43,7 +43,6 @@ services:
             /project/sdk/python:\
             /project/integration:\
             /project/signing:\
-            /project/core:\
             /project/utility/ias_client:\
             /project/utility/ias_proxy:\
             /project/validator/tests:\
