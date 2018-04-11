@@ -24,14 +24,14 @@ import shutil
 from unittest import TestCase
 from unittest import mock
 
-from utils import random_name
-from utils import create_random_public_key_hash
+from test_ias_proxy.utils import random_name
+from test_ias_proxy.utils import create_random_public_key_hash
 
-# pylint: disable=no-name-in-module
+# pylint: disable = no - name - in-module
 from sawtooth_poet_sgx.poet_enclave_sgx import poet_enclave as poet
 
 
-class TestIasProxyClient(TestCase):
+class TestIasProxyClient():
     @classmethod
     def setUpClass(cls):
 
@@ -195,3 +195,9 @@ class TestIasProxyClient(TestCase):
             poet.verify_wait_certificate(
                 wait_cert,
                 other_signup_info.poet_public_key)
+
+
+def test_ias_proxy(benchmark):
+    iasProxy = TestIasProxyClient
+    result = benchmark(iasProxy.setUpClass)
+    return
