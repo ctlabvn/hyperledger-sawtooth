@@ -45,6 +45,7 @@ services:
             /project/signing:\
             /project/utility/ias_client:\
             /project/utility/ias_proxy:\
+            /project/validator/tests:\
             /project/validator"
 
             
