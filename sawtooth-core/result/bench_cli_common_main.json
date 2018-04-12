@@ -1,0 +1,128 @@
+{
+    "commit_info": {
+        "author_time": null,
+        "project": "benchs",
+        "time": null,
+        "id": "unversioned",
+        "branch": "(unknown)",
+        "dirty": false
+    },
+    "benchmarks": [
+        {
+            "fullname": "benchs/commons/bench_cli_common_main.py::test_create_console_handler",
+            "stats": {
+                "hd15iqr": 0.00019740000061574392,
+                "rounds": 10,
+                "q3": 6.08000009378884e-05,
+                "iqr": 4.8099998821271583e-05,
+                "min": 1.1100000847363845e-05,
+                "outliers": "1;1",
+                "q1": 1.2700002116616815e-05,
+                "stddev": 5.8457426122275106e-05,
+                "ops": 21285.65341719383,
+                "iterations": 1,
+                "max": 0.00019740000061574392,
+                "median": 1.4399998690350913e-05,
+                "data": [
+                    0.00019740000061574392,
+                    7.479999840143137e-05,
+                    1.5800000255694613e-05,
+                    1.2700002116616815e-05,
+                    6.08000009378884e-05,
+                    1.2900000001536682e-05,
+                    1.1600001016631722e-05,
+                    1.1100000847363845e-05,
+                    5.9699999837903306e-05,
+                    1.2999997125007212e-05
+                ],
+                "stddev_outliers": 1,
+                "iqr_outliers": 1,
+                "total": 0.0004698000011558179,
+                "ld15iqr": 1.1100000847363845e-05,
+                "mean": 4.698000011558179e-05
+            },
+            "extra_info": {},
+            "options": {
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "disable_gc": false,
+                "warmup": false
+            },
+            "param": null,
+            "group": null,
+            "name": "test_create_console_handler",
+            "params": null
+        },
+        {
+            "fullname": "benchs/commons/bench_cli_common_main.py::test_create_parent_parser",
+            "stats": {
+                "hd15iqr": 0.07866299999659532,
+                "rounds": 10,
+                "q3": 0.054054699998232536,
+                "iqr": 0.006325099999230588,
+                "min": 0.04734929999904125,
+                "outliers": "1;1",
+                "q1": 0.04772959999900195,
+                "stddev": 0.009443773859546407,
+                "ops": 18.918519073854654,
+                "iterations": 1,
+                "max": 0.07866299999659532,
+                "median": 0.049804099999164464,
+                "data": [
+                    0.07866299999659532,
+                    0.0541427999996813,
+                    0.0511871999988216,
+                    0.04772959999900195,
+                    0.047894499999529216,
+                    0.04734929999904125,
+                    0.04842099999950733,
+                    0.05160780000005616,
+                    0.04753269999855547,
+                    0.054054699998232536
+                ],
+                "stddev_outliers": 1,
+                "iqr_outliers": 1,
+                "total": 0.5285825999890221,
+                "ld15iqr": 0.04734929999904125,
+                "mean": 0.052858259998902216
+            },
+            "extra_info": {},
+            "options": {
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "disable_gc": false,
+                "warmup": false
+            },
+            "param": null,
+            "group": null,
+            "name": "test_create_parent_parser",
+            "params": null
+        }
+    ],
+    "version": "3.1.1",
+    "datetime": "2018-04-12T00:16:49.617203",
+    "machine_info": {
+        "machine": "x86_64",
+        "python_compiler": "GCC 5.4.0 20160609",
+        "release": "4.9.87-linuxkit-aufs",
+        "node": "2928b354267e",
+        "system": "Linux",
+        "cpu": {
+            "brand": "Intel(R) Core(TM) i5-5257U CPU @ 2.70GHz",
+            "vendor_id": "GenuineIntel",
+            "hardware": "unknown"
+        },
+        "python_version": "3.5.2",
+        "python_build": [
+            "default",
+            "Nov 23 2017 16:37:01"
+        ],
+        "python_implementation_version": "3.5.2",
+        "processor": "x86_64",
+        "python_implementation": "CPython"
+    }
+}

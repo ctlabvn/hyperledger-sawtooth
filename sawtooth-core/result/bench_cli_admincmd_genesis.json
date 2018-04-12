@@ -1,0 +1,128 @@
+{
+    "machine_info": {
+        "node": "2928b354267e",
+        "machine": "x86_64",
+        "python_compiler": "GCC 5.4.0 20160609",
+        "system": "Linux",
+        "python_build": [
+            "default",
+            "Nov 23 2017 16:37:01"
+        ],
+        "cpu": {
+            "vendor_id": "GenuineIntel",
+            "brand": "Intel(R) Core(TM) i5-5257U CPU @ 2.70GHz",
+            "hardware": "unknown"
+        },
+        "python_implementation": "CPython",
+        "processor": "x86_64",
+        "python_version": "3.5.2",
+        "release": "4.9.87-linuxkit-aufs",
+        "python_implementation_version": "3.5.2"
+    },
+    "version": "3.1.1",
+    "datetime": "2018-04-12T00:16:44.615378",
+    "commit_info": {
+        "dirty": false,
+        "branch": "(unknown)",
+        "project": "benchs",
+        "author_time": null,
+        "id": "unversioned",
+        "time": null
+    },
+    "benchmarks": [
+        {
+            "param": null,
+            "name": "test_add_genesis_parser",
+            "options": {
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "min_rounds": 5,
+                "disable_gc": false,
+                "warmup": false,
+                "timer": "perf_counter"
+            },
+            "extra_info": {},
+            "params": null,
+            "stats": {
+                "q1": 0.00016899999900488183,
+                "hd15iqr": 0.0002137000010407064,
+                "q3": 0.0001816000003600493,
+                "ops": 5650.994576533428,
+                "iqr": 1.2600001355167478e-05,
+                "max": 0.0002137000010407064,
+                "median": 0.00017189999925903976,
+                "iqr_outliers": 1,
+                "data": [
+                    0.0002137000010407064,
+                    0.0001816000003600493,
+                    0.0001737000020511914,
+                    0.00016959999993559904,
+                    0.00016419999883510172,
+                    0.00017160000061267056,
+                    0.00016429999959655106,
+                    0.00016899999900488183,
+                    0.00018970000019180588,
+                    0.00017219999790540896
+                ],
+                "mean": 0.0001769599999533966,
+                "outliers": "1;1",
+                "rounds": 10,
+                "stddev_outliers": 1,
+                "ld15iqr": 0.00016419999883510172,
+                "iterations": 1,
+                "total": 0.0017695999995339662,
+                "min": 0.00016419999883510172,
+                "stddev": 1.504180892428499e-05
+            },
+            "group": null,
+            "fullname": "benchs/admin_cmd/bench_cli_admincmd_genesis.py::test_add_genesis_parser"
+        },
+        {
+            "param": null,
+            "name": "test_do_genesis",
+            "options": {
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "min_rounds": 5,
+                "disable_gc": false,
+                "warmup": false,
+                "timer": "perf_counter"
+            },
+            "extra_info": {},
+            "params": null,
+            "stats": {
+                "q1": 0.00024289999782922678,
+                "hd15iqr": 0.0003214999996998813,
+                "q3": 0.00029910000012023374,
+                "ops": 3679.988220734973,
+                "iqr": 5.620000229100697e-05,
+                "max": 0.0003214999996998813,
+                "median": 0.0002664500007085735,
+                "iqr_outliers": 0,
+                "data": [
+                    0.0002778999987640418,
+                    0.00023919999875943176,
+                    0.0003214999996998813,
+                    0.00030220000189729035,
+                    0.00029279999944265,
+                    0.00029910000012023374,
+                    0.0002550000026531052,
+                    0.0002463000018906314,
+                    0.00024289999782922678,
+                    0.00024050000138231553
+                ],
+                "mean": 0.0002717400002438808,
+                "outliers": "3;0",
+                "rounds": 10,
+                "stddev_outliers": 3,
+                "ld15iqr": 0.00023919999875943176,
+                "iterations": 1,
+                "total": 0.002717400002438808,
+                "min": 0.00023919999875943176,
+                "stddev": 3.060113285511895e-05
+            },
+            "group": null,
+            "fullname": "benchs/admin_cmd/bench_cli_admincmd_genesis.py::test_do_genesis"
+        }
+    ]
+}

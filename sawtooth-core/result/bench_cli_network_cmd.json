@@ -1,0 +1,175 @@
+{
+    "commit_info": {
+        "author_time": null,
+        "dirty": false,
+        "branch": "(unknown)",
+        "id": "unversioned",
+        "time": null,
+        "project": "benchs"
+    },
+    "benchmarks": [
+        {
+            "extra_info": {},
+            "fullname": "benchs/bench_cli_network_cmd.py::test_add_peers_parser",
+            "params": null,
+            "group": null,
+            "options": {
+                "timer": "perf_counter",
+                "disable_gc": false,
+                "min_time": 5e-06,
+                "max_time": 1.0,
+                "warmup": false,
+                "min_rounds": 5
+            },
+            "param": null,
+            "stats": {
+                "rounds": 10,
+                "q3": 0.0011310669979138765,
+                "stddev": 0.00027660731102596096,
+                "iqr_outliers": 0,
+                "total": 0.009753758997248951,
+                "data": [
+                    0.001617923000594601,
+                    0.0011310669979138765,
+                    0.0008301489979203325,
+                    0.0009021420009958092,
+                    0.0007671800012758467,
+                    0.0009714230000099633,
+                    0.0008712409980944358,
+                    0.0007425180010613985,
+                    0.0007190739997895434,
+                    0.0012010419995931443
+                ],
+                "outliers": "1;0",
+                "ops": 1025.2457542595118,
+                "mean": 0.0009753758997248952,
+                "max": 0.001617923000594601,
+                "min": 0.0007190739997895434,
+                "median": 0.0008866914995451225,
+                "hd15iqr": 0.001617923000594601,
+                "iqr": 0.0003638869966380298,
+                "stddev_outliers": 1,
+                "ld15iqr": 0.0007190739997895434,
+                "iterations": 1,
+                "q1": 0.0007671800012758467
+            },
+            "name": "test_add_peers_parser"
+        },
+        {
+            "extra_info": {},
+            "fullname": "benchs/bench_cli_network_cmd.py::test_compare_get_node_id_map",
+            "params": null,
+            "group": null,
+            "options": {
+                "timer": "perf_counter",
+                "disable_gc": false,
+                "min_time": 5e-06,
+                "max_time": 1.0,
+                "warmup": false,
+                "min_rounds": 5
+            },
+            "param": null,
+            "stats": {
+                "rounds": 10,
+                "q3": 1.8500031728763133e-06,
+                "stddev": 2.9240520414027626e-06,
+                "iqr_outliers": 2,
+                "total": 2.360399957979098e-05,
+                "data": [
+                    3.4619988582562655e-06,
+                    1.8500031728763133e-06,
+                    1.2650016287807375e-06,
+                    1.1649972293525934e-06,
+                    1.309999788645655e-06,
+                    1.0405998182250187e-05,
+                    1.0500007192604244e-06,
+                    1.0660005500540137e-06,
+                    1.0160001693293452e-06,
+                    1.0139992809854448e-06
+                ],
+                "outliers": "1;2",
+                "ops": 423657.01482903317,
+                "mean": 2.360399957979098e-06,
+                "max": 1.0405998182250187e-05,
+                "min": 1.0139992809854448e-06,
+                "median": 1.2149994290666655e-06,
+                "hd15iqr": 3.4619988582562655e-06,
+                "iqr": 8.00002453615889e-07,
+                "stddev_outliers": 1,
+                "ld15iqr": 1.0139992809854448e-06,
+                "iterations": 1,
+                "q1": 1.0500007192604244e-06
+            },
+            "name": "test_compare_get_node_id_map"
+        },
+        {
+            "extra_info": {},
+            "fullname": "benchs/bench_cli_network_cmd.py::test_compare_print_table",
+            "params": null,
+            "group": null,
+            "options": {
+                "timer": "perf_counter",
+                "disable_gc": false,
+                "min_time": 5e-06,
+                "max_time": 1.0,
+                "warmup": false,
+                "min_rounds": 5
+            },
+            "param": null,
+            "stats": {
+                "rounds": 10,
+                "q3": 0.00014278200251283124,
+                "stddev": 2.293639068139412e-05,
+                "iqr_outliers": 1,
+                "total": 0.0014177870070852805,
+                "data": [
+                    0.00020476799909374677,
+                    0.0001423250032530632,
+                    0.00014278200251283124,
+                    0.00013082599980407394,
+                    0.00013140100054442883,
+                    0.00013008800306124613,
+                    0.00014459299927693792,
+                    0.000130824999359902,
+                    0.00013043299986748025,
+                    0.00012974600031157024
+                ],
+                "outliers": "1;1",
+                "ops": 7053.245621539608,
+                "mean": 0.00014177870070852805,
+                "max": 0.00020476799909374677,
+                "min": 0.00012974600031157024,
+                "median": 0.00013111350017425139,
+                "hd15iqr": 0.00020476799909374677,
+                "iqr": 1.2349002645350993e-05,
+                "stddev_outliers": 1,
+                "ld15iqr": 0.00012974600031157024,
+                "iterations": 1,
+                "q1": 0.00013043299986748025
+            },
+            "name": "test_compare_print_table"
+        }
+    ],
+    "datetime": "2018-04-11T08:11:17.932137",
+    "machine_info": {
+        "python_compiler": "GCC 5.4.0 20160609",
+        "machine": "x86_64",
+        "cpu": {
+            "brand": "Intel(R) Core(TM) i5-5257U CPU @ 2.70GHz",
+            "vendor_id": "GenuineIntel",
+            "hardware": "unknown"
+        },
+        "release": "4.9.87-linuxkit-aufs",
+        "processor": "x86_64",
+        "system": "Linux",
+        "python_implementation_version": "3.5.2",
+        "node": "2928b354267e",
+        "python_version": "3.5.2",
+        "python_build": [
+            "default",
+            "Nov 23 2017 16:37:01"
+        ],
+        "python_implementation": "CPython"
+    },
+    "version": "3.1.1"
+}

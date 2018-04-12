@@ -1,0 +1,128 @@
+{
+    "machine_info": {
+        "python_compiler": "GCC 5.4.0 20160609",
+        "system": "Linux",
+        "machine": "x86_64",
+        "python_implementation_version": "3.5.2",
+        "python_implementation": "CPython",
+        "processor": "x86_64",
+        "release": "4.9.87-linuxkit-aufs",
+        "python_build": [
+            "default",
+            "Nov 23 2017 16:37:01"
+        ],
+        "node": "2928b354267e",
+        "cpu": {
+            "brand": "Intel(R) Core(TM) i5-5257U CPU @ 2.70GHz",
+            "vendor_id": "GenuineIntel",
+            "hardware": "unknown"
+        },
+        "python_version": "3.5.2"
+    },
+    "datetime": "2018-04-12T00:16:57.221614",
+    "benchmarks": [
+        {
+            "name": "test_add_peers_parser",
+            "fullname": "benchs/network_cmd/bench_cli_networkcmd_peers.py::test_add_peers_parser",
+            "stats": {
+                "mean": 0.000933039998926688,
+                "hd15iqr": 0.0012296000022615772,
+                "median": 0.0009105499975703424,
+                "ld15iqr": 0.0007313999994948972,
+                "iqr": 0.0002870999996957835,
+                "max": 0.0012296000022615772,
+                "data": [
+                    0.0009356999980809633,
+                    0.0010665999980119523,
+                    0.0007752999990771059,
+                    0.0009202999972330872,
+                    0.0007313999994948972,
+                    0.0011712999985320494,
+                    0.0008199000003514811,
+                    0.0007794999983161688,
+                    0.0012296000022615772,
+                    0.0009007999979075976
+                ],
+                "total": 0.00933039998926688,
+                "iterations": 1,
+                "ops": 1071.7654132195175,
+                "stddev": 0.00017181337589839595,
+                "iqr_outliers": 0,
+                "rounds": 10,
+                "stddev_outliers": 3,
+                "q3": 0.0010665999980119523,
+                "min": 0.0007313999994948972,
+                "q1": 0.0007794999983161688,
+                "outliers": "3;0"
+            },
+            "param": null,
+            "options": {
+                "timer": "perf_counter",
+                "disable_gc": false,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": false,
+                "min_rounds": 5
+            },
+            "group": null,
+            "extra_info": {},
+            "params": null
+        },
+        {
+            "name": "test_add_list_parser",
+            "fullname": "benchs/network_cmd/bench_cli_networkcmd_peers.py::test_add_list_parser",
+            "stats": {
+                "mean": 0.000305389999266481,
+                "hd15iqr": 0.00039879999894765206,
+                "median": 0.00027269999918644316,
+                "ld15iqr": 0.00026529999740887433,
+                "iqr": 1.7400001524947584e-05,
+                "max": 0.0004760999981954228,
+                "data": [
+                    0.00039879999894765206,
+                    0.00027299999783281237,
+                    0.0002682999984244816,
+                    0.0002660999998624902,
+                    0.0002856999999494292,
+                    0.00026529999740887433,
+                    0.00027630000113276765,
+                    0.00027240000054007396,
+                    0.0004760999981954228,
+                    0.0002719000003708061
+                ],
+                "total": 0.0030538999926648103,
+                "iterations": 1,
+                "ops": 3274.501465018203,
+                "stddev": 7.217791947582058e-05,
+                "iqr_outliers": 2,
+                "rounds": 10,
+                "stddev_outliers": 2,
+                "q3": 0.0002856999999494292,
+                "min": 0.00026529999740887433,
+                "q1": 0.0002682999984244816,
+                "outliers": "2;2"
+            },
+            "param": null,
+            "options": {
+                "timer": "perf_counter",
+                "disable_gc": false,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": false,
+                "min_rounds": 5
+            },
+            "group": null,
+            "extra_info": {},
+            "params": null
+        }
+    ],
+    "commit_info": {
+        "id": "unversioned",
+        "project": "benchs",
+        "time": null,
+        "author_time": null,
+        "dirty": false,
+        "branch": "(unknown)"
+    },
+    "version": "3.1.1"
+}

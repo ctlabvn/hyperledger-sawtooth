@@ -1,0 +1,222 @@
+{
+    "commit_info": {
+        "branch": "(unknown)",
+        "id": "unversioned",
+        "dirty": false,
+        "author_time": null,
+        "project": "benchs",
+        "time": null
+    },
+    "version": "3.1.1",
+    "datetime": "2018-04-12T00:16:53.512613",
+    "benchmarks": [
+        {
+            "options": {
+                "disable_gc": false,
+                "warmup": false,
+                "min_time": 5e-06,
+                "min_rounds": 5,
+                "timer": "perf_counter",
+                "max_time": 1.0
+            },
+            "param": null,
+            "stats": {
+                "ld15iqr": 3.9000005926936865e-06,
+                "min": 3.9000005926936865e-06,
+                "stddev_outliers": 1,
+                "q1": 3.999997716164216e-06,
+                "rounds": 10,
+                "q3": 4.900000931229442e-06,
+                "stddev": 1.220928224440167e-06,
+                "iterations": 1,
+                "hd15iqr": 7.799997547408566e-06,
+                "ops": 216450.2386215114,
+                "median": 4.099998477613553e-06,
+                "data": [
+                    7.799997547408566e-06,
+                    4.900000931229442e-06,
+                    4.099998477613553e-06,
+                    4.1000021155923605e-06,
+                    3.999997716164216e-06,
+                    3.9000005926936865e-06,
+                    3.9000005926936865e-06,
+                    5.40000110049732e-06,
+                    4.099998477613553e-06,
+                    3.999997716164216e-06
+                ],
+                "max": 7.799997547408566e-06,
+                "iqr_outliers": 1,
+                "iqr": 9.00003215065226e-07,
+                "mean": 4.61999952676706e-06,
+                "outliers": "1;1",
+                "total": 4.61999952676706e-05
+            },
+            "group": null,
+            "params": null,
+            "name": "test_compare_get_node_id_map",
+            "extra_info": {},
+            "fullname": "benchs/network_cmd/bench_cli_networkcmd_compare.py::test_compare_get_node_id_map"
+        },
+        {
+            "options": {
+                "disable_gc": false,
+                "warmup": false,
+                "min_time": 5e-06,
+                "min_rounds": 5,
+                "timer": "perf_counter",
+                "max_time": 1.0
+            },
+            "param": null,
+            "stats": {
+                "ld15iqr": 0.00013789999866276048,
+                "min": 0.00013789999866276048,
+                "stddev_outliers": 3,
+                "q1": 0.00019409999731578864,
+                "rounds": 10,
+                "q3": 0.00041849999979604036,
+                "stddev": 0.00015366002987766793,
+                "iterations": 1,
+                "hd15iqr": 0.0005853000002389308,
+                "ops": 3062.505747467285,
+                "median": 0.00034934999894176144,
+                "data": [
+                    0.0005853000002389308,
+                    0.00045900000259280205,
+                    0.00041849999979604036,
+                    0.000418399999034591,
+                    0.0004177999981038738,
+                    0.0002808999997796491,
+                    0.00021320000087143853,
+                    0.0001401999979862012,
+                    0.00019409999731578864,
+                    0.00013789999866276048
+                ],
+                "max": 0.0005853000002389308,
+                "iqr_outliers": 0,
+                "iqr": 0.00022440000248025171,
+                "mean": 0.0003265299994382076,
+                "outliers": "3;0",
+                "total": 0.003265299994382076
+            },
+            "group": null,
+            "params": null,
+            "name": "test_compare_print_table",
+            "extra_info": {},
+            "fullname": "benchs/network_cmd/bench_cli_networkcmd_compare.py::test_compare_print_table"
+        },
+        {
+            "options": {
+                "disable_gc": false,
+                "warmup": false,
+                "min_time": 5e-06,
+                "min_rounds": 5,
+                "timer": "perf_counter",
+                "max_time": 1.0
+            },
+            "param": null,
+            "stats": {
+                "ld15iqr": 0.000558299998374423,
+                "min": 0.000558299998374423,
+                "stddev_outliers": 2,
+                "q1": 0.0005596999981207773,
+                "rounds": 10,
+                "q3": 0.0005720000008295756,
+                "stddev": 8.172981303587429e-05,
+                "iterations": 1,
+                "hd15iqr": 0.0006923000000824686,
+                "ops": 1665.4730772884996,
+                "median": 0.0005637000012939097,
+                "data": [
+                    0.0008022000001801644,
+                    0.0005720000008295756,
+                    0.0005621000018436462,
+                    0.0006923000000824686,
+                    0.0005651000028592534,
+                    0.000562299999728566,
+                    0.0005707999989681412,
+                    0.0005595000002358574,
+                    0.0005596999981207773,
+                    0.000558299998374423
+                ],
+                "max": 0.0008022000001801644,
+                "iqr_outliers": 2,
+                "iqr": 1.2300002708798274e-05,
+                "mean": 0.0006004300001222873,
+                "outliers": "2;2",
+                "total": 0.006004300001222873
+            },
+            "group": null,
+            "params": null,
+            "name": "test_compare_print_tree",
+            "extra_info": {},
+            "fullname": "benchs/network_cmd/bench_cli_networkcmd_compare.py::test_compare_print_tree"
+        },
+        {
+            "options": {
+                "disable_gc": false,
+                "warmup": false,
+                "min_time": 5e-06,
+                "min_rounds": 5,
+                "timer": "perf_counter",
+                "max_time": 1.0
+            },
+            "param": null,
+            "stats": {
+                "ld15iqr": 9.229999704984948e-05,
+                "min": 9.229999704984948e-05,
+                "stddev_outliers": 2,
+                "q1": 9.309999950346537e-05,
+                "rounds": 10,
+                "q3": 0.00010710000060498714,
+                "stddev": 2.6012999300478135e-05,
+                "iterations": 1,
+                "hd15iqr": 0.00014989999908721074,
+                "ops": 9178.522307428357,
+                "median": 9.684999895398505e-05,
+                "data": [
+                    0.00014989999908721074,
+                    9.969999882741831e-05,
+                    9.399999908055179e-05,
+                    9.280000085709617e-05,
+                    9.309999950346537e-05,
+                    9.229999704984948e-05,
+                    9.309999950346537e-05,
+                    0.00010710000060498714,
+                    0.00010349999865866266,
+                    0.00016400000095018186
+                ],
+                "max": 0.00016400000095018186,
+                "iqr_outliers": 2,
+                "iqr": 1.4000001101521775e-05,
+                "mean": 0.00010894999941228889,
+                "outliers": "2;2",
+                "total": 0.001089499994122889
+            },
+            "group": null,
+            "params": null,
+            "name": "test_compare_print_summary",
+            "extra_info": {},
+            "fullname": "benchs/network_cmd/bench_cli_networkcmd_compare.py::test_compare_print_summary"
+        }
+    ],
+    "machine_info": {
+        "python_implementation": "CPython",
+        "release": "4.9.87-linuxkit-aufs",
+        "node": "2928b354267e",
+        "system": "Linux",
+        "machine": "x86_64",
+        "python_implementation_version": "3.5.2",
+        "processor": "x86_64",
+        "cpu": {
+            "brand": "Intel(R) Core(TM) i5-5257U CPU @ 2.70GHz",
+            "vendor_id": "GenuineIntel",
+            "hardware": "unknown"
+        },
+        "python_version": "3.5.2",
+        "python_compiler": "GCC 5.4.0 20160609",
+        "python_build": [
+            "default",
+            "Nov 23 2017 16:37:01"
+        ]
+    }
+}

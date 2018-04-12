@@ -1,0 +1,81 @@
+{
+    "version": "3.1.1",
+    "commit_info": {
+        "dirty": false,
+        "time": null,
+        "id": "unversioned",
+        "project": "benchs",
+        "author_time": null,
+        "branch": "(unknown)"
+    },
+    "benchmarks": [
+        {
+            "name": "test_add_keygen_parser",
+            "params": null,
+            "param": null,
+            "group": null,
+            "options": {
+                "min_rounds": 5,
+                "timer": "perf_counter",
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": false,
+                "disable_gc": false
+            },
+            "fullname": "benchs/bench_cli_admin_cmd.py::test_add_keygen_parser",
+            "extra_info": {},
+            "stats": {
+                "iterations": 1,
+                "total": 0.0030758970060560387,
+                "ld15iqr": 0.00019290699856355786,
+                "hd15iqr": 0.0007076479996612761,
+                "mean": 0.00030758970060560384,
+                "min": 0.00019290699856355786,
+                "stddev_outliers": 1,
+                "q1": 0.00024890100030461326,
+                "max": 0.0007076479996612761,
+                "outliers": "1;1",
+                "ops": 3251.084148887726,
+                "iqr_outliers": 1,
+                "data": [
+                    0.0007076479996612761,
+                    0.00031882400071481243,
+                    0.000309726001432864,
+                    0.00026812700161826797,
+                    0.0002725550002651289,
+                    0.00027170500106876716,
+                    0.00019290699856355786,
+                    0.00022260300102061592,
+                    0.00024890100030461326,
+                    0.00026290100140613504
+                ],
+                "iqr": 6.082500112825073e-05,
+                "rounds": 10,
+                "stddev": 0.00014532192885560467,
+                "q3": 0.000309726001432864,
+                "median": 0.00026991600134351756
+            }
+        }
+    ],
+    "machine_info": {
+        "machine": "x86_64",
+        "python_implementation": "CPython",
+        "system": "Linux",
+        "python_build": [
+            "default",
+            "Nov 23 2017 16:37:01"
+        ],
+        "python_version": "3.5.2",
+        "cpu": {
+            "brand": "Intel(R) Core(TM) i5-5257U CPU @ 2.70GHz",
+            "hardware": "unknown",
+            "vendor_id": "GenuineIntel"
+        },
+        "node": "2928b354267e",
+        "python_compiler": "GCC 5.4.0 20160609",
+        "processor": "x86_64",
+        "release": "4.9.87-linuxkit-aufs",
+        "python_implementation_version": "3.5.2"
+    },
+    "datetime": "2018-04-11T08:11:10.696287"
+}
