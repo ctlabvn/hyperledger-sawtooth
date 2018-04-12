@@ -1,0 +1,81 @@
+{
+    "version": "3.1.1",
+    "commit_info": {
+        "time": null,
+        "project": "benchs",
+        "dirty": false,
+        "id": "unversioned",
+        "branch": "(unknown)",
+        "author_time": null
+    },
+    "machine_info": {
+        "node": "2928b354267e",
+        "machine": "x86_64",
+        "python_implementation": "CPython",
+        "system": "Linux",
+        "release": "4.9.87-linuxkit-aufs",
+        "cpu": {
+            "hardware": "unknown",
+            "vendor_id": "GenuineIntel",
+            "brand": "Intel(R) Core(TM) i5-5257U CPU @ 2.70GHz"
+        },
+        "python_build": [
+            "default",
+            "Nov 23 2017 16:37:01"
+        ],
+        "python_version": "3.5.2",
+        "processor": "x86_64",
+        "python_implementation_version": "3.5.2",
+        "python_compiler": "GCC 5.4.0 20160609"
+    },
+    "datetime": "2018-04-11T23:33:41.117307",
+    "benchmarks": [
+        {
+            "fullname": "benchs/admin_cmd/bench_cli_admin_cmd.py::test_add_keygen_parser",
+            "params": null,
+            "param": null,
+            "extra_info": {},
+            "stats": {
+                "iqr": 2.1500000002561137e-05,
+                "ops": 4282.471846116503,
+                "stddev_outliers": 2,
+                "iqr_outliers": 2,
+                "stddev": 3.349996552312725e-05,
+                "max": 0.00030110000079730526,
+                "outliers": "2;2",
+                "ld15iqr": 0.00020810000205528922,
+                "data": [
+                    0.000289100000372855,
+                    0.0002268999996886123,
+                    0.00021879999985685572,
+                    0.00020810000205528922,
+                    0.00021909999850322492,
+                    0.00020869999934802763,
+                    0.00022449999960372224,
+                    0.0002085999985865783,
+                    0.00030110000079730526,
+                    0.00023019999935058877
+                ],
+                "total": 0.0023350999981630594,
+                "iterations": 1,
+                "mean": 0.00023350999981630594,
+                "hd15iqr": 0.000289100000372855,
+                "q3": 0.00023019999935058877,
+                "q1": 0.00020869999934802763,
+                "rounds": 10,
+                "min": 0.00020810000205528922,
+                "median": 0.00022179999905347358
+            },
+            "name": "test_add_keygen_parser",
+            "group": null,
+            "options": {
+                "warmup": false,
+                "min_time": 5e-06,
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "max_time": 1.0
+            }
+        }
+    ]
+}

@@ -4,11 +4,13 @@
 import argparse
 import random
 import string
-from sawtooth_cli.network_command.peers import add_peers_parser
+
 from sawtooth_cli.network_command.compare import get_tails
 from sawtooth_cli.network_command.compare import build_fork_graph
 from sawtooth_cli.network_command.compare import get_node_id_map
 from sawtooth_cli.network_command.compare import print_table
+from sawtooth_cli.network_command.compare import print_tree
+from sawtooth_cli.network_command.compare import print_summary
 
 from sawtooth_cli.network_command.fork_graph import SimpleBlock
 
@@ -18,6 +20,21 @@ VERBOSE_LEVEL = 1
 LOOP = 100000
 ITERATIONS = 1
 ROUNDS = 10
+
+CHAIN_INFO = [
+        (15, ['z', '', '', '', '']),
+        (14, ['y', '', '', '', '']),
+        (13, ['w', '', 'x', '', '']),
+        (12, ['t', '', 'u', '', 'v']),
+        (11, ['g', 'h', 'l', 'm', 's']),
+        (10, ['f', 'f', 'k', 'k', 'r']),
+        (9, ['e', 'e', 'j', 'j', 'q']),
+        (8, ['d', 'd', 'i', 'i', 'p']),
+        (7, ['c', 'c', 'c', 'c', 'o']),
+        (6, ['b', 'b', 'b', 'b', 'n']),
+        (5, ['a', 'a', 'a', 'a', 'a']),
+        (4, ['0', '0', '0', '0', '0']),
+    ]
 #########################################################################################
 
 
@@ -45,31 +62,10 @@ class NetworkCommandUtils():
         }
         return chains
 
-#########################################################################################
-def test_add_peers_parser(benchmark):
-    _parser = argparse.ArgumentParser(add_help=False)
-    parent_parser = argparse.ArgumentParser(prog='test_keygen', add_help=False)
-    subparsers = _parser.add_subparsers(title='subcommands', dest='command')
-    benchmark.pedantic(add_peers_parser, kwargs = {'subparsers':subparsers, 'parent_parser': parent_parser}, \
-    iterations=ITERATIONS, rounds=ROUNDS)
+
 #########################################################################################
 def test_compare_get_tails(benchmark):
-    chains_info = [
-        (15, ['z', '', '', '', '']),
-        (14, ['y', '', '', '', '']),
-        (13, ['w', '', 'x', '', '']),
-        (12, ['t', '', 'u', '', 'v']),
-        (11, ['g', 'h', 'l', 'm', 's']),
-        (10, ['f', 'f', 'k', 'k', 'r']),
-        (9, ['e', 'e', 'j', 'j', 'q']),
-        (8, ['d', 'd', 'i', 'i', 'p']),
-        (7, ['c', 'c', 'c', 'c', 'o']),
-        (6, ['b', 'b', 'b', 'b', 'n']),
-        (5, ['a', 'a', 'a', 'a', 'a']),
-        (4, ['0', '0', '0', '0', '0']),
-    ]
-
-    chains = NetworkCommandUtils.make_chains(chains_info)
+    chains = NetworkCommandUtils.make_chains(CHAIN_INFO)
     try:
         benchmark.pedantic(get_tails, kwargs = {'chains':chains}, iterations=ITERATIONS, rounds=ROUNDS)
     except Exception as e:
@@ -109,26 +105,33 @@ def test_compare_get_node_id_map(benchmark):
 
 #########################################################################################
 def test_compare_print_table(benchmark):
-    chains_info = [
-            (15, ['z', '', '', '', '']),
-            (14, ['y', '', '', '', '']),
-            (13, ['w', '', 'x', '', '']),
-            (12, ['t', '', 'u', '', 'v']),
-            (11, ['g', 'h', 'l', 'm', 's']),
-            (10, ['f', 'f', 'k', 'k', 'r']),
-            (9, ['e', 'e', 'j', 'j', 'q']),
-            (8, ['d', 'd', 'i', 'i', 'p']),
-            (7, ['c', 'c', 'c', 'c', 'o']),
-            (6, ['b', 'b', 'b', 'b', 'n']),
-            (5, ['a', 'a', 'a', 'a', 'a']),
-            (4, ['0', '0', '0', '0', '0']),
-        ]
 
-    chains = NetworkCommandUtils.make_chains(chains_info)
+    chains = NetworkCommandUtils.make_chains(CHAIN_INFO)
     tails, _ = get_tails(chains)
     graph, _ = build_fork_graph(chains, tails)
     node_id_map = get_node_id_map([], len(tails))
     tails = list(map(lambda item: item[1], sorted(tails.items())))
 
     benchmark.pedantic(print_table, kwargs = {'graph': graph, 'tails': tails, 'node_id_map': node_id_map}, \
+        iterations=ITERATIONS, rounds=ROUNDS)
+
+#########################################################################################
+def test_compare_print_tree(benchmark):
+    chains = NetworkCommandUtils.make_chains(CHAIN_INFO)
+    tails, _ = get_tails(chains)
+    graph, _ = build_fork_graph(chains, tails)
+    node_id_map = get_node_id_map([], len(tails))
+    tails = list(map(lambda item: item[1], sorted(tails.items())))
+
+    benchmark.pedantic(print_tree, kwargs = {'graph': graph, 'tails': tails, 'node_id_map': node_id_map}, \
+        iterations=ITERATIONS, rounds=ROUNDS)
+
+#########################################################################################
+def test_compare_print_summary(benchmark):
+    chains = NetworkCommandUtils.make_chains(CHAIN_INFO)
+    tails, _ = get_tails(chains)
+    graph, _ = build_fork_graph(chains, tails)
+    node_id_map = get_node_id_map([], len(tails))
+    tails = list(map(lambda item: item[1], sorted(tails.items())))
+    benchmark.pedantic(print_summary, kwargs = {'graph': graph, 'tails': tails, 'node_id_map': node_id_map}, \
         iterations=ITERATIONS, rounds=ROUNDS)

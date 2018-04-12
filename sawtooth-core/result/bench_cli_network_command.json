@@ -1,0 +1,269 @@
+{
+    "datetime": "2018-04-11T22:58:19.622360",
+    "benchmarks": [
+        {
+            "stats": {
+                "rounds": 10,
+                "outliers": "2;2",
+                "mean": 0.0007794400004058844,
+                "median": 0.0007382000003417488,
+                "stddev": 9.677338034896224e-05,
+                "max": 0.001001100001303712,
+                "hd15iqr": 0.0009135000000242144,
+                "q1": 0.0007244000007631257,
+                "q3": 0.0007552999995823484,
+                "total": 0.0077944000040588435,
+                "iqr": 3.0899998819222674e-05,
+                "iterations": 1,
+                "iqr_outliers": 2,
+                "ops": 1282.972389766065,
+                "stddev_outliers": 2,
+                "ld15iqr": 0.0007206000009318814,
+                "min": 0.0007206000009318814,
+                "data": [
+                    0.001001100001303712,
+                    0.0007552999995823484,
+                    0.000739799997973023,
+                    0.0007540000005974434,
+                    0.0007366000027104747,
+                    0.0009135000000242144,
+                    0.0007282000005943701,
+                    0.0007208999995782506,
+                    0.0007244000007631257,
+                    0.0007206000009318814
+                ]
+            },
+            "name": "test_add_peers_parser",
+            "fullname": "benchs/network_cmd/bench_cli_network_cmd.py::test_add_peers_parser",
+            "param": null,
+            "group": null,
+            "params": null,
+            "extra_info": {},
+            "options": {
+                "max_time": 1.0,
+                "min_rounds": 5,
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "warmup": false,
+                "min_time": 5e-06
+            }
+        },
+        {
+            "stats": {
+                "rounds": 10,
+                "outliers": "1;2",
+                "mean": 4.47000093117822e-06,
+                "median": 4.050001734867692e-06,
+                "stddev": 1.0975229268009059e-06,
+                "max": 7.500002539018169e-06,
+                "hd15iqr": 4.800000169780105e-06,
+                "q1": 4.0000013541430235e-06,
+                "q3": 4.300000000512227e-06,
+                "total": 4.4700009311782196e-05,
+                "iqr": 2.999986463692039e-07,
+                "iterations": 1,
+                "iqr_outliers": 2,
+                "ops": 223713.59992903096,
+                "stddev_outliers": 1,
+                "ld15iqr": 3.9000005926936865e-06,
+                "min": 3.9000005926936865e-06,
+                "data": [
+                    7.500002539018169e-06,
+                    4.800000169780105e-06,
+                    4.19999923906289e-06,
+                    4.300000000512227e-06,
+                    4.0000013541430235e-06,
+                    4.1000021155923605e-06,
+                    3.9000005926936865e-06,
+                    4.0000013541430235e-06,
+                    4.0000013541430235e-06,
+                    3.9000005926936865e-06
+                ]
+            },
+            "name": "test_compare_get_node_id_map",
+            "fullname": "benchs/network_cmd/bench_cli_network_cmd.py::test_compare_get_node_id_map",
+            "param": null,
+            "group": null,
+            "params": null,
+            "extra_info": {},
+            "options": {
+                "max_time": 1.0,
+                "min_rounds": 5,
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "warmup": false,
+                "min_time": 5e-06
+            }
+        },
+        {
+            "stats": {
+                "rounds": 10,
+                "outliers": "1;2",
+                "mean": 0.00016410999960498885,
+                "median": 0.00014259999989008065,
+                "stddev": 5.014180983935544e-05,
+                "max": 0.00029320000248844735,
+                "hd15iqr": 0.00020909999875584617,
+                "q1": 0.0001390999968862161,
+                "q3": 0.00015150000035646372,
+                "total": 0.0016410999960498884,
+                "iqr": 1.2400003470247611e-05,
+                "iterations": 1,
+                "iqr_outliers": 2,
+                "ops": 6093.473904131315,
+                "stddev_outliers": 1,
+                "ld15iqr": 0.00013829999807057902,
+                "min": 0.00013829999807057902,
+                "data": [
+                    0.00020909999875584617,
+                    0.00014660000306321308,
+                    0.00014259999807109125,
+                    0.0001390999968862161,
+                    0.00013839999883202836,
+                    0.00013969999781693332,
+                    0.00029320000248844735,
+                    0.00015150000035646372,
+                    0.00014260000170907006,
+                    0.00013829999807057902
+                ]
+            },
+            "name": "test_compare_print_table",
+            "fullname": "benchs/network_cmd/bench_cli_network_cmd.py::test_compare_print_table",
+            "param": null,
+            "group": null,
+            "params": null,
+            "extra_info": {},
+            "options": {
+                "max_time": 1.0,
+                "min_rounds": 5,
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "warmup": false,
+                "min_time": 5e-06
+            }
+        },
+        {
+            "stats": {
+                "rounds": 10,
+                "outliers": "1;1",
+                "mean": 0.0005642400003125659,
+                "median": 0.0005519999995158287,
+                "stddev": 3.11116697655509e-05,
+                "max": 0.0006513000007544179,
+                "hd15iqr": 0.0006513000007544179,
+                "q1": 0.0005516999990504701,
+                "q3": 0.000563599998713471,
+                "total": 0.005642400003125658,
+                "iqr": 1.1899999663000926e-05,
+                "iterations": 1,
+                "iqr_outliers": 1,
+                "ops": 1772.2954761201634,
+                "stddev_outliers": 1,
+                "ld15iqr": 0.0005473000019264873,
+                "min": 0.0005473000019264873,
+                "data": [
+                    0.0006513000007544179,
+                    0.0005652999971061945,
+                    0.0005559000019275118,
+                    0.0005516999990504701,
+                    0.0005516000019269995,
+                    0.0005473000019264873,
+                    0.000563599998713471,
+                    0.0005517000026884489,
+                    0.0005519000005733687,
+                    0.0005520999984582886
+                ]
+            },
+            "name": "test_compare_print_tree",
+            "fullname": "benchs/network_cmd/bench_cli_network_cmd.py::test_compare_print_tree",
+            "param": null,
+            "group": null,
+            "params": null,
+            "extra_info": {},
+            "options": {
+                "max_time": 1.0,
+                "min_rounds": 5,
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "warmup": false,
+                "min_time": 5e-06
+            }
+        },
+        {
+            "stats": {
+                "rounds": 10,
+                "outliers": "1;1",
+                "mean": 0.0001185499997518491,
+                "median": 0.0001096499981940724,
+                "stddev": 3.649372124708215e-05,
+                "max": 0.0002213000007031951,
+                "hd15iqr": 0.0002213000007031951,
+                "q1": 0.00010150000161956996,
+                "q3": 0.00011269999959040433,
+                "total": 0.001185499997518491,
+                "iqr": 1.1199997970834374e-05,
+                "iterations": 1,
+                "iqr_outliers": 1,
+                "ops": 8435.259401882895,
+                "stddev_outliers": 1,
+                "ld15iqr": 9.869999848888256e-05,
+                "min": 9.869999848888256e-05,
+                "data": [
+                    0.0002213000007031951,
+                    0.00011369999992894009,
+                    0.00010800000018207356,
+                    0.00010959999781334773,
+                    0.00011050000102841295,
+                    0.00010969999857479706,
+                    0.00011269999959040433,
+                    0.00010150000161956996,
+                    9.869999848888256e-05,
+                    9.979999958886765e-05
+                ]
+            },
+            "name": "test_compare_print_summary",
+            "fullname": "benchs/network_cmd/bench_cli_network_cmd.py::test_compare_print_summary",
+            "param": null,
+            "group": null,
+            "params": null,
+            "extra_info": {},
+            "options": {
+                "max_time": 1.0,
+                "min_rounds": 5,
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "warmup": false,
+                "min_time": 5e-06
+            }
+        }
+    ],
+    "version": "3.1.1",
+    "commit_info": {
+        "branch": "(unknown)",
+        "id": "unversioned",
+        "dirty": false,
+        "time": null,
+        "author_time": null,
+        "project": "benchs"
+    },
+    "machine_info": {
+        "python_compiler": "GCC 5.4.0 20160609",
+        "machine": "x86_64",
+        "release": "4.9.87-linuxkit-aufs",
+        "system": "Linux",
+        "node": "2928b354267e",
+        "processor": "x86_64",
+        "python_implementation": "CPython",
+        "python_build": [
+            "default",
+            "Nov 23 2017 16:37:01"
+        ],
+        "python_implementation_version": "3.5.2",
+        "cpu": {
+            "brand": "Intel(R) Core(TM) i5-5257U CPU @ 2.70GHz",
+            "vendor_id": "GenuineIntel",
+            "hardware": "unknown"
+        },
+        "python_version": "3.5.2"
+    }
+}
