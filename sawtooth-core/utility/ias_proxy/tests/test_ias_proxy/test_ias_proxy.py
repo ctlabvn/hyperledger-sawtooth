@@ -24,8 +24,8 @@ import shutil
 from unittest import TestCase
 from unittest import mock
 
-from test_ias_proxy.utils import random_name
-from test_ias_proxy.utils import create_random_public_key_hash
+from utils import random_name
+from utils import create_random_public_key_hash
 
 # pylint: disable=no-name-in-module
 from sawtooth_poet_sgx.poet_enclave_sgx import poet_enclave as poet
