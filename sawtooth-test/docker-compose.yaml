@@ -38,7 +38,7 @@ services:
             /project/consensus/poet/families:\
             /project/families/battleship:\
             /project/families/block_info:\
-            /project/families/indentity:\
+            /project/families/identity:\
             /project/families/settings:\
             /project/cli:\
             /project/sdk/python:\
