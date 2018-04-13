@@ -34,6 +34,8 @@ services:
             /project/consensus/poet/common:\
             /project/consensus/poet/core:\
             /project/consensus/poet/sgx:\
+            /project/consensus/poet/sgx/sawtooth_poet_sgx:\
+            /project/consensus/poet/sgx/tests:\
             /project/consensus/poet/simulator:\
             /project/consensus/poet/families:\
             /project/consensus/poet/families/sawtooth_validator_registry:\
