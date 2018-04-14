@@ -1,0 +1,222 @@
+{
+    "datetime": "2018-04-14T01:44:41.792992",
+    "benchmarks": [
+        {
+            "group": null,
+            "fullname": "families_identity_sawtoothidentity_processor.py::test_setting_key_to_address",
+            "options": {
+                "min_time": 5e-06,
+                "max_time": 1.0,
+                "min_rounds": 5,
+                "warmup": false,
+                "disable_gc": false,
+                "timer": "perf_counter"
+            },
+            "stats": {
+                "total": 0.0021765000001323642,
+                "median": 1.0449999535921961e-05,
+                "iterations": 1,
+                "hd15iqr": 5.8400000852998346e-05,
+                "q1": 9.40000063565094e-06,
+                "ld15iqr": 8.999999408842996e-06,
+                "data": [
+                    0.002029499999480322,
+                    1.590000101714395e-05,
+                    1.1299998732283711e-05,
+                    1.4799999917158857e-05,
+                    9.499999578110874e-06,
+                    9.40000063565094e-06,
+                    9.100000170292333e-06,
+                    5.8400000852998346e-05,
+                    9.60000033956021e-06,
+                    8.999999408842996e-06
+                ],
+                "max": 0.002029499999480322,
+                "mean": 0.00021765000001323643,
+                "rounds": 10,
+                "min": 8.999999408842996e-06,
+                "ops": 4594.532506038065,
+                "iqr_outliers": 2,
+                "stddev": 0.0006367975173507574,
+                "iqr": 6.50000038149301e-06,
+                "outliers": "1;2",
+                "q3": 1.590000101714395e-05,
+                "stddev_outliers": 1
+            },
+            "name": "test_setting_key_to_address",
+            "extra_info": {},
+            "param": null,
+            "params": null
+        },
+        {
+            "group": null,
+            "fullname": "families_identity_sawtoothidentity_processor.py::test_handler_get_role_address",
+            "options": {
+                "min_time": 5e-06,
+                "max_time": 1.0,
+                "min_rounds": 5,
+                "warmup": false,
+                "disable_gc": false,
+                "timer": "perf_counter"
+            },
+            "stats": {
+                "total": 0.00011530000119819306,
+                "median": 9.500000487605575e-06,
+                "iterations": 1,
+                "hd15iqr": 2.6199999410891905e-05,
+                "q1": 9.299999874201603e-06,
+                "ld15iqr": 9.299999874201603e-06,
+                "data": [
+                    2.6199999410891905e-05,
+                    1.2299999070819467e-05,
+                    1.0600000678095967e-05,
+                    9.900000804918818e-06,
+                    9.499999578110874e-06,
+                    9.500001397100277e-06,
+                    9.299999874201603e-06,
+                    9.299999874201603e-06,
+                    9.299999874201603e-06,
+                    9.40000063565094e-06
+                ],
+                "max": 2.6199999410891905e-05,
+                "mean": 1.1530000119819305e-05,
+                "rounds": 10,
+                "min": 9.299999874201603e-06,
+                "ops": 86730.26796253595,
+                "iqr_outliers": 1,
+                "stddev": 5.238966950917939e-06,
+                "iqr": 1.3000008038943633e-06,
+                "outliers": "1;1",
+                "q3": 1.0600000678095967e-05,
+                "stddev_outliers": 1
+            },
+            "name": "test_handler_get_role_address",
+            "extra_info": {},
+            "param": null,
+            "params": null
+        },
+        {
+            "group": null,
+            "fullname": "families_identity_sawtoothidentity_processor.py::test_create_console_handler",
+            "options": {
+                "min_time": 5e-06,
+                "max_time": 1.0,
+                "min_rounds": 5,
+                "warmup": false,
+                "disable_gc": false,
+                "timer": "perf_counter"
+            },
+            "stats": {
+                "total": 0.00017269999625568744,
+                "median": 1.0999999176419806e-05,
+                "iterations": 1,
+                "hd15iqr": 5.339999916031957e-05,
+                "q1": 9.800000043469481e-06,
+                "ld15iqr": 9.499999578110874e-06,
+                "data": [
+                    5.339999916031957e-05,
+                    1.5600000551785342e-05,
+                    2.2399999579647556e-05,
+                    1.179999890155159e-05,
+                    2.010000025620684e-05,
+                    1.0199999451288022e-05,
+                    9.800000043469481e-06,
+                    9.800000043469481e-06,
+                    9.499999578110874e-06,
+                    1.0099998689838685e-05
+                ],
+                "max": 5.339999916031957e-05,
+                "mean": 1.7269999625568742e-05,
+                "rounds": 10,
+                "min": 9.499999578110874e-06,
+                "ops": 57903.88081534585,
+                "iqr_outliers": 1,
+                "stddev": 1.3522742072523037e-05,
+                "iqr": 1.0300000212737359e-05,
+                "outliers": "1;1",
+                "q3": 2.010000025620684e-05,
+                "stddev_outliers": 1
+            },
+            "name": "test_create_console_handler",
+            "extra_info": {},
+            "param": null,
+            "params": null
+        },
+        {
+            "group": null,
+            "fullname": "families_identity_sawtoothidentity_processor.py::test_create_parser",
+            "options": {
+                "min_time": 5e-06,
+                "max_time": 1.0,
+                "min_rounds": 5,
+                "warmup": false,
+                "disable_gc": false,
+                "timer": "perf_counter"
+            },
+            "stats": {
+                "total": 0.5005824000018038,
+                "median": 0.04632539999965957,
+                "iterations": 1,
+                "hd15iqr": 0.0646444000012707,
+                "q1": 0.04544779999923776,
+                "ld15iqr": 0.04344730000048003,
+                "data": [
+                    0.0646444000012707,
+                    0.0501683000002231,
+                    0.04544779999923776,
+                    0.06612459999996645,
+                    0.045997699999134056,
+                    0.04587520000131917,
+                    0.04665310000018508,
+                    0.04344730000048003,
+                    0.04535570000007283,
+                    0.0468682999999146
+                ],
+                "max": 0.06612459999996645,
+                "mean": 0.05005824000018037,
+                "rounds": 10,
+                "min": 0.04344730000048003,
+                "ops": 19.976731103538533,
+                "iqr_outliers": 2,
+                "stddev": 0.00825783918410808,
+                "iqr": 0.004720500000985339,
+                "outliers": "2;2",
+                "q3": 0.0501683000002231,
+                "stddev_outliers": 2
+            },
+            "name": "test_create_parser",
+            "extra_info": {},
+            "param": null,
+            "params": null
+        }
+    ],
+    "machine_info": {
+        "python_implementation_version": "3.5.2",
+        "cpu": {
+            "hardware": "unknown",
+            "vendor_id": "GenuineIntel",
+            "brand": "Intel(R) Core(TM) i7-4770HQ CPU @ 2.20GHz"
+        },
+        "machine": "x86_64",
+        "release": "4.9.87-linuxkit-aufs",
+        "python_implementation": "CPython",
+        "python_build": [
+            "default",
+            "Nov 23 2017 16:37:01"
+        ],
+        "python_version": "3.5.2",
+        "system": "Linux",
+        "node": "3766aecf1231",
+        "python_compiler": "GCC 5.4.0 20160609",
+        "processor": "x86_64"
+    },
+    "commit_info": {
+        "branch": "(unknown)",
+        "time": null,
+        "dirty": false,
+        "id": "unversioned",
+        "project": "benchs",
+        "author_time": null
+    },
+    "version": "3.1.1"
+}
