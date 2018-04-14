@@ -1,0 +1,128 @@
+{
+    "commit_info": {
+        "author_time": null,
+        "id": "unversioned",
+        "time": null,
+        "dirty": false,
+        "project": "benchs",
+        "branch": "(unknown)"
+    },
+    "datetime": "2018-04-14T01:44:34.425913",
+    "version": "3.1.1",
+    "machine_info": {
+        "node": "3766aecf1231",
+        "python_implementation": "CPython",
+        "python_compiler": "GCC 5.4.0 20160609",
+        "release": "4.9.87-linuxkit-aufs",
+        "system": "Linux",
+        "python_version": "3.5.2",
+        "machine": "x86_64",
+        "python_implementation_version": "3.5.2",
+        "cpu": {
+            "vendor_id": "GenuineIntel",
+            "hardware": "unknown",
+            "brand": "Intel(R) Core(TM) i7-4770HQ CPU @ 2.20GHz"
+        },
+        "processor": "x86_64",
+        "python_build": [
+            "default",
+            "Nov 23 2017 16:37:01"
+        ]
+    },
+    "benchmarks": [
+        {
+            "extra_info": {},
+            "param": null,
+            "options": {
+                "min_rounds": 5,
+                "disable_gc": false,
+                "min_time": 5e-06,
+                "timer": "perf_counter",
+                "max_time": 1.0,
+                "warmup": false
+            },
+            "fullname": "families_blockinfo_sawtoothblockinfo.py::test_common_create_block_address",
+            "params": null,
+            "group": null,
+            "stats": {
+                "rounds": 10,
+                "ops": 224215.23108566212,
+                "data": [
+                    8.799999704933725e-06,
+                    5.399999281507917e-06,
+                    4.100000296602957e-06,
+                    3.700000888784416e-06,
+                    3.7999998312443495e-06,
+                    3.700000888784416e-06,
+                    3.600000127335079e-06,
+                    3.700000888784416e-06,
+                    3.9000005926936865e-06,
+                    3.9000005926936865e-06
+                ],
+                "max": 8.799999704933725e-06,
+                "stddev": 1.6118998624038747e-06,
+                "total": 4.460000309336465e-05,
+                "iqr": 3.9999940781854093e-07,
+                "mean": 4.460000309336465e-06,
+                "iterations": 1,
+                "median": 3.850000211969018e-06,
+                "min": 3.600000127335079e-06,
+                "stddev_outliers": 1,
+                "outliers": "1;2",
+                "hd15iqr": 5.399999281507917e-06,
+                "q3": 4.100000296602957e-06,
+                "iqr_outliers": 2,
+                "ld15iqr": 3.600000127335079e-06,
+                "q1": 3.700000888784416e-06
+            },
+            "name": "test_common_create_block_address"
+        },
+        {
+            "extra_info": {},
+            "param": null,
+            "options": {
+                "min_rounds": 5,
+                "disable_gc": false,
+                "min_time": 5e-06,
+                "timer": "perf_counter",
+                "max_time": 1.0,
+                "warmup": false
+            },
+            "fullname": "families_blockinfo_sawtoothblockinfo.py::test_injector_blockinfoinject_create_batch",
+            "params": null,
+            "group": null,
+            "stats": {
+                "rounds": 10,
+                "ops": 4958.104021159671,
+                "data": [
+                    0.00024029999985941686,
+                    0.0002072000006592134,
+                    0.00020339999900897965,
+                    0.00019880000036209822,
+                    0.00019350000002305023,
+                    0.00019379999866941944,
+                    0.0001951000012923032,
+                    0.00019579999934649095,
+                    0.00019489999976940453,
+                    0.00019410000095376745
+                ],
+                "max": 0.00024029999985941686,
+                "stddev": 1.4312112162099183e-05,
+                "total": 0.002016899999944144,
+                "iqr": 9.2999980552122e-06,
+                "mean": 0.00020168999999441438,
+                "iterations": 1,
+                "median": 0.00019545000031939708,
+                "min": 0.00019350000002305023,
+                "stddev_outliers": 1,
+                "outliers": "1;1",
+                "hd15iqr": 0.00024029999985941686,
+                "q3": 0.00020339999900897965,
+                "iqr_outliers": 1,
+                "ld15iqr": 0.00019350000002305023,
+                "q1": 0.00019410000095376745
+            },
+            "name": "test_injector_blockinfoinject_create_batch"
+        }
+    ]
+}

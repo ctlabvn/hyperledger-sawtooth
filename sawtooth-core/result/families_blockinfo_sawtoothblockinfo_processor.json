@@ -1,0 +1,175 @@
+{
+    "benchmarks": [
+        {
+            "group": null,
+            "name": "test_create_console_handler",
+            "extra_info": {},
+            "param": null,
+            "fullname": "families_blockinfo_sawtoothblockinfo_processor.py::test_create_console_handler",
+            "params": null,
+            "options": {
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "disable_gc": false,
+                "max_time": 1.0,
+                "warmup": false,
+                "min_time": 5e-06
+            },
+            "stats": {
+                "median": 1.0550000297371298e-05,
+                "q1": 1.0099998689838685e-05,
+                "ld15iqr": 8.099999831756577e-06,
+                "iqr_outliers": 2,
+                "outliers": "1;2",
+                "stddev": 1.2034436575804705e-05,
+                "stddev_outliers": 1,
+                "hd15iqr": 1.8700000509852543e-05,
+                "ops": 67159.16697028968,
+                "rounds": 10,
+                "data": [
+                    4.819999958272092e-05,
+                    1.8700000509852543e-05,
+                    1.1500000255182385e-05,
+                    1.1000000085914508e-05,
+                    1.0300000212737359e-05,
+                    1.0199999451288022e-05,
+                    1.0000001566368155e-05,
+                    1.0099998689838685e-05,
+                    8.099999831756577e-06,
+                    1.0800000382005237e-05
+                ],
+                "total": 0.0001489000005676644,
+                "iqr": 1.4000015653437003e-06,
+                "q3": 1.1500000255182385e-05,
+                "iterations": 1,
+                "max": 4.819999958272092e-05,
+                "min": 8.099999831756577e-06,
+                "mean": 1.4890000056766439e-05
+            }
+        },
+        {
+            "group": null,
+            "name": "test_processor_create_parser",
+            "extra_info": {},
+            "param": null,
+            "fullname": "families_blockinfo_sawtoothblockinfo_processor.py::test_processor_create_parser",
+            "params": null,
+            "options": {
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "disable_gc": false,
+                "max_time": 1.0,
+                "warmup": false,
+                "min_time": 5e-06
+            },
+            "stats": {
+                "median": 0.043238150001343456,
+                "q1": 0.04209629999968456,
+                "ld15iqr": 0.04201139999895531,
+                "iqr_outliers": 1,
+                "outliers": "1;1",
+                "stddev": 0.0036853566618849187,
+                "stddev_outliers": 1,
+                "hd15iqr": 0.0543346999984351,
+                "ops": 22.566298091298663,
+                "rounds": 10,
+                "data": [
+                    0.0543346999984351,
+                    0.04209629999968456,
+                    0.042056399999637506,
+                    0.04270850000102655,
+                    0.04289080000125978,
+                    0.043585500001427135,
+                    0.04450659999929485,
+                    0.04201139999895531,
+                    0.04367330000059155,
+                    0.04527520000010554
+                ],
+                "total": 0.4431387000004179,
+                "iqr": 0.002410299999610288,
+                "q3": 0.04450659999929485,
+                "iterations": 1,
+                "max": 0.0543346999984351,
+                "min": 0.04201139999895531,
+                "mean": 0.04431387000004179
+            }
+        },
+        {
+            "group": null,
+            "name": "test_create_block_info_config",
+            "extra_info": {},
+            "param": null,
+            "fullname": "families_blockinfo_sawtoothblockinfo_processor.py::test_create_block_info_config",
+            "params": null,
+            "options": {
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "disable_gc": false,
+                "max_time": 1.0,
+                "warmup": false,
+                "min_time": 5e-06
+            },
+            "stats": {
+                "median": 1.7049999769369606e-05,
+                "q1": 1.6400001186411828e-05,
+                "ld15iqr": 1.6099998902063817e-05,
+                "iqr_outliers": 1,
+                "outliers": "1;1",
+                "stddev": 1.5654889575171524e-05,
+                "stddev_outliers": 1,
+                "hd15iqr": 6.680000115011353e-05,
+                "ops": 43668.12205580879,
+                "rounds": 10,
+                "data": [
+                    6.680000115011353e-05,
+                    2.4900000425986946e-05,
+                    1.990000055229757e-05,
+                    1.799999881768599e-05,
+                    1.700000029813964e-05,
+                    1.7099999240599573e-05,
+                    1.6400001186411828e-05,
+                    1.6099998902063817e-05,
+                    1.630000042496249e-05,
+                    1.650000012887176e-05
+                ],
+                "total": 0.00022900000112713315,
+                "iqr": 3.499999365885742e-06,
+                "q3": 1.990000055229757e-05,
+                "iterations": 1,
+                "max": 6.680000115011353e-05,
+                "min": 1.6099998902063817e-05,
+                "mean": 2.2900000112713313e-05
+            }
+        }
+    ],
+    "version": "3.1.1",
+    "machine_info": {
+        "processor": "x86_64",
+        "python_version": "3.5.2",
+        "node": "3766aecf1231",
+        "cpu": {
+            "brand": "Intel(R) Core(TM) i7-4770HQ CPU @ 2.20GHz",
+            "vendor_id": "GenuineIntel",
+            "hardware": "unknown"
+        },
+        "system": "Linux",
+        "python_implementation": "CPython",
+        "machine": "x86_64",
+        "python_build": [
+            "default",
+            "Nov 23 2017 16:37:01"
+        ],
+        "python_compiler": "GCC 5.4.0 20160609",
+        "release": "4.9.87-linuxkit-aufs",
+        "python_implementation_version": "3.5.2"
+    },
+    "datetime": "2018-04-14T01:44:38.118055",
+    "commit_info": {
+        "id": "unversioned",
+        "dirty": false,
+        "project": "benchs",
+        "branch": "(unknown)",
+        "time": null,
+        "author_time": null
+    }
+}
