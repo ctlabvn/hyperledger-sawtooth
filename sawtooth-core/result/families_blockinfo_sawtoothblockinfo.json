@@ -1,29 +1,27 @@
 {
     "commit_info": {
-        "author_time": null,
-        "id": "unversioned",
         "time": null,
         "dirty": false,
         "project": "benchs",
-        "branch": "(unknown)"
+        "branch": "(unknown)",
+        "id": "unversioned",
+        "author_time": null
     },
-    "datetime": "2018-04-14T01:44:34.425913",
-    "version": "3.1.1",
     "machine_info": {
-        "node": "3766aecf1231",
-        "python_implementation": "CPython",
-        "python_compiler": "GCC 5.4.0 20160609",
-        "release": "4.9.87-linuxkit-aufs",
+        "node": "f63ad2aac348",
         "system": "Linux",
-        "python_version": "3.5.2",
-        "machine": "x86_64",
-        "python_implementation_version": "3.5.2",
         "cpu": {
-            "vendor_id": "GenuineIntel",
             "hardware": "unknown",
-            "brand": "Intel(R) Core(TM) i7-4770HQ CPU @ 2.20GHz"
+            "brand": "Intel(R) Core(TM) i7-4770HQ CPU @ 2.20GHz",
+            "vendor_id": "GenuineIntel"
         },
         "processor": "x86_64",
+        "python_compiler": "GCC 5.4.0 20160609",
+        "machine": "x86_64",
+        "python_implementation": "CPython",
+        "python_version": "3.5.2",
+        "release": "4.9.87-linuxkit-aufs",
+        "python_implementation_version": "3.5.2",
         "python_build": [
             "default",
             "Nov 23 2017 16:37:01"
@@ -31,98 +29,100 @@
     },
     "benchmarks": [
         {
-            "extra_info": {},
-            "param": null,
-            "options": {
-                "min_rounds": 5,
-                "disable_gc": false,
-                "min_time": 5e-06,
-                "timer": "perf_counter",
-                "max_time": 1.0,
-                "warmup": false
+            "stats": {
+                "iqr": 1.9999788491986692e-07,
+                "q1": 3.5000011848751456e-06,
+                "hd15iqr": 5.500000042957254e-06,
+                "outliers": "1;4",
+                "median": 3.600000127335079e-06,
+                "rounds": 10,
+                "ops": 242718.46302095838,
+                "total": 4.119999721297063e-05,
+                "max": 8.499999239575118e-06,
+                "mean": 4.119999721297063e-06,
+                "ld15iqr": 3.5000011848751456e-06,
+                "q3": 3.6999990697950125e-06,
+                "iqr_outliers": 4,
+                "data": [
+                    8.499999239575118e-06,
+                    5.500000042957254e-06,
+                    2.999999196617864e-06,
+                    2.5000008463393897e-06,
+                    3.5000011848751456e-06,
+                    3.6999990697950125e-06,
+                    3.600000127335079e-06,
+                    3.600000127335079e-06,
+                    3.5999983083456755e-06,
+                    3.6999990697950125e-06
+                ],
+                "stddev": 1.7164561069135164e-06,
+                "iterations": 1,
+                "min": 2.5000008463393897e-06,
+                "stddev_outliers": 1
             },
             "fullname": "families_blockinfo_sawtoothblockinfo.py::test_common_create_block_address",
+            "name": "test_common_create_block_address",
             "params": null,
-            "group": null,
-            "stats": {
-                "rounds": 10,
-                "ops": 224215.23108566212,
-                "data": [
-                    8.799999704933725e-06,
-                    5.399999281507917e-06,
-                    4.100000296602957e-06,
-                    3.700000888784416e-06,
-                    3.7999998312443495e-06,
-                    3.700000888784416e-06,
-                    3.600000127335079e-06,
-                    3.700000888784416e-06,
-                    3.9000005926936865e-06,
-                    3.9000005926936865e-06
-                ],
-                "max": 8.799999704933725e-06,
-                "stddev": 1.6118998624038747e-06,
-                "total": 4.460000309336465e-05,
-                "iqr": 3.9999940781854093e-07,
-                "mean": 4.460000309336465e-06,
-                "iterations": 1,
-                "median": 3.850000211969018e-06,
-                "min": 3.600000127335079e-06,
-                "stddev_outliers": 1,
-                "outliers": "1;2",
-                "hd15iqr": 5.399999281507917e-06,
-                "q3": 4.100000296602957e-06,
-                "iqr_outliers": 2,
-                "ld15iqr": 3.600000127335079e-06,
-                "q1": 3.700000888784416e-06
-            },
-            "name": "test_common_create_block_address"
-        },
-        {
             "extra_info": {},
+            "group": null,
             "param": null,
             "options": {
+                "timer": "perf_counter",
+                "min_time": 5e-06,
                 "min_rounds": 5,
                 "disable_gc": false,
-                "min_time": 5e-06,
-                "timer": "perf_counter",
-                "max_time": 1.0,
-                "warmup": false
+                "warmup": false,
+                "max_time": 1.0
+            }
+        },
+        {
+            "stats": {
+                "iqr": 1.0399999155197293e-05,
+                "q1": 0.00018869999985327013,
+                "hd15iqr": 0.0002282999994349666,
+                "outliers": "1;1",
+                "median": 0.00019110000084765488,
+                "rounds": 10,
+                "ops": 5093.7245305510505,
+                "total": 0.0019632000003184658,
+                "max": 0.0002282999994349666,
+                "mean": 0.00019632000003184659,
+                "ld15iqr": 0.0001883000004454516,
+                "q3": 0.00019909999900846742,
+                "iqr_outliers": 1,
+                "data": [
+                    0.0002282999994349666,
+                    0.0002030000014201505,
+                    0.00019909999900846742,
+                    0.00019599999905040022,
+                    0.00019220000103814527,
+                    0.0001883000004454516,
+                    0.00018869999985327013,
+                    0.00018900000031862874,
+                    0.0001885999990918208,
+                    0.0001900000006571645
+                ],
+                "stddev": 1.2327277637266739e-05,
+                "iterations": 1,
+                "min": 0.0001883000004454516,
+                "stddev_outliers": 1
             },
             "fullname": "families_blockinfo_sawtoothblockinfo.py::test_injector_blockinfoinject_create_batch",
+            "name": "test_injector_blockinfoinject_create_batch",
             "params": null,
+            "extra_info": {},
             "group": null,
-            "stats": {
-                "rounds": 10,
-                "ops": 4958.104021159671,
-                "data": [
-                    0.00024029999985941686,
-                    0.0002072000006592134,
-                    0.00020339999900897965,
-                    0.00019880000036209822,
-                    0.00019350000002305023,
-                    0.00019379999866941944,
-                    0.0001951000012923032,
-                    0.00019579999934649095,
-                    0.00019489999976940453,
-                    0.00019410000095376745
-                ],
-                "max": 0.00024029999985941686,
-                "stddev": 1.4312112162099183e-05,
-                "total": 0.002016899999944144,
-                "iqr": 9.2999980552122e-06,
-                "mean": 0.00020168999999441438,
-                "iterations": 1,
-                "median": 0.00019545000031939708,
-                "min": 0.00019350000002305023,
-                "stddev_outliers": 1,
-                "outliers": "1;1",
-                "hd15iqr": 0.00024029999985941686,
-                "q3": 0.00020339999900897965,
-                "iqr_outliers": 1,
-                "ld15iqr": 0.00019350000002305023,
-                "q1": 0.00019410000095376745
-            },
-            "name": "test_injector_blockinfoinject_create_batch"
+            "param": null,
+            "options": {
+                "timer": "perf_counter",
+                "min_time": 5e-06,
+                "min_rounds": 5,
+                "disable_gc": false,
+                "warmup": false,
+                "max_time": 1.0
+            }
         }
-    ]
+    ],
+    "version": "3.1.1",
+    "datetime": "2018-04-14T22:56:53.560427"
 }
