@@ -12,7 +12,7 @@ from sawtooth_sdk.processor.core import TransactionProcessor
 VERBOSE_LEVEL = 1
 LOOP = 100000
 ITERATIONS = 1
-ROUNDS = 5
+ROUNDS = 10
 DISTRIBUTION_NAME = 'sawadm'
 #########################################################################################
 
@@ -29,9 +29,9 @@ def test_create_block_info_config(benchmark):
     benchmark.pedantic(load_block_info_config, kwargs = {'first_config':blockInfoConfig}, \
     iterations=ITERATIONS, rounds=ROUNDS)
 
-def test_setup_loggers(benchmark):
-    address = 'tcp://127.0.0.1:4004'
-    transactionProcessor =  TransactionProcessor(address)
-    benchmark.pedantic(setup_loggers, kwargs = {'verbose_level':VERBOSE_LEVEL, 'processor':transactionProcessor}, \
-    iterations=ITERATIONS, rounds=ROUNDS)
-    return
+# def test_setup_loggers(benchmark):
+#     address = 'tcp://127.0.0.1:4004'
+#     transactionProcessor =  TransactionProcessor(address)
+#     benchmark.pedantic(setup_loggers, kwargs = {'verbose_level':VERBOSE_LEVEL, 'processor':transactionProcessor}, \
+#     iterations=ITERATIONS, rounds=ROUNDS)
+#     return

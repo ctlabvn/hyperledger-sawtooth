@@ -1,0 +1,128 @@
+{
+    "commit_info": {
+        "time": null,
+        "dirty": false,
+        "project": "benchs",
+        "branch": "(unknown)",
+        "id": "unversioned",
+        "author_time": null
+    },
+    "machine_info": {
+        "node": "f63ad2aac348",
+        "system": "Linux",
+        "cpu": {
+            "hardware": "unknown",
+            "brand": "Intel(R) Core(TM) i7-4770HQ CPU @ 2.20GHz",
+            "vendor_id": "GenuineIntel"
+        },
+        "processor": "x86_64",
+        "python_compiler": "GCC 5.4.0 20160609",
+        "machine": "x86_64",
+        "python_implementation": "CPython",
+        "python_version": "3.5.2",
+        "release": "4.9.87-linuxkit-aufs",
+        "python_implementation_version": "3.5.2",
+        "python_build": [
+            "default",
+            "Nov 23 2017 16:37:01"
+        ]
+    },
+    "benchmarks": [
+        {
+            "stats": {
+                "iqr": 1.9999788491986692e-07,
+                "q1": 3.5000011848751456e-06,
+                "hd15iqr": 5.500000042957254e-06,
+                "outliers": "1;4",
+                "median": 3.600000127335079e-06,
+                "rounds": 10,
+                "ops": 242718.46302095838,
+                "total": 4.119999721297063e-05,
+                "max": 8.499999239575118e-06,
+                "mean": 4.119999721297063e-06,
+                "ld15iqr": 3.5000011848751456e-06,
+                "q3": 3.6999990697950125e-06,
+                "iqr_outliers": 4,
+                "data": [
+                    8.499999239575118e-06,
+                    5.500000042957254e-06,
+                    2.999999196617864e-06,
+                    2.5000008463393897e-06,
+                    3.5000011848751456e-06,
+                    3.6999990697950125e-06,
+                    3.600000127335079e-06,
+                    3.600000127335079e-06,
+                    3.5999983083456755e-06,
+                    3.6999990697950125e-06
+                ],
+                "stddev": 1.7164561069135164e-06,
+                "iterations": 1,
+                "min": 2.5000008463393897e-06,
+                "stddev_outliers": 1
+            },
+            "fullname": "families_blockinfo_sawtoothblockinfo.py::test_common_create_block_address",
+            "name": "test_common_create_block_address",
+            "params": null,
+            "extra_info": {},
+            "group": null,
+            "param": null,
+            "options": {
+                "timer": "perf_counter",
+                "min_time": 5e-06,
+                "min_rounds": 5,
+                "disable_gc": false,
+                "warmup": false,
+                "max_time": 1.0
+            }
+        },
+        {
+            "stats": {
+                "iqr": 1.0399999155197293e-05,
+                "q1": 0.00018869999985327013,
+                "hd15iqr": 0.0002282999994349666,
+                "outliers": "1;1",
+                "median": 0.00019110000084765488,
+                "rounds": 10,
+                "ops": 5093.7245305510505,
+                "total": 0.0019632000003184658,
+                "max": 0.0002282999994349666,
+                "mean": 0.00019632000003184659,
+                "ld15iqr": 0.0001883000004454516,
+                "q3": 0.00019909999900846742,
+                "iqr_outliers": 1,
+                "data": [
+                    0.0002282999994349666,
+                    0.0002030000014201505,
+                    0.00019909999900846742,
+                    0.00019599999905040022,
+                    0.00019220000103814527,
+                    0.0001883000004454516,
+                    0.00018869999985327013,
+                    0.00018900000031862874,
+                    0.0001885999990918208,
+                    0.0001900000006571645
+                ],
+                "stddev": 1.2327277637266739e-05,
+                "iterations": 1,
+                "min": 0.0001883000004454516,
+                "stddev_outliers": 1
+            },
+            "fullname": "families_blockinfo_sawtoothblockinfo.py::test_injector_blockinfoinject_create_batch",
+            "name": "test_injector_blockinfoinject_create_batch",
+            "params": null,
+            "extra_info": {},
+            "group": null,
+            "param": null,
+            "options": {
+                "timer": "perf_counter",
+                "min_time": 5e-06,
+                "min_rounds": 5,
+                "disable_gc": false,
+                "warmup": false,
+                "max_time": 1.0
+            }
+        }
+    ],
+    "version": "3.1.1",
+    "datetime": "2018-04-14T22:56:53.560427"
+}

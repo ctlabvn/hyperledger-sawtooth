@@ -1,0 +1,175 @@
+{
+    "machine_info": {
+        "python_implementation_version": "3.5.2",
+        "system": "Linux",
+        "release": "4.9.87-linuxkit-aufs",
+        "python_compiler": "GCC 5.4.0 20160609",
+        "python_build": [
+            "default",
+            "Nov 23 2017 16:37:01"
+        ],
+        "python_version": "3.5.2",
+        "machine": "x86_64",
+        "processor": "x86_64",
+        "cpu": {
+            "vendor_id": "GenuineIntel",
+            "brand": "Intel(R) Core(TM) i7-4770HQ CPU @ 2.20GHz",
+            "hardware": "unknown"
+        },
+        "node": "f63ad2aac348",
+        "python_implementation": "CPython"
+    },
+    "version": "3.1.1",
+    "benchmarks": [
+        {
+            "params": null,
+            "param": null,
+            "options": {
+                "min_rounds": 5,
+                "timer": "perf_counter",
+                "min_time": 5e-06,
+                "disable_gc": false,
+                "max_time": 1.0,
+                "warmup": false
+            },
+            "extra_info": {},
+            "fullname": "families_blockinfo_sawtoothblockinfo_processor.py::test_create_console_handler",
+            "stats": {
+                "total": 0.00014200000077835284,
+                "q1": 9.40000063565094e-06,
+                "ld15iqr": 9.299999874201603e-06,
+                "mean": 1.4200000077835283e-05,
+                "outliers": "1;2",
+                "min": 9.299999874201603e-06,
+                "data": [
+                    4.529999932856299e-05,
+                    1.7500000467407517e-05,
+                    1.1899999663000926e-05,
+                    1.0300000212737359e-05,
+                    9.699999282020144e-06,
+                    9.60000033956021e-06,
+                    9.299999874201603e-06,
+                    9.40000063565094e-06,
+                    9.299999874201603e-06,
+                    9.700001101009548e-06
+                ],
+                "iterations": 1,
+                "iqr_outliers": 2,
+                "median": 9.700000191514846e-06,
+                "stddev_outliers": 1,
+                "max": 4.529999932856299e-05,
+                "q3": 1.1899999663000926e-05,
+                "stddev": 1.121169999501777e-05,
+                "ops": 70422.53482525647,
+                "hd15iqr": 1.7500000467407517e-05,
+                "iqr": 2.499999027349986e-06,
+                "rounds": 10
+            },
+            "group": null,
+            "name": "test_create_console_handler"
+        },
+        {
+            "params": null,
+            "param": null,
+            "options": {
+                "min_rounds": 5,
+                "timer": "perf_counter",
+                "min_time": 5e-06,
+                "disable_gc": false,
+                "max_time": 1.0,
+                "warmup": false
+            },
+            "extra_info": {},
+            "fullname": "families_blockinfo_sawtoothblockinfo_processor.py::test_processor_create_parser",
+            "stats": {
+                "total": 0.5513620999990962,
+                "q1": 0.05309520000082557,
+                "ld15iqr": 0.05239660000006552,
+                "mean": 0.055136209999909626,
+                "outliers": "1;2",
+                "min": 0.05239660000006552,
+                "data": [
+                    0.06723210000018298,
+                    0.054318799999236944,
+                    0.05373109999891312,
+                    0.05321229999935895,
+                    0.05246880000049714,
+                    0.05239660000006552,
+                    0.05437840000013239,
+                    0.05309520000082557,
+                    0.054042400000980706,
+                    0.056486399998902925
+                ],
+                "iterations": 1,
+                "iqr_outliers": 2,
+                "median": 0.053886749999946915,
+                "stddev_outliers": 1,
+                "max": 0.06723210000018298,
+                "q3": 0.05437840000013239,
+                "stddev": 0.004410019501449769,
+                "ops": 18.136901321321126,
+                "hd15iqr": 0.056486399998902925,
+                "iqr": 0.0012831999993068166,
+                "rounds": 10
+            },
+            "group": null,
+            "name": "test_processor_create_parser"
+        },
+        {
+            "params": null,
+            "param": null,
+            "options": {
+                "min_rounds": 5,
+                "timer": "perf_counter",
+                "min_time": 5e-06,
+                "disable_gc": false,
+                "max_time": 1.0,
+                "warmup": false
+            },
+            "extra_info": {},
+            "fullname": "families_blockinfo_sawtoothblockinfo_processor.py::test_create_block_info_config",
+            "stats": {
+                "total": 0.00022330000319925603,
+                "q1": 1.6200001482502557e-05,
+                "ld15iqr": 1.610000072105322e-05,
+                "mean": 2.2330000319925603e-05,
+                "outliers": "1;2",
+                "min": 1.610000072105322e-05,
+                "data": [
+                    6.040000153006986e-05,
+                    2.5999999706982635e-05,
+                    1.9600000086938962e-05,
+                    1.809999957913533e-05,
+                    1.739999970595818e-05,
+                    1.700000029813964e-05,
+                    1.630000042496249e-05,
+                    1.6200001482502557e-05,
+                    1.6199999663513154e-05,
+                    1.610000072105322e-05
+                ],
+                "iterations": 1,
+                "iqr_outliers": 2,
+                "median": 1.720000000204891e-05,
+                "stddev_outliers": 1,
+                "max": 6.040000153006986e-05,
+                "q3": 1.9600000086938962e-05,
+                "stddev": 1.370799073126557e-05,
+                "ops": 44782.80276188244,
+                "hd15iqr": 2.5999999706982635e-05,
+                "iqr": 3.399998604436405e-06,
+                "rounds": 10
+            },
+            "group": null,
+            "name": "test_create_block_info_config"
+        }
+    ],
+    "commit_info": {
+        "id": "unversioned",
+        "branch": "(unknown)",
+        "time": null,
+        "dirty": false,
+        "author_time": null,
+        "project": "benchs"
+    },
+    "datetime": "2018-04-14T22:56:58.177524"
+}
