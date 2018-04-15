@@ -1,0 +1,4 @@
+[
+  "test/first_test.py::test_my_stuff",
+  "test/first_test.py::test_my_stuff_different_arg"
+]
