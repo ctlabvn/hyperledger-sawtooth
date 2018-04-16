@@ -105,7 +105,7 @@ $ npm test -- simple -c ./benchmark/simple/config.json -n ./benchmark/simple/fab
 # start the network
 $ cd network/sawtooth/simplenetwork && ./start.sh
 # start the processor
-$ cd network/sawtooth/processor && node index.js
+$ cd src/contract/sawtooth/simple/processor && node index.js
 # clean resources
 $ cd network/sawtooth/simplenetwork && ./stop.sh
 # Ctrl + c to stop the processor

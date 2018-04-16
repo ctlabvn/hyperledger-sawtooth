@@ -12,6 +12,7 @@ module.exports.info = "opening accounts";
 var accounts = [];
 var initMoney;
 var bc, contx;
+var accountIndex = 0;
 module.exports.init = function(blockchain, context, args) {
     if (!args.hasOwnProperty("money")) {
         return Promise.reject(
@@ -22,30 +23,21 @@ module.exports.init = function(blockchain, context, args) {
     initMoney = args["money"].toString();
     bc = blockchain;
     contx = context;
+    accounts = args.accounts;
     return Promise.resolve();
 };
 
-var dic = "abcdefghijklmnopqrstuvwxyz";
-function get26Num(number) {
-    var result = "";
-    while (number > 0) {
-        result += dic.charAt(number % 26);
-        number = parseInt(number / 26);
-    }
-    return result;
-}
-var prefix;
 function generateAccount() {
-    // should be [a-z]{1,9}
-    if (typeof prefix === "undefined") {
-        prefix = get26Num(process.pid);
+    const acc = accounts[accountIndex];
+    accountIndex++;
+    if (accountIndex >= accounts.length) {
+        accountIndex = 0;
     }
-    return prefix + get26Num(accounts.length + 1);
+    return acc;
 }
 
 module.exports.run = function() {
     var newAcc = generateAccount();
-    accounts.push(newAcc);
     return bc.invokeSmartContract(
         contx,
         "simple",

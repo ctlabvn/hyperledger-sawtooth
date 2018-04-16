@@ -12,10 +12,9 @@ module.exports.info = "querying accounts";
 var bc, contx;
 var accounts;
 module.exports.init = function(blockchain, context, args) {
-  var open = require("./open.js");
   bc = blockchain;
   contx = context;
-  accounts = open.accounts;
+  accounts = args.accounts;
   return Promise.resolve();
 };
 
