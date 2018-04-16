@@ -1,12 +1,10 @@
-## Caliper Introduction
+## Sawtooh Caliper Introduction
 
-Caliper is a blockchain performance benchmark framework, which allows users to test different blockchain solutions with predefined use cases, and get a set of performance test results.
+Sawtooh Caliper is a blockchain performance benchmark framework, which allows users to test different blockchain solutions with predefined use cases, and get a set of performance test results.
 
 Currently supported blockchain solutions:
 
-* [fabric 1.0.5](https://github.com/hyperledger/fabric)
 * [sawtooth 1.0.2](https://github.com/hyperledger/sawtooth-core)
-* [Iroha (develop branch @fcc2f7c8ceaee4f7654c3b216d65b8906a35f633)](https://github.com/hyperledger/iroha)
 
 Currently supported performance indicators:
 
@@ -35,29 +33,10 @@ Run `npm install` in caliper folder to install dependencies locally
 
 ### Install blockchain SDKs
 
-* Fabric
-
-  * Install with source code
-    * Clone [fabric-sdk-node](https://github.com/hyperledger/fabric-sdk-node) and run the headless tests to make sure everything is ok
-    * Install **fabric-client** and **fabric-ca-client** from the SDK, e.g run `npm install path-to-sdk/fabric-client path-to-sdk/fabric-ca-client` in caliper's root folder, or just copy the `node_modules` from fabric-sdk-node project
-  * Or install using the repository
-    * run `npm install fabric-ca-client fabric-client` in the root folder
-
 * Sawtooth
 
   * Clone [sawtooth-core](https://github.com/hyperledger/sawtooth-core) and run the `./bin/run_tests -m javascript_sdk` to test the SDK
   * Install **sawtooth-sdk** from the SDK, e.g run `npm install path-to-sdk/javascript` in capliper's root folder.
-
-* Iroha
-
-  * Install dependencies
-
-    ```
-    $sudo apt-get install libv8-dev
-    $install google-protobuf grpc
-    ```
-
-  * A precompiled Iroha library is provided in `src/iroha/external`, which is compiled with Ubuntu 14 x86_64. The library should be replaced if it is incompatible with the under platform.
 
 ## Run benchmark
 
@@ -69,7 +48,7 @@ To start a benchmark, just run `node main.js -c yourconfig.json -n yournetwork.j
 
 ```bash
 # start the simple benchmark, default config.json is used
-cd ~/caliper/benchmark/simple
+cd ~/sawtooth-caliper/benchmark/simple
 node main.js
 ```
 
@@ -79,9 +58,9 @@ Some example SUTs are provided in [_caliper/network_](./network) folder, they ca
 {
   "command": {
     "start":
-      "docker-compose -f network/fabric/simplenetwork/docker-compose.yaml up -d",
+      "docker-compose -f network/caliper/simplenetwork/docker-compose.yaml up -d",
     "end":
-      "docker-compose -f network/fabric/simplenetwork/docker-compose.yaml down;docker rm $(docker ps -aq)"
+      "docker-compose -f network/caliper/simplenetwork/docker-compose.yaml down;docker rm $(docker ps -aq)"
   }
 }
 ```
@@ -126,7 +105,7 @@ $ npm test -- simple -c ./benchmark/simple/config.json -n ./benchmark/simple/fab
 # start the network
 $ cd network/sawtooth/simplenetwork && ./start.sh
 # start the processor
-$ cd network/sawtooth/processor && node index.js
+$ cd src/contract/sawtooth/simple/processor && node index.js
 # clean resources
 $ cd network/sawtooth/simplenetwork && ./stop.sh
 # Ctrl + c to stop the processor
