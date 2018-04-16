@@ -26,11 +26,13 @@ class Sawtooth extends BlockchainInterface {
 
 	init() {
 		// todo: sawtooth
+		// we just start the network
 		return Promise.resolve();
 	}
 
 	installSmartContract() {
 		// todo:
+		// we just run the processor
 		return Promise.resolve();
 	}
 
@@ -45,25 +47,12 @@ class Sawtooth extends BlockchainInterface {
 
 	invokeSmartContract(context, contractID, contractVer, args, timeout) {
 		const address = calculateAddresses(contractID, args);
-		let sawtoothContractVersion = "1.0";
-		if (contractVer === "v0") {
-			sawtoothContractVersion = "1.0";
-		}
-		const batchBytes = createBatch(
-			contractID,
-			sawtoothContractVersion,
-			address,
-			args
-		);
+		const batchBytes = createBatch(contractID, contractVer, address, args);
 		// console.log(contractID, sawtoothContractVersion, address, args);
 		return submitBatches(batchBytes, this.config.sawtooth.network.restapi.url);
 	}
 
 	queryState(context, contractID, contractVer, queryName) {
-		let sawtoothContractVersion = "1.0";
-		if (contractVer === "v0") {
-			sawtoothContractVersion = "1.0";
-		}
 		return querybycontext(
 			context,
 			contractID,
@@ -295,12 +284,5 @@ function createBatch(contractID, contractVer, addresses, args) {
 		batches: [batch]
 	}).finish();
 
-	// const fileStream = fs.createWriteStream("/tmp/intkey.batches");
-	// fileStream.write(batchListBytes);
-	// fileStream.end();
-
 	return batchListBytes;
-	// const batchBytes = protobuf.TransactionList.encode([transaction]).finish();
-
-	// return batchBytes;
 }

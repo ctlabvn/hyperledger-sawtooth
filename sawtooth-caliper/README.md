@@ -5,7 +5,7 @@ Caliper is a blockchain performance benchmark framework, which allows users to t
 Currently supported blockchain solutions:
 
 * [fabric 1.0.5](https://github.com/hyperledger/fabric)
-* [sawtooth 0.8](https://github.com/hyperledger/sawtooth-core)
+* [sawtooth 1.0.2](https://github.com/hyperledger/sawtooth-core)
 * [Iroha (develop branch @fcc2f7c8ceaee4f7654c3b216d65b8906a35f633)](https://github.com/hyperledger/iroha)
 
 Currently supported performance indicators:
@@ -116,9 +116,6 @@ simple
 
 ```bash
 $ npm test -- simple -c ./benchmark/simple/config.json -n ./benchmark/simple/fabric.json
-
-> caliper@0.1.0 test /home/hurf/caliper
-> node ./scripts/test.js "simple" "-c" "./benchmark/simple/config.json" "-n" "./benchmark/simple/fabric.json"
 ......
 ```
 

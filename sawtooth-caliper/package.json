@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Huawei-OSG/caliper"
+    "url": "https://github.com/agiletechvn/sawtooth-caliper.git"
   },
   "scripts": {
     "test": "node ./scripts/test.js",
@@ -33,11 +33,5 @@
     "tape": "^4.8.0",
     "tape-promise": "^1.1.0"
   },
-  "license": "Apache-2.0",
-  "licenses": [
-    {
-      "type": "Apache-2.0",
-      "url": "https://github.com/Huawei-OSG/caliper/blob/master/LICENSE"
-    }
-  ]
+  "license": "Apache-2.0"
 }
