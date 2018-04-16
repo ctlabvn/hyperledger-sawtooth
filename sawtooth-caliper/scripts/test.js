@@ -54,6 +54,8 @@ function main() {
             "config file of the blockchain system under test",
             setNetwork
         )
+        .option("--output-folder <folder>", "Folder where to save outputs to")
+        .option("--output-format <format>", "formats of benchmark output files")
         .parse(process.argv);
     var cmd = "node main.js";
     if (typeof configFile === "string") {
@@ -63,6 +65,14 @@ function main() {
     if (typeof networkFile === "string") {
         cmd += " -n ";
         cmd += networkFile;
+    }
+
+    if (typeof program.outputFolder === "string") {
+        cmd += " --output-folder " + program.outputFolder;
+    }
+
+    if (typeof program.outputFormat === "string") {
+        cmd += " --output-format " + program.outputFormat;
     }
 
     var childProcess = require("child_process");
