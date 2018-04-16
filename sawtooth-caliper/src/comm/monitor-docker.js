@@ -280,16 +280,20 @@ function findContainers() {
                         this.stats[containers[i].id] = newContainerStat();
                     }
                 } else {
-                    for (let i = 0; i < size; i++) {
-                        if (
-                            filterName.local.indexOf(containers[i].name) != -1
-                        ) {
+                    const filterRegLocal = filterName.local.map(filter =>
+                        RegExp(filter)
+                    );
+                    for (let container of containers) {
+                        const test = filterRegLocal.some(filter =>
+                            filter.test(container.name)
+                        );
+                        if (test) {
                             this.containers.push({
-                                id: containers[i].id,
-                                name: containers[i].name,
+                                id: container.id,
+                                name: container.name,
                                 remote: null
                             });
-                            this.stats[containers[i].id] = newContainerStat();
+                            this.stats[container.id] = newContainerStat();
                         }
                     }
                 }
