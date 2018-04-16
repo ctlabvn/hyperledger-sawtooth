@@ -199,7 +199,9 @@ var Report = class {
                     }
                 });
             } else {
-                console.log(this.data);
+                const logData = Object.assign({}, this.data);
+                delete logData.benchmarkInfo;
+                console.log(JSON.stringify(logData, null, 2));
                 resolve(format + " format is not supported!");
             }
         });

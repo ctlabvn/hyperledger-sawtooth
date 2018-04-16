@@ -124,7 +124,7 @@
     "monitor": {
         "type": "docker",
         "docker": {
-            "name": ["all"]
+            "name": ["sawtooth"]
         },
         "interval": 1
     }
