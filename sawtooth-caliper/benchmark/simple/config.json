@@ -1,45 +1,40 @@
 {
   "blockchain": {
-    "type": "fabric",
-    "config": "benchmark/simple/fabric.json"
+    "type": "sawtooth",
+    "config": "benchmark/simple/sawtooth.json"
   },
-  "command" : {
-    "start": "docker-compose -f network/fabric/simplenetwork/docker-compose.yaml up -d",
-    "end" : "docker-compose -f network/fabric/simplenetwork/docker-compose.yaml down;docker rm $(docker ps -aq)"
+  "/** command **/": {
+    "start":
+      "docker-compose -f network/sawtooth/simplenetwork/docker-compose.yaml up -d",
+    "end":
+      "docker-compose -f network/sawtooth/simplenetwork/docker-compose.yaml down;docker rm $(docker ps -aq)"
   },
   "test": {
-    "name": "simple",
-    "description" : "This is an example benchmark for caliper, to test the backend DLT's performance with simple account opening & querying transactions",
     "clients": {
       "type": "local",
-      "number": 5
+      "number": 1
     },
-    "rounds": [{
-        "label" : "open",
-        "txNumber" : [5000, 5000, 5000],
-        "rateControl" : [{"type": "fixed-rate", "opts": {"tps" : 100}}, {"type": "fixed-rate", "opts": {"tps" : 200}}, {"type": "fixed-rate", "opts": {"tps" : 300}}],
+    "rounds": [
+      {
+        "label": "open",
+        "txNumber": [100],
+        "rateControl": [{ "type": "fixed-rate", "opts": { "tps": 10 } }],
         "arguments": { "money": 10000 },
-        "callback" : "benchmark/simple/open.js"
+        "callback": "benchmark/simple/open.js"
       },
       {
-        "label" : "query",
-        "txNumber" : [5000, 5000],
-        "rateControl" : [{"type": "fixed-rate", "opts": {"tps" : 300}}, {"type": "fixed-rate", "opts": {"tps" : 400}}],
-        "callback" : "benchmark/simple/query.js"
-      }]
+        "label": "query",
+        "txNumber": [100],
+        "rateControl": [{ "type": "fixed-rate", "opts": { "tps": 10 } }],
+        "callback": "benchmark/simple/query.js"
+      }
+    ]
   },
   "monitor": {
-    "type": ["docker", "process"],
-    "docker":{
+    "type": ["docker"],
+    "docker": {
       "name": ["all"]
     },
-    "process": [
-      {
-        "command" : "node",
-        "arguments" : "local-client.js",
-        "multiOutput" : "avg"
-      }
-    ],
     "interval": 1
   }
 }
