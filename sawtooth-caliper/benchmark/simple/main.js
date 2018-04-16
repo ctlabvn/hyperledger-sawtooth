@@ -9,6 +9,7 @@
 
 var configFile;
 var networkFile;
+
 function setConfig(file) {
     configFile = file;
 }
@@ -31,6 +32,8 @@ function main() {
             "config file of the blockchain system under test, if not provided, blockchain property in benchmark config is used",
             setNetwork
         )
+        .option("--output-folder <folder>", "Folder where to save outputs to")
+        .option("--output-format <format>", "formats of benchmark output files")
         .parse(process.argv);
 
     var path = require("path");
@@ -64,23 +67,20 @@ function main() {
         return;
     }
 
+    let absOutputFolder;
+    if (program.outputFolder) {
+        absOutputFolder = path.join(__dirname, program.outputFolder);
+        if (!fs.existsSync(absOutputFolder)) {
+            console.log("folder " + absOutputFolder + " does not exist");
+            return;
+        }
+    }
+
     // call framework with config file and network file
     var framework = require("../../src/comm/bench-flow.js");
+    framework.setOutputFolder(absOutputFolder);
+    framework.setOutputFormat(program.outputFormat);
     framework.run(absConfigFile, absNetworkFile);
 }
 
 main();
-
-/*
-var config_path;
-if(process.argv.length < 3) {
-    config_path = path.join(__dirname, 'config.json');
-}
-else {
-    config_path = path.join(__dirname, process.argv[2]);
-}
-
-// use default framework to run the tests
-var framework = require('../../src/comm/bench-flow.js');
-framework.run(config_path);
-*/

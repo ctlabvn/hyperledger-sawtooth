@@ -27,6 +27,17 @@ var demo = require("../gui/src/demo.js");
 var absConfigFile, absNetworkFile;
 var absCaliperDir = path.join(__dirname, "../..");
 
+// set outputFolder and format
+var outputFolder;
+var outputFormat;
+module.exports.setOutputFolder = function(folder) {
+    outputFolder = folder;
+};
+
+module.exports.setOutputFormat = function(format) {
+    outputFormat = format;
+};
+
 /**
  * Start a default test flow to run the tests
  * @config_path {string},path of the local configuration file
@@ -115,11 +126,14 @@ module.exports.run = function(configFile, networkFile) {
                     .replace(/-/g, "")
                     .replace(/:/g, "")
                     .substr(0, 15);
+
+                let format = outputFormat || "json";
+                // get output folder
                 let output = path.join(
-                    process.cwd(),
-                    "report" + date + ".html"
+                    outputFolder || path.join(process.cwd(), "outputs"),
+                    "report" + date + "." + format
                 );
-                return report.generate(output).then(() => {
+                return report.generate(output, format).then(() => {
                     demo.stopWatch(output);
                     console.log("Generated report at " + output);
                     return Promise.resolve();
