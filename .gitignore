@@ -16,7 +16,7 @@
 # Exclude IDE and Editor files
 /.idea/
 *.sublime*
-
+.DS_Store
 # Exclude poet build artifacts
 /consensus/**/__pycache__/
 /consensus/**/build/
