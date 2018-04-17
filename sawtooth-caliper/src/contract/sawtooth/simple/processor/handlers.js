@@ -39,7 +39,7 @@ const openAccount = (owner, asset, context) => {
     if (entry && entry.length > 0) {
       // throw new InvalidTransaction("Account in use");
       // allow update state to test the transaction through put
-      console.log("Account in use");
+      console.log("Account in use, need overridden");
     }
 
     return context.setState({

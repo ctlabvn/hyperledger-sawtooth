@@ -24,19 +24,19 @@ services:
       - validator
     entrypoint: settings-tp -vv -C tcp://validator:4004
 
-  intkey-tp-python:
-    image: hyperledger/sawtooth-intkey-tp-python:latest
-    container_name: sawtooth-intkey-tp-python-default
-    depends_on:
-      - validator
-    entrypoint: intkey-tp-python -vv -C tcp://validator:4004
+  # intkey-tp-python:
+  #   image: hyperledger/sawtooth-intkey-tp-python:latest
+  #   container_name: sawtooth-intkey-tp-python-default
+  #   depends_on:
+  #     - validator
+  #   entrypoint: intkey-tp-python -vv -C tcp://validator:4004
 
-  xo-tp-python:
-    image: hyperledger/sawtooth-xo-tp-python:latest
-    container_name: sawtooth-xo-tp-python-default
-    depends_on:
-      - validator
-    entrypoint: xo-tp-python -vv -C tcp://validator:4004
+  # xo-tp-python:
+  #   image: hyperledger/sawtooth-xo-tp-python:latest
+  #   container_name: sawtooth-xo-tp-python-default
+  #   depends_on:
+  #     - validator
+  #   entrypoint: xo-tp-python -vv -C tcp://validator:4004
 
   validator:
     image: hyperledger/sawtooth-validator:latest
@@ -52,53 +52,54 @@ services:
         sawset genesis -k /root/.sawtooth/keys/my_key.priv && \
         sawadm genesis config-genesis.batch && \
         sawtooth-validator -vv \
+          --scheduler parallel \
           --endpoint tcp://validator:8800 \
           --bind component:tcp://eth0:4004 \
           --bind network:tcp://eth0:8800 \
         \""
 
-  validator-1:
-    image: hyperledger/sawtooth-validator:latest
-    expose:
-      - 4004
-      - 8800
-    depends_on:
-      - validator
-    command: "bash -c \"\
-        sawadm keygen --force && \
-        sawtooth-validator -v \
-          --endpoint tcp://validator-1:8800 \
-          --peers tcp://validator:8800 \
-          --bind component:tcp://eth0:4004 \
-          --bind network:tcp://eth0:8800 \
-    \""
-    environment:
-      PYTHONPATH: "/project/sawtooth-core/consensus/poet/common:\
-        /project/sawtooth-core/consensus/poet/simulator:\
-        /project/sawtooth-core/consensus/poet/core"
-    stop_signal: SIGKILL
+  # validator-1:
+  #   image: hyperledger/sawtooth-validator:latest
+  #   expose:
+  #     - 4004
+  #     - 8800
+  #   depends_on:
+  #     - validator
+  #   command: "bash -c \"\
+  #       sawadm keygen --force && \
+  #       sawtooth-validator -v \
+  #         --endpoint tcp://validator-1:8800 \
+  #         --peers tcp://validator:8800 \
+  #         --bind component:tcp://eth0:4004 \
+  #         --bind network:tcp://eth0:8800 \
+  #   \""
+  #   environment:
+  #     PYTHONPATH: "/project/sawtooth-core/consensus/poet/common:\
+  #       /project/sawtooth-core/consensus/poet/simulator:\
+  #       /project/sawtooth-core/consensus/poet/core"
+  #   stop_signal: SIGKILL
 
-  validator-2:
-    image: hyperledger/sawtooth-validator:latest
-    expose:
-      - 4004
-      - 8800
-    depends_on:
-      - validator
-      - validator-1
-    command: "bash -c \"\
-        sawadm keygen --force && \
-        sawtooth-validator -v \
-          --endpoint tcp://validator-2:8800 \
-          --peers tcp://validator:8800,tcp://validator-1:8800
-          --bind component:tcp://eth0:4004 \
-          --bind network:tcp://eth0:8800 \
-    \""
-    environment:
-      PYTHONPATH: "/project/sawtooth-core/consensus/poet/common:\
-        /project/sawtooth-core/consensus/poet/simulator:\
-        /project/sawtooth-core/consensus/poet/core"
-    stop_signal: SIGKILL
+  # validator-2:
+  #   image: hyperledger/sawtooth-validator:latest
+  #   expose:
+  #     - 4004
+  #     - 8800
+  #   depends_on:
+  #     - validator
+  #     - validator-1
+  #   command: "bash -c \"\
+  #       sawadm keygen --force && \
+  #       sawtooth-validator -v \
+  #         --endpoint tcp://validator-2:8800 \
+  #         --peers tcp://validator:8800,tcp://validator-1:8800
+  #         --bind component:tcp://eth0:4004 \
+  #         --bind network:tcp://eth0:8800 \
+  #   \""
+  #   environment:
+  #     PYTHONPATH: "/project/sawtooth-core/consensus/poet/common:\
+  #       /project/sawtooth-core/consensus/poet/simulator:\
+  #       /project/sawtooth-core/consensus/poet/core"
+  #   stop_signal: SIGKILL
 
   rest-api:
     image: hyperledger/sawtooth-rest_api:latest
