@@ -8,7 +8,7 @@
 
 "use strict";
 
-var Report = class {
+class Report {
     constructor() {
         var path = require("path");
         this.template = path.join(__dirname, "template/report.html");
@@ -198,15 +198,16 @@ var Report = class {
                         resolve("Report  created successfully!");
                     }
                 });
+                console.log("Generated report at " + output);
             } else {
-                const logData = Object.assign({}, this.data);
-                delete logData.benchmarkInfo;
-                console.log(JSON.stringify(logData, null, 2));
+                // const logData = Object.assign({}, this.data);
+                // delete logData.benchmarkInfo;
+                // console.log(JSON.stringify(logData, null, 2));
                 resolve(format + " format is not supported!");
             }
         });
     }
-};
+}
 
 module.exports = Report;
 

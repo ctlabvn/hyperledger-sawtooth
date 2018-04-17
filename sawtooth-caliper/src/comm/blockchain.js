@@ -10,24 +10,22 @@
 
 var path = require("path");
 class Blockchain {
-    constructor(configPath) {
-        var config = require(configPath);
-
+    constructor(config) {
         if (config.hasOwnProperty("fabric")) {
             var fabric = require("../fabric/fabric.js");
             this.bcType = "fabric";
-            this.bcObj = new fabric(configPath);
+            this.bcObj = new fabric(config);
         } else if (config.hasOwnProperty("sawtooth")) {
             var sawtooth = require("../sawtooth/sawtooth.js");
             this.bcType = "sawtooth";
-            this.bcObj = new sawtooth(configPath);
+            this.bcObj = new sawtooth(config);
         } else if (config.hasOwnProperty("iroha")) {
             var iroha = require("../iroha/iroha.js");
             this.bcType = "iroha";
-            this.bcObj = new iroha(configPath);
+            this.bcObj = new iroha(config);
         } else {
             this.bcType = "unknown";
-            throw new Error("Unknown blockchain config file " + configPath);
+            throw new Error("Unknown blockchain config file " + config.file);
         }
     }
 

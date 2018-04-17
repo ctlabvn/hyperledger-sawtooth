@@ -13,11 +13,32 @@ const {
 	calculateAddress,
 	calculateAddresses
 } = require("../../lib/sawtooth/address");
+const Cargo = require("../../lib/cargo");
+const request = require("request-promise");
+const cbor = require("cbor");
+const { createHash } = require("crypto");
+const { protobuf } = require("sawtooth-sdk");
+const { createContext, CryptoFactory } = require("sawtooth-sdk/signing");
 
 class Sawtooth extends BlockchainInterface {
-	constructor(config_path) {
-		super(config_path);
-		this.config = JSON.parse(fs.readFileSync(this.configPath, "utf8"));
+	constructor(config) {
+		super(config);
+
+		const cryptoContext = createContext("secp256k1");
+		const privateKey = cryptoContext.newRandomPrivateKey();
+		this.signer = new CryptoFactory(cryptoContext).newSigner(privateKey);
+
+		this.cargo = new Cargo(
+			(tasks, callback) => {
+				const batchBytes = createBatch(this.signer, tasks);
+
+				callback(
+					submitBatches(batchBytes, this.config.sawtooth.network.restapi.url)
+				);
+			},
+			100,
+			1000
+		);
 	}
 
 	gettype() {
@@ -27,6 +48,7 @@ class Sawtooth extends BlockchainInterface {
 	init() {
 		// todo: sawtooth
 		// we just start the network
+
 		return Promise.resolve();
 	}
 
@@ -46,10 +68,28 @@ class Sawtooth extends BlockchainInterface {
 	}
 
 	invokeSmartContract(context, contractID, contractVer, args, timeout) {
-		const address = calculateAddresses(contractID, args);
-		const batchBytes = createBatch(contractID, contractVer, address, args);
-		// console.log(contractID, sawtoothContractVersion, address, args);
-		return submitBatches(batchBytes, this.config.sawtooth.network.restapi.url);
+		// const address = calculateAddresses(contractID, args);
+
+		// const batchBytes = createBatch(
+		// 	this.signer,
+		// 	contractID,
+		// 	contractVer,
+		// 	address,
+		// 	args
+		// );
+		// // console.log(contractID, sawtoothContractVersion, address, args);
+		// return submitBatches(batchBytes, this.config.sawtooth.network.restapi.url);
+
+		return new Promise(resolve => {
+			this.cargo.push(
+				{
+					contractID: contractID,
+					contractVer: contractVer,
+					args: args
+				},
+				resolve
+			);
+		});
 	}
 
 	queryState(context, contractID, contractVer, queryName) {
@@ -84,20 +124,20 @@ function getState(address, restApiUrl) {
 		result: null
 	};
 
-	const stateLink = restApiUrl + "/state?address=" + address;
+	const stateLink = restApiUrl + "/state/" + address;
 	var options = {
-		uri: stateLink
+		uri: stateLink,
+		json: true
 	};
+
 	return request(options)
 		.then(function(body) {
 			// console.log("Get Body from state: " + body);
-			let data = JSON.parse(body)["data"];
+			let data = body.data;
 
-			if (data.length > 0) {
-				let stateDataBase64 = data[0]["data"];
-				let stateDataBuffer = new Buffer(stateDataBase64, "base64");
-				let stateData = stateDataBuffer.toString("hex");
-
+			if (data) {
+				let stateDataBuffer = Buffer.from(data, "base64");
+				let stateData = stateDataBuffer.toString();
 				invoke_status.time_final = Date.now();
 				invoke_status.result = stateData;
 				invoke_status.status = "success";
@@ -126,7 +166,7 @@ function submitBatches(batchBytes, restApiUrl) {
 		time_order: 0,
 		result: null
 	};
-	const request = require("request-promise");
+
 	var options = {
 		method: "POST",
 		url: restApiUrl + "/batches",
@@ -140,7 +180,7 @@ function submitBatches(batchBytes, restApiUrl) {
 			return getBatchStatus(link, invoke_status);
 		})
 		.catch(function(err) {
-			console.log("Submit batches failed, " + (err.stack ? err.stack : err));
+			// console.log("Submit batches failed, " + (err.stack ? err.stack : err));
 			return Promise.resolve(invoke_status);
 		});
 }
@@ -189,7 +229,6 @@ function getBatchStatus(link, invoke_status) {
 }
 
 var timeoutID = 0;
-const request = require("request-promise");
 var requestIndex = 0;
 
 function getBatchStatusByRequest(
@@ -201,11 +240,12 @@ function getBatchStatusByRequest(
 ) {
 	requestIndex++;
 	var options = {
-		uri: statusLink
+		uri: statusLink,
+		json: true
 	};
 	return request(options)
 		.then(function(body) {
-			let batchStatuses = JSON.parse(body).data;
+			let batchStatuses = body.data;
 			// console.log("Got Status: " + JSON.stringify(batchStatuses));
 			let hasPending = false;
 			for (let index in batchStatuses) {
@@ -224,22 +264,14 @@ function getBatchStatusByRequest(
 			}
 		})
 		.catch(function(err) {
-			console.log(err);
+			// console.log(err);
 			return resolve(invoke_status);
 		});
 }
 
-function createBatch(contractID, contractVer, addresses, args) {
-	const cbor = require("cbor");
-	const { createHash } = require("crypto");
-	const { protobuf } = require("sawtooth-sdk");
-	const { createContext, CryptoFactory } = require("sawtooth-sdk/signing");
-	const context = createContext("secp256k1");
-	const privateKey = context.newRandomPrivateKey();
-	const signer = new CryptoFactory(context).newSigner(privateKey);
-
-	const payloadBytes = cbor.encode(args);
-
+function createTransaction(signer, contractID, contractVer, data) {
+	const payloadBytes = cbor.encode(data);
+	const addresses = calculateAddresses(contractID, data);
 	const transactionHeaderBytes = protobuf.TransactionHeader.encode({
 		familyName: contractID,
 		familyVersion: contractVer,
@@ -267,7 +299,13 @@ function createBatch(contractID, contractVer, addresses, args) {
 		payload: payloadBytes
 	});
 
-	const transactions = [transaction];
+	return transaction;
+}
+
+function createBatch(signer, tasks) {
+	const transactions = tasks.map(task =>
+		createTransaction(signer, task.contractID, task.contractVer, task.args)
+	);
 
 	const batchHeaderBytes = protobuf.BatchHeader.encode({
 		signerPublicKey: signer.getPublicKey().asHex(),

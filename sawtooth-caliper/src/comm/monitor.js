@@ -8,11 +8,11 @@
 
 "use strict";
 
-var table = require("table");
+const table = require("table");
 
-var Monitor = class {
-    constructor(config_path) {
-        this.configPath = config_path;
+class Monitor {
+    constructor(config) {
+        this.config = config;
         this.started = false;
         this.peers = [];
         this.monitors = [];
@@ -23,8 +23,7 @@ var Monitor = class {
      * @return {Promise}
      */
     start() {
-        var config = require(this.configPath);
-        var m = config.monitor;
+        var m = this.config.monitor;
         if (typeof m === "undefined") {
             return Promise.reject(
                 new Error("Failed to find monitor in config file")
@@ -440,7 +439,7 @@ var Monitor = class {
                 return Promise.reject(err);
             });
     }
-};
+}
 
 module.exports = Monitor;
 
