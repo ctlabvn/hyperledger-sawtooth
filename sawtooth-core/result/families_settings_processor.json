@@ -1,128 +1,128 @@
 {
-    "datetime": "2018-04-14T22:57:06.879149",
     "version": "3.1.1",
-    "benchmarks": [
-        {
-            "params": null,
-            "extra_info": {},
-            "stats": {
-                "total": 0.00021570000171777792,
-                "ld15iqr": 1.0199999451288022e-05,
-                "ops": 46360.68576895057,
-                "median": 1.275000067835208e-05,
-                "rounds": 10,
-                "stddev_outliers": 1,
-                "hd15iqr": 9.680000039224979e-05,
-                "q3": 1.6599999071331695e-05,
-                "data": [
-                    9.680000039224979e-05,
-                    1.939999856404029e-05,
-                    1.6599999071331695e-05,
-                    1.1300000551273115e-05,
-                    1.06999996205559e-05,
-                    1.5200001143966801e-05,
-                    1.0400000974186696e-05,
-                    1.0199999451288022e-05,
-                    1.0900001143454574e-05,
-                    1.4200000805431046e-05
-                ],
-                "max": 9.680000039224979e-05,
-                "iqr_outliers": 1,
-                "outliers": "1;1",
-                "min": 1.0199999451288022e-05,
-                "iterations": 1,
-                "mean": 2.1570000171777792e-05,
-                "q1": 1.06999996205559e-05,
-                "stddev": 2.6615327687618426e-05,
-                "iqr": 5.899999450775795e-06
-            },
-            "param": null,
-            "name": "test_create_console_handler",
-            "fullname": "families_settings_processor.py::test_create_console_handler",
-            "group": null,
-            "options": {
-                "warmup": false,
-                "disable_gc": false,
-                "min_time": 5e-06,
-                "timer": "perf_counter",
-                "max_time": 1.0,
-                "min_rounds": 5
-            }
-        },
-        {
-            "params": null,
-            "extra_info": {},
-            "stats": {
-                "total": 0.43937730000106967,
-                "ld15iqr": 0.04069879999951809,
-                "ops": 22.75948256766031,
-                "median": 0.04250475000026199,
-                "rounds": 10,
-                "stddev_outliers": 1,
-                "hd15iqr": 0.056740399999398505,
-                "q3": 0.04377060000115307,
-                "data": [
-                    0.056740399999398505,
-                    0.04522970000107307,
-                    0.04086070000084874,
-                    0.04228749999856518,
-                    0.04198580000047514,
-                    0.042794299999513896,
-                    0.04241370000090683,
-                    0.04259579999961716,
-                    0.04069879999951809,
-                    0.04377060000115307
-                ],
-                "max": 0.056740399999398505,
-                "iqr_outliers": 1,
-                "outliers": "1;1",
-                "min": 0.04069879999951809,
-                "iterations": 1,
-                "mean": 0.043937730000106964,
-                "q1": 0.04198580000047514,
-                "stddev": 0.004684826863967217,
-                "iqr": 0.001784800000677933
-            },
-            "param": null,
-            "name": "test_create_parser",
-            "fullname": "families_settings_processor.py::test_create_parser",
-            "group": null,
-            "options": {
-                "warmup": false,
-                "disable_gc": false,
-                "min_time": 5e-06,
-                "timer": "perf_counter",
-                "max_time": 1.0,
-                "min_rounds": 5
-            }
-        }
-    ],
-    "commit_info": {
-        "id": "unversioned",
-        "project": "benchs",
-        "author_time": null,
-        "time": null,
-        "branch": "(unknown)",
-        "dirty": false
-    },
     "machine_info": {
         "python_implementation": "CPython",
+        "system": "Linux",
+        "processor": "x86_64",
+        "node": "983f792f1335",
+        "release": "4.9.87-linuxkit-aufs",
+        "machine": "x86_64",
+        "python_compiler": "GCC 5.4.0 20160609",
+        "python_version": "3.5.2",
+        "cpu": {
+            "hardware": "unknown",
+            "brand": "Intel(R) Core(TM) i7-4770HQ CPU @ 2.20GHz",
+            "vendor_id": "GenuineIntel"
+        },
+        "python_implementation_version": "3.5.2",
         "python_build": [
             "default",
             "Nov 23 2017 16:37:01"
-        ],
-        "python_version": "3.5.2",
-        "processor": "x86_64",
-        "node": "f63ad2aac348",
-        "release": "4.9.87-linuxkit-aufs",
-        "cpu": {
-            "hardware": "unknown",
-            "vendor_id": "GenuineIntel",
-            "brand": "Intel(R) Core(TM) i7-4770HQ CPU @ 2.20GHz"
+        ]
+    },
+    "benchmarks": [
+        {
+            "fullname": "families_settings_processor.py::test_create_console_handler",
+            "params": null,
+            "extra_info": {},
+            "group": null,
+            "name": "test_create_console_handler",
+            "stats": {
+                "total": 0.00014969999892855412,
+                "outliers": "1;1",
+                "hd15iqr": 4.369999987829942e-05,
+                "ops": 66800.2676791775,
+                "max": 4.369999987829942e-05,
+                "q1": 1.049999991664663e-05,
+                "ld15iqr": 7.900000127847306e-06,
+                "median": 1.1349999795129406e-05,
+                "mean": 1.4969999892855412e-05,
+                "iqr_outliers": 1,
+                "iqr": 4.099999841855606e-06,
+                "q3": 1.4599999758502236e-05,
+                "data": [
+                    4.369999987829942e-05,
+                    1.75999998646148e-05,
+                    1.4599999758502236e-05,
+                    1.1999999969702912e-05,
+                    1.1699999959091656e-05,
+                    1.0999999631167157e-05,
+                    1.049999991664663e-05,
+                    7.900000127847306e-06,
+                    9.899999895424116e-06,
+                    1.0799999927257886e-05
+                ],
+                "stddev_outliers": 1,
+                "stddev": 1.0439247506162034e-05,
+                "rounds": 10,
+                "iterations": 1,
+                "min": 7.900000127847306e-06
+            },
+            "options": {
+                "disable_gc": false,
+                "max_time": 1.0,
+                "timer": "perf_counter",
+                "warmup": false,
+                "min_time": 5e-06,
+                "min_rounds": 5
+            },
+            "param": null
         },
-        "system": "Linux",
-        "python_compiler": "GCC 5.4.0 20160609",
-        "python_implementation_version": "3.5.2",
-        "machine": "x86_64"
+        {
+            "fullname": "families_settings_processor.py::test_create_parser",
+            "params": null,
+            "extra_info": {},
+            "group": null,
+            "name": "test_create_parser",
+            "stats": {
+                "total": 0.5529495000000679,
+                "outliers": "1;1",
+                "hd15iqr": 0.06910819999984597,
+                "ops": 18.08483414850501,
+                "max": 0.06910819999984597,
+                "q1": 0.053097299999990355,
+                "ld15iqr": 0.05236849999982951,
+                "median": 0.05375869999988936,
+                "mean": 0.055294950000006796,
+                "iqr_outliers": 1,
+                "iqr": 0.001838200000293,
+                "q3": 0.054935500000283355,
+                "data": [
+                    0.06910819999984597,
+                    0.054935500000283355,
+                    0.05333730000029391,
+                    0.05259650000016336,
+                    0.05360019999989163,
+                    0.053097299999990355,
+                    0.05236849999982951,
+                    0.05520230000001902,
+                    0.05391719999988709,
+                    0.054786499999863736
+                ],
+                "stddev_outliers": 1,
+                "stddev": 0.004949527013994617,
+                "rounds": 10,
+                "iterations": 1,
+                "min": 0.05236849999982951
+            },
+            "options": {
+                "disable_gc": false,
+                "max_time": 1.0,
+                "timer": "perf_counter",
+                "warmup": false,
+                "min_time": 5e-06,
+                "min_rounds": 5
+            },
+            "param": null
+        }
+    ],
+    "datetime": "2018-04-17T01:46:23.931774",
+    "commit_info": {
+        "time": null,
+        "dirty": false,
+        "project": "benchs",
+        "branch": "(unknown)",
+        "id": "unversioned",
+        "author_time": null
     }
 }
