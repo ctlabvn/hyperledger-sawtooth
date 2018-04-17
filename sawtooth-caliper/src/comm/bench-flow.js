@@ -24,7 +24,7 @@ var blockchain, monitor, report, client;
 var resultsbyround = []; // results table for each test round
 var round = 0; // test round
 var demo = require("../gui/src/demo.js");
-var absConfigFile, absNetworkFile;
+
 var absCaliperDir = path.join(__dirname, "../..");
 
 // set outputFolder and format
@@ -42,18 +42,15 @@ module.exports.setOutputFormat = function(format) {
  * Start a default test flow to run the tests
  * @config_path {string},path of the local configuration file
  */
-module.exports.run = function(configFile, networkFile) {
+module.exports.run = function(config, network) {
     test("#######Caliper Test######", t => {
         global.tapeObj = t;
-        absConfigFile = configFile;
-        absNetworkFile = networkFile;
-        blockchain = new Blockchain(absNetworkFile);
-        monitor = new Monitor(absConfigFile);
-        client = new Client(absConfigFile);
-        createReport();
+        blockchain = new Blockchain(network);
+        monitor = new Monitor(config);
+        client = new Client(config);
+        createReport(config, network);
         demo.init();
         var startPromise = new Promise((resolve, reject) => {
-            let config = require(absConfigFile);
             if (
                 config.hasOwnProperty("command") &&
                 config.command.hasOwnProperty("start")
@@ -101,7 +98,7 @@ module.exports.run = function(configFile, networkFile) {
                         );
                     });
 
-                var allTests = require(absConfigFile).test.rounds;
+                var allTests = config.test.rounds;
                 var testIdx = 0;
                 var testNum = allTests.length;
                 //demo.startWatch(client);
@@ -109,6 +106,7 @@ module.exports.run = function(configFile, networkFile) {
                     return prev.then(() => {
                         ++testIdx;
                         return defaultTest(
+                            network,
                             item,
                             clientArgs,
                             testIdx === testNum
@@ -133,15 +131,14 @@ module.exports.run = function(configFile, networkFile) {
                     outputFolder || path.join(process.cwd(), "outputs"),
                     "report" + date + "." + format
                 );
-                return report.generate(output, format).then(() => {
+                return report.generate(output, format).then(message => {
                     demo.stopWatch(output);
-                    console.log("Generated report at " + output);
+                    // console.log(message);
                     return Promise.resolve();
                 });
             })
             .then(() => {
                 client.stop();
-                let config = require(absConfigFile);
                 if (
                     config.hasOwnProperty("command") &&
                     config.command.hasOwnProperty("end")
@@ -158,7 +155,6 @@ module.exports.run = function(configFile, networkFile) {
                 console.log(
                     "unexpected error, " + (err.stack ? err.stack : err)
                 );
-                let config = require(absConfigFile);
                 if (
                     config.hasOwnProperty("command") &&
                     config.command.hasOwnProperty("end")
@@ -173,8 +169,7 @@ module.exports.run = function(configFile, networkFile) {
     });
 };
 
-function createReport() {
-    var config = require(absConfigFile);
+function createReport(config, sut) {
     report = new Report();
     report.addMetadata("DLT", blockchain.gettype());
     try {
@@ -201,7 +196,6 @@ function createReport() {
         report.addMetadata("Test Rounds", " ");
     }
 
-    var sut = require(absNetworkFile);
     if (sut.hasOwnProperty("info")) {
         for (let key in sut.info) {
             report.addSUTInfo(key, sut.info[key]);
@@ -216,14 +210,14 @@ function createReport() {
  * @final {boolean}: =true, the last test; otherwise, =false
  * @return {Promise}
  */
-function defaultTest(args, clientArgs, final) {
+function defaultTest(network, args, clientArgs, final) {
     return new Promise(function(resolve, reject) {
-        var t = global.tapeObj;
+        const t = global.tapeObj;
         t.comment("\n\n###### testing '" + args.label + "' ######");
-        var testLabel = args.label;
-        var testRounds = args.txDuration ? args.txDuration : args.txNumber;
-        var tests = []; // array of all test rounds
-        var configPath = path.relative(absCaliperDir, absNetworkFile);
+        const testLabel = args.label;
+        const testRounds = args.txDuration ? args.txDuration : args.txNumber;
+        const tests = []; // array of all test rounds
+
         for (let i = 0; i < testRounds.length; i++) {
             let msg = {
                 type: "test",
@@ -234,7 +228,7 @@ function defaultTest(args, clientArgs, final) {
                 trim: args.trim ? args.trim : 0,
                 args: args.arguments,
                 cb: args.callback,
-                config: configPath
+                config: network
             };
 
             // condition for time based or number based test driving
@@ -295,44 +289,6 @@ function defaultTest(args, clientArgs, final) {
             });
     });
 }
-
-/**
- * fork a child process to act as a client to interact with backend's blockchain system
- * @msg {Object}, message to be sent to child process
- * @processes {Array}
- * @t {Object}, tape object
- */
-/*function loadProcess(msg, t, processes) {
-    return new Promise( function(resolve, reject) {
-        var child = childProcess.fork(path.join(absCaliperDir, './src/comm/bench-client.js'));
-        processes.push(child);
-        child.on('message', function(message) {
-            if(message.type === 'testResult') {
-                results.push(message.data);
-                resolve();
-                child.kill();
-            }
-            else if(message.type === 'error') {
-                reject('client encountered error, ' + message.data);
-                child.kill();
-            }
-            else if(message.type === 'queryResult') {
-                demo.queryCB(message.session, message.data);
-            }
-        });
-
-        child.on('error', function(){
-            reject('client encountered unexpected error');
-        });
-
-        child.on('exit', function(){
-            console.log('client exited');
-            resolve();
-        });
-
-        child.send(msg);
-    });
-}*/
 
 /**
  * merge testing results from multiple child processes and store the merged result in the global result array

@@ -7,6 +7,8 @@
 
 "use strict";
 
+const { requireJSON } = require("../../lib/json");
+
 var configFile;
 var networkFile;
 
@@ -51,9 +53,11 @@ function main() {
 
     var absNetworkFile;
     var absCaliperDir = path.join(__dirname, "../..");
+    let config, network;
     if (typeof networkFile === "undefined") {
         try {
-            let config = require(absConfigFile);
+            config = requireJSON(absConfigFile);
+            config.file = absConfigFile;
             absNetworkFile = path.join(absCaliperDir, config.blockchain.config);
         } catch (err) {
             console.log("failed to find blockchain.config in " + absConfigFile);
@@ -62,9 +66,18 @@ function main() {
     } else {
         absNetworkFile = path.join(__dirname, networkFile);
     }
+
     if (!fs.existsSync(absNetworkFile)) {
         console.log("file " + absNetworkFile + " does not exist");
         return;
+    } else {
+        try {
+            network = requireJSON(absNetworkFile);
+            network.file = absNetworkFile;
+        } catch (err) {
+            console.log("failed to find network.config in " + absNetworkFile);
+            return;
+        }
     }
 
     let absOutputFolder;
@@ -80,7 +93,7 @@ function main() {
     var framework = require("../../src/comm/bench-flow.js");
     framework.setOutputFolder(absOutputFolder);
     framework.setOutputFormat(program.outputFormat);
-    framework.run(absConfigFile, absNetworkFile);
+    framework.run(config, network);
 }
 
 main();
