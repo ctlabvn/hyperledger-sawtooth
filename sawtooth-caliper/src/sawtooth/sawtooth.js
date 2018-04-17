@@ -180,7 +180,7 @@ function submitBatches(batchBytes, restApiUrl) {
 			return getBatchStatus(link, invoke_status);
 		})
 		.catch(function(err) {
-			// console.log("Submit batches failed, " + (err.stack ? err.stack : err));
+			console.log("Submit batches failed, " + (err.stack ? err.stack : err));
 			return Promise.resolve(invoke_status);
 		});
 }
