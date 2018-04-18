@@ -1,0 +1,321 @@
+{
+  "summary": {
+    "meta": [
+      {
+        "name": "DLT",
+        "value": "sawtooth"
+      },
+      {
+        "name": "Benchmark"
+      },
+      {
+        "name": "Description"
+      },
+      {
+        "name": "Test Rounds",
+        "value": 2
+      }
+    ],
+    "head": [
+      "Test",
+      "Name",
+      "Succ",
+      "Fail",
+      "Send Rate",
+      "Max Latency",
+      "Min Latency",
+      "Avg Latency",
+      "75%ile Latency",
+      "Throughput"
+    ],
+    "results": [
+      {
+        "result": [
+          "1",
+          "open",
+          100,
+          0,
+          "100 tps",
+          "2.08 s",
+          "2.08 s",
+          "2.08 s",
+          "2.08 s",
+          "100 tps"
+        ]
+      },
+      {
+        "result": [
+          "2",
+          "query",
+          100,
+          0,
+          "102 tps",
+          "0.64 s",
+          "0.04 s",
+          "0.45 s",
+          "0.58 s",
+          "73 tps"
+        ]
+      }
+    ]
+  },
+  "rounds": [
+    {
+      "id": "round 0",
+      "description": "open",
+      "performance": {
+        "head": [
+          "Name",
+          "Succ",
+          "Fail",
+          "Send Rate",
+          "Max Latency",
+          "Min Latency",
+          "Avg Latency",
+          "75%ile Latency",
+          "Throughput"
+        ],
+        "result": [
+          "open",
+          100,
+          0,
+          "100 tps",
+          "2.08 s",
+          "2.08 s",
+          "2.08 s",
+          "2.08 s",
+          "100 tps"
+        ]
+      },
+      "resource": {
+        "head": [
+          "TYPE",
+          "NAME",
+          "Memory(max)",
+          "Memory(avg)",
+          "CPU(max)",
+          "CPU(avg)",
+          "Traffic In",
+          "Traffic Out"
+        ],
+        "results": [
+          {
+            "result": [
+              "Docker",
+              "sawtooth-shell-default",
+              "18.2MB",
+              "18.2MB",
+              "0.01%",
+              "0.01%",
+              "0B",
+              "0B"
+            ]
+          },
+          {
+            "result": [
+              "Docker",
+              "sawtooth-rest-api-default",
+              "50.8MB",
+              "50.8MB",
+              "0.11%",
+              "0.11%",
+              "0B",
+              "0B"
+            ]
+          },
+          {
+            "result": [
+              "Docker",
+              "sawtooth-settings-tp-default",
+              "36.4MB",
+              "36.4MB",
+              "0.01%",
+              "0.01%",
+              "0B",
+              "0B"
+            ]
+          },
+          {
+            "result": [
+              "Docker",
+              "sawtooth-validator-default",
+              "91.1MB",
+              "91.1MB",
+              "0.27%",
+              "0.27%",
+              "0B",
+              "0B"
+            ]
+          },
+          {
+            "result": [
+              "Docker",
+              "sawtooth-intkey-tp-python...fault",
+              "0B",
+              "0B",
+              "0.00%",
+              "0.00%",
+              "0B",
+              "-"
+            ]
+          },
+          {
+            "result": [
+              "Docker",
+              "sawtooth-xo-tp-python-default",
+              "0B",
+              "0B",
+              "0.00%",
+              "0.00%",
+              "0B",
+              "-"
+            ]
+          },
+          {
+            "result": [
+              "Docker",
+              "sawtooth-test",
+              "0B",
+              "0B",
+              "0.00%",
+              "0.00%",
+              "0B",
+              "-"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "round 1",
+      "description": "query",
+      "performance": {
+        "head": [
+          "Name",
+          "Succ",
+          "Fail",
+          "Send Rate",
+          "Max Latency",
+          "Min Latency",
+          "Avg Latency",
+          "75%ile Latency",
+          "Throughput"
+        ],
+        "result": [
+          "query",
+          100,
+          0,
+          "102 tps",
+          "0.64 s",
+          "0.04 s",
+          "0.45 s",
+          "0.58 s",
+          "73 tps"
+        ]
+      },
+      "resource": {
+        "head": [
+          "TYPE",
+          "NAME",
+          "Memory(max)",
+          "Memory(avg)",
+          "CPU(max)",
+          "CPU(avg)",
+          "Traffic In",
+          "Traffic Out"
+        ],
+        "results": [
+          {
+            "result": [
+              "Docker",
+              "sawtooth-shell-default",
+              "18.2MB",
+              "18.2MB",
+              "0.00%",
+              "0.00%",
+              "0B",
+              "0B"
+            ]
+          },
+          {
+            "result": [
+              "Docker",
+              "sawtooth-rest-api-default",
+              "53.3MB",
+              "53.3MB",
+              "57.67%",
+              "57.67%",
+              "0B",
+              "0B"
+            ]
+          },
+          {
+            "result": [
+              "Docker",
+              "sawtooth-settings-tp-default",
+              "36.4MB",
+              "36.4MB",
+              "0.00%",
+              "0.00%",
+              "0B",
+              "0B"
+            ]
+          },
+          {
+            "result": [
+              "Docker",
+              "sawtooth-validator-default",
+              "90.6MB",
+              "90.6MB",
+              "29.98%",
+              "29.98%",
+              "0B",
+              "0B"
+            ]
+          },
+          {
+            "result": [
+              "Docker",
+              "sawtooth-intkey-tp-python...fault",
+              "0B",
+              "0B",
+              "0.00%",
+              "0.00%",
+              "0B",
+              "-"
+            ]
+          },
+          {
+            "result": [
+              "Docker",
+              "sawtooth-xo-tp-python-default",
+              "0B",
+              "0B",
+              "0.00%",
+              "0.00%",
+              "0B",
+              "-"
+            ]
+          },
+          {
+            "result": [
+              "Docker",
+              "sawtooth-test",
+              "0B",
+              "0B",
+              "0.00%",
+              "0.00%",
+              "0B",
+              "-"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "benchmarkInfo": "{\n  \"clients\": {\n    \"type\": \"local\",\n    \"number\": 1\n  },\n  \"rounds\": [\n    {\n      \"label\": \"open\",\n      \"txNumber\": [\n        100\n      ],\n      \"rateControl\": [\n        {\n          \"type\": \"fixed-rate\",\n          \"opts\": {\n            \"tps\": 100\n          }\n        }\n      ],\n      \"arguments\": {\n        \"money\": 10000\n      },\n      \"callback\": \"benchmark/simple/open.js\"\n    },\n    {\n      \"label\": \"query\",\n      \"txNumber\": [\n        100\n      ],\n      \"rateControl\": [\n        {\n          \"type\": \"fixed-rate\",\n          \"opts\": {\n            \"tps\": 100\n          }\n        }\n      ],\n      \"callback\": \"benchmark/simple/query.js\"\n    }\n  ]\n}",
+  "sut": {
+    "meta": [],
+    "details": "not provided"
+  }
+}
