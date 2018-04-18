@@ -13,7 +13,7 @@
 # limitations under the License.
 # ------------------------------------------------------------------------------
 
-version: "2.1"
+version: "3"
 
 services:
 
@@ -110,13 +110,13 @@ services:
       - validator
     entrypoint: sawtooth-rest-api -C tcp://validator:4004 --bind rest-api:8080
 
-  shell:
-    image: hyperledger/sawtooth-shell:latest
-    container_name: sawtooth-shell-default
-    depends_on:
-      - rest-api
-    entrypoint: "bash -c \"\
-        sawtooth keygen --force && \        
-        tail -f /dev/null \
-        \""
+  # shell:
+  #   image: hyperledger/sawtooth-shell:latest
+  #   container_name: sawtooth-shell-default
+  #   depends_on:
+  #     - rest-api
+  #   entrypoint: "bash -c \"\
+  #       sawtooth keygen --force && \        
+  #       tail -f /dev/null \
+  #       \""
 
