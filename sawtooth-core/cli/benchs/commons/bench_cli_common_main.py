@@ -17,12 +17,14 @@ PROGRAM_NAME = "prog_name"
 #########################################################################################
 
 def test_create_console_handler(benchmark):
-    benchmark.pedantic(create_console_handler, kwargs = {'verbose_level':VERBOSE_LEVEL}, \
-    iterations=ITERATIONS, rounds=ROUNDS)
+    @benchmark
+    def do_test_create_console_handler():
+        create_console_handler(verbose_level= VERBOSE_LEVEL)
     
 def test_create_parent_parser(benchmark):
-    benchmark.pedantic(create_parent_parser, kwargs = {'prog_name':PROGRAM_NAME}, \
-    iterations=ITERATIONS, rounds=ROUNDS)
+    @benchmark
+    def do_test_create_parent_parser():
+        create_parent_parser(prog_name= PROGRAM_NAME)
 
 # def test_main_wrapper(benchmark):
 #     benchmark.pedantic(main_wrapper, iterations=ITERATIONS, rounds=ROUNDS)
