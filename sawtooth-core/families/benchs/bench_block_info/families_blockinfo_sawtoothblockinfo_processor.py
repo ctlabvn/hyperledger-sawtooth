@@ -17,17 +17,21 @@ DISTRIBUTION_NAME = 'sawadm'
 #########################################################################################
 
 def test_create_console_handler(benchmark):
-    benchmark.pedantic(create_console_handler, kwargs = {'verbose_level':VERBOSE_LEVEL}, \
-    iterations=ITERATIONS, rounds=ROUNDS)
+    @benchmark
+    def do_test_create_console_handler():
+        create_console_handler(verbose_level = VERBOSE_LEVEL)
+
 
 def test_processor_create_parser(benchmark):
-    benchmark.pedantic(create_parser, kwargs = {'prog_name':DISTRIBUTION_NAME}, \
-    iterations=ITERATIONS, rounds=ROUNDS)
+    @benchmark
+    def do_test_processor_create_parser():
+        create_parser(prog_name = DISTRIBUTION_NAME)
 
 def test_create_block_info_config(benchmark):
-    blockInfoConfig = BlockInfoConfig()
-    benchmark.pedantic(load_block_info_config, kwargs = {'first_config':blockInfoConfig}, \
-    iterations=ITERATIONS, rounds=ROUNDS)
+    @benchmark
+    def do_test_create_block_info_config():
+        blockInfoConfig = BlockInfoConfig()
+        load_block_info_config(first_config = blockInfoConfig)
 
 # def test_setup_loggers(benchmark):
 #     address = 'tcp://127.0.0.1:4004'

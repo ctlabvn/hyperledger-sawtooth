@@ -17,10 +17,6 @@ from sawtooth_cli.admin_command import genesis
 # from sawtooth_cli.exceptions import CliException
 
 #########################################################################################
-VERBOSE_LEVEL = 1
-LOOP = 100000
-ITERATIONS = 1
-ROUNDS = 10
 
 TEMP_DIR = tempfile.mkdtemp()
 _parser = argparse.ArgumentParser(add_help=False)
@@ -80,23 +76,21 @@ class TestBenchmarkCliGenesis():
 
 #########################################################################################
 def test_add_genesis_parser(benchmark):
-    
-    parent_parser = argparse.ArgumentParser(prog='test_genesis',
-                                                add_help=False)
-    subparsers = _parser.add_subparsers(title='subcommands',
-                                                 dest='command')
-    benchmark.pedantic(genesis.add_genesis_parser, kwargs = {'subparsers':subparsers, 'parent_parser': parent_parser}, \
-    iterations=ITERATIONS, rounds=ROUNDS)
-
+    @benchmark
+    def do_test_add_genesis_parser():
+        parent_parser = argparse.ArgumentParser(prog='test_genesis',add_help=False)
+        subparsers = _parser.add_subparsers(title='subcommands', dest='command')
+        genesis.add_genesis_parser(subparsers = subparsers, parent_parser = parent_parser)
+#########################################################################################
 def test_do_genesis(benchmark):
-    batches = [TestBenchmarkCliGenesis.make_batch('batch1',
-                                   TestBenchmarkCliGenesis.transaction('id1', []),
-                                   TestBenchmarkCliGenesis.transaction('id2', []),
-                                   TestBenchmarkCliGenesis.transaction('id3', [])),
-                    TestBenchmarkCliGenesis.make_batch('batch2',
-                                   TestBenchmarkCliGenesis.transaction('id4', ['id1', 'id2']))]
-    
-    args = TestBenchmarkCliGenesis.parse_command(batches)
-
-    benchmark.pedantic(genesis.do_genesis, kwargs = {'args':args, 'data_dir': TMP_DATA_DIR}, \
-    iterations=ITERATIONS, rounds=ROUNDS)
+    @benchmark
+    def do_test_do_genesis():
+        batches = [TestBenchmarkCliGenesis.make_batch('batch1',
+                                    TestBenchmarkCliGenesis.transaction('id1', []),
+                                    TestBenchmarkCliGenesis.transaction('id2', []),
+                                    TestBenchmarkCliGenesis.transaction('id3', [])),
+                        TestBenchmarkCliGenesis.make_batch('batch2',
+                                    TestBenchmarkCliGenesis.transaction('id4', ['id1', 'id2']))]
+        
+        args = TestBenchmarkCliGenesis.parse_command(batches)
+        genesis.do_genesis(args=args, data_dir= TMP_DATA_DIR)

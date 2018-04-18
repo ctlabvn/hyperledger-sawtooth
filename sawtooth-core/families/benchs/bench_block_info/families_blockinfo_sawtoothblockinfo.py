@@ -25,27 +25,28 @@ BLOCKINFO_PREVIOUS_BLOCKID = "0" * 128
 #########################################################################################
 
 def test_common_create_block_address(benchmark):
-    block_num = random.randint(50000, 5000000)
-    benchmark.pedantic(create_block_address, kwargs = {'block_num':block_num}, \
-    iterations=ITERATIONS, rounds=ROUNDS)
+    @benchmark
+    def do_test_common_create_block_address():
+        block_num = random.randint(50000, 5000000)
+        create_block_address(block_num = block_num)
 
 def test_injector_blockinfoinject_create_batch(benchmark):
-    block_info = BlockInfo(
-        block_num=100,
-        signer_public_key=BLOCKINFO_SIGNER_PUBLIC_KEY,
-        header_signature=BLOCKINFO_HEADER_SIGNATURE,
-        timestamp=2364657,
-        previous_block_id=BLOCKINFO_PREVIOUS_BLOCKID)
+    @benchmark
+    def do_test_injector_blockinfoinject_create_batch():
+        block_info = BlockInfo(
+            block_num=100,
+            signer_public_key=BLOCKINFO_SIGNER_PUBLIC_KEY,
+            header_signature=BLOCKINFO_HEADER_SIGNATURE,
+            timestamp=2364657,
+            previous_block_id=BLOCKINFO_PREVIOUS_BLOCKID)
 
-    btm = BlockTreeManager()
-    batch_injector_factory=DefaultBatchInjectorFactory(\
-                        block_store=btm.block_store,\
-                        state_view_factory=MockStateViewFactory(btm.state_db),\
-                        signer=btm.identity_signer)
+        btm = BlockTreeManager()
+        batch_injector_factory=DefaultBatchInjectorFactory(\
+                            block_store=btm.block_store,\
+                            state_view_factory=MockStateViewFactory(btm.state_db),\
+                            signer=btm.identity_signer)
 
-    blockinjector = BlockInfoInjector(batch_injector_factory._block_store, \
-    batch_injector_factory._state_view_factory, batch_injector_factory._signer)
-
-    benchmark.pedantic(blockinjector.create_batch, kwargs = {'block_info':block_info}, \
-    iterations=ITERATIONS, rounds=ROUNDS)
+        blockinjector = BlockInfoInjector(batch_injector_factory._block_store, \
+        batch_injector_factory._state_view_factory, batch_injector_factory._signer)
+        blockinjector.create_batch(block_info=block_info)
     

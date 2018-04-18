@@ -16,11 +16,13 @@ ROUNDS = 10
 #########################################################################################
 
 def test_add_keygen_parser(benchmark):
-    _parser = argparse.ArgumentParser(add_help=False)
-    parent_parser = argparse.ArgumentParser(prog='test_keygen', add_help=False)
-    subparsers = _parser.add_subparsers(title='subcommands', dest='command')
-    benchmark.pedantic(add_keygen_parser, kwargs = {'subparsers':subparsers, 'parent_parser': parent_parser}, \
-    iterations=ITERATIONS, rounds=ROUNDS)
+    @benchmark
+    def do_test_add_keygen_parser():
+        _parser = argparse.ArgumentParser(add_help=False)
+        parent_parser = argparse.ArgumentParser(prog='test_keygen', add_help=False)
+        subparsers = _parser.add_subparsers(title='subcommands', dest='command')
+        add_keygen_parser(subparsers=subparsers, parent_parser=parent_parser)
+
 
 # def test_do_keygen(benchmark):
 #     _parser = argparse.ArgumentParser(add_help=False)

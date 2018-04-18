@@ -1,81 +1,90 @@
 {
     "machine_info": {
         "release": "4.9.87-linuxkit-aufs",
-        "python_implementation_version": "3.5.2",
-        "python_compiler": "GCC 5.4.0 20160609",
+        "system": "Linux",
+        "machine": "x86_64",
         "python_build": [
             "default",
             "Nov 23 2017 16:37:01"
         ],
+        "node": "983f792f1335",
+        "python_implementation_version": "3.5.2",
+        "python_implementation": "CPython",
         "cpu": {
             "hardware": "unknown",
-            "brand": "Intel(R) Core(TM) i5-5257U CPU @ 2.70GHz",
-            "vendor_id": "GenuineIntel"
+            "vendor_id": "GenuineIntel",
+            "brand": "Intel(R) Core(TM) i7-4770HQ CPU @ 2.20GHz"
         },
-        "node": "2928b354267e",
-        "machine": "x86_64",
-        "python_implementation": "CPython",
-        "processor": "x86_64",
-        "system": "Linux",
-        "python_version": "3.5.2"
+        "python_compiler": "GCC 5.4.0 20160609",
+        "python_version": "3.5.2",
+        "processor": "x86_64"
     },
-    "datetime": "2018-04-12T00:17:01.698801",
+    "commit_info": {
+        "dirty": false,
+        "author_time": null,
+        "id": "unversioned",
+        "project": "benchs",
+        "time": null,
+        "branch": "(unknown)"
+    },
+    "datetime": "2018-04-17T18:01:18.951434",
     "benchmarks": [
         {
+            "name": "test_add_list_blocks_parser",
+            "fullname": "benchs/network_cmd/bench_cli_networkcmd_listblocks.py::test_add_list_blocks_parser",
+            "group": null,
+            "params": null,
             "stats": {
-                "q1": 0.0002899999999499414,
-                "iqr_outliers": 0,
-                "mean": 0.0003941199993278133,
-                "stddev": 0.00013905047641063305,
-                "max": 0.0006341999978758395,
-                "median": 0.000304600000163191,
+                "iqr_outliers": 2,
+                "q1": 0.054606799998509814,
+                "max": 0.0680279000007431,
+                "rounds": 19,
+                "iqr": 0.0017811750017244776,
                 "iterations": 1,
-                "total": 0.003941199993278133,
-                "min": 0.0002862999972421676,
-                "ops": 2537.2982891138186,
-                "rounds": 10,
-                "hd15iqr": 0.0006341999978758395,
-                "outliers": "3;0",
+                "stddev_outliers": 2,
+                "stddev": 0.0033565288271282983,
+                "q3": 0.05638797500023429,
+                "median": 0.055375500000081956,
+                "min": 0.05164150000018708,
                 "data": [
-                    0.0004043000008095987,
-                    0.0006341999978758395,
-                    0.0005610999978671316,
-                    0.0005670999998983461,
-                    0.0002899999999499414,
-                    0.00028670000028796494,
-                    0.0002862999972421676,
-                    0.00030619999961345457,
-                    0.0003022999990207609,
-                    0.00030300000071292743
+                    0.05533389999982319,
+                    0.052578599999833386,
+                    0.05802939999921364,
+                    0.05583870000009483,
+                    0.05525050000142073,
+                    0.05652910000026168,
+                    0.055375500000081956,
+                    0.0680279000007431,
+                    0.05517849999887403,
+                    0.05579340000076627,
+                    0.05733689999942726,
+                    0.05286809999961406,
+                    0.05743529999926977,
+                    0.0541045000009035,
+                    0.05539230000067619,
+                    0.05164150000018708,
+                    0.05596460000015213,
+                    0.05451599999832979,
+                    0.05487919999904989
                 ],
-                "q3": 0.0005610999978671316,
-                "stddev_outliers": 3,
-                "iqr": 0.0002710999979171902,
-                "ld15iqr": 0.0002862999972421676
+                "ops": 17.889527273029547,
+                "ld15iqr": 0.052578599999833386,
+                "hd15iqr": 0.0680279000007431,
+                "total": 1.0620738999987225,
+                "outliers": "2;2",
+                "mean": 0.05589862631572223
             },
             "param": null,
-            "group": null,
-            "name": "test_add_list_blocks_parser",
             "extra_info": {},
-            "fullname": "benchs/network_cmd/bench_cli_networkcmd_listblocks.py::test_add_list_blocks_parser",
-            "params": null,
             "options": {
-                "max_time": 1.0,
                 "warmup": false,
+                "timer": "perf_counter",
                 "min_rounds": 5,
                 "disable_gc": false,
-                "timer": "perf_counter",
-                "min_time": 5e-06
+                "min_time": 5e-06,
+                "max_time": 1.0
             }
         }
     ],
-    "commit_info": {
-        "id": "unversioned",
-        "author_time": null,
-        "dirty": false,
-        "branch": "(unknown)",
-        "time": null,
-        "project": "benchs"
-    },
     "version": "3.1.1"
 }
