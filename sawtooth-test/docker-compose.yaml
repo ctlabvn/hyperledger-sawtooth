@@ -37,6 +37,7 @@ services:
       - ./tests:/usr/bin/tests
       - ./benchs:/usr/bin/benchs
       - ./start-validator:/usr/bin/start-validator
+      - ./start-only-validator:/usr/bin/start-only-validator
       - ./result:/result
     tty: true
     command: /bin/bash

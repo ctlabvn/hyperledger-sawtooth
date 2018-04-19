@@ -137,3 +137,6 @@
 **/.cache
 *.batch
 *.pyc
+
+/venv
+/.idea

@@ -1,0 +1,1 @@
+sawtooth-validator -vv --scheduler parallel --endpoint tcp://validator:8800 --bind component:tcp://eth0:4004 --bind network:tcp://eth0:8800
