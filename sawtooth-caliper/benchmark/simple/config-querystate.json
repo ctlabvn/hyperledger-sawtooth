@@ -11,10 +11,10 @@
         "rounds": [
             {
                 "label": "querystate",
-                // "txDuration": [10],
+                // "txDuration": [4],
                 "txNumber": [1000],
                 "rateControl": [
-                    { "type": "fixed-rate", "opts": { "tps": 100 } }
+                    { "type": "fixed-rate", "opts": { "tps": 150 } }
                 ],
                 "callback": "benchmark/simple/querystate.js",
                 "arguments": {

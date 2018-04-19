@@ -1,0 +1,18 @@
+FROM pypy:3
+
+# install dependencies
+RUN pypy3 -m pip install --upgrade pip && \
+    pypy3 -m pip install requests cbor colorlog lmdb netifaces protobuf pyformance PyYAML pyzmq toml secp256k1
+
+# config for container
+EXPOSE 4004/tcp
+EXPOSE 8008
+
+RUN mkdir -p /var/log/sawtooth \
+ && mkdir -p /var/lib/sawtooth \
+ && mkdir -p /etc/sawtooth \
+ && mkdir -p /etc/sawtooth/keys
+
+ENV PATH=$PATH:/project/bin
+
+
