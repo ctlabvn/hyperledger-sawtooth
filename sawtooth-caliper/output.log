@@ -1,0 +1,25 @@
+
+> caliper@0.1.0 test /Users/vjtc0n/Desktop/sawtooth-core-benchmark/sawtooth-caliper
+> node ./scripts/test.js "simple" "-c" "./benchmark/simple/config.json"
+
+Running: /Users/vjtc0n/Desktop/sawtooth-core-benchmark/sawtooth-caliper/benchmark/simple/main.js
+TAP version 13
+# #######Caliper Test######
+# ##### testing 'open' ######
+----test round 0----
+started monitor successfully
+doTest() with:  /Users/vjtc0n/Desktop/sawtooth-core-benchmark/sawtooth-caliper/benchmark/simple/sawtooth.json
+Info: client 19429 start test runFixedNumber():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 20 } }
+[Transaction Info] - Submitted: 0 Succ: 0 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 21 Succ: 0 Fail:0 Unfinished:21
+[Transaction Info] - Submitted: 41 Succ: 0 Fail:0 Unfinished:41
+[Transaction Info] - Submitted: 62 Succ: 0 Fail:0 Unfinished:62
+[Transaction Info] - Submitted: 82 Succ: 0 Fail:0 Unfinished:82
+[Transaction Info] - Submitted: 100 Succ: 0 Fail:0 Unfinished:100
+[Transaction Info] - Submitted: 100 Succ: 0 Fail:0 Unfinished:100
+[Transaction Info] - Submitted: 100 Succ: 0 Fail:0 Unfinished:100
+[Transaction Info] - Submitted: 100 Succ: 0 Fail:0 Unfinished:100
+[Transaction Info] - Submitted: 100 Succ: 0 Fail:0 Unfinished:100
+[Transaction Info] - Submitted: 100 Succ: 0 Fail:0 Unfinished:100
+[Transaction Info] - Submitted: 100 Succ: 0 Fail:0 Unfinished:100

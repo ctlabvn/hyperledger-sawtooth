@@ -1,6 +1,7 @@
 # keys are under /etc/sawtooth/keys, /root/.sawtooth/keys
 # block, genesis, merkle, receipts are under /var/lib/sawtooth/
 
+chmod u+x /usr/bin/start-only-validator
 sawadm keygen --force 
 sawtooth keygen my_key --force 
 sawset genesis -k /root/.sawtooth/keys/my_key.priv -o /root/.sawtooth/config-genesis.batch 
@@ -8,4 +9,4 @@ sawset genesis -k /root/.sawtooth/keys/my_key.priv -o /root/.sawtooth/config-gen
 rm -rf /var/lib/sawtooth/*
 sawadm genesis /root/.sawtooth/config-genesis.batch 
 # finally run validator
-sawtooth-validator -vv --endpoint tcp://validator:8800 --bind component:tcp://eth0:4004 --bind network:tcp://eth0:8800
+sawtooth-validator -vv --scheduler parallel --endpoint tcp://validator:8800 --bind component:tcp://eth0:4004 --bind network:tcp://eth0:8800
