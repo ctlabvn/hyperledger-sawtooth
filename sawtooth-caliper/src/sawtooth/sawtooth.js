@@ -37,7 +37,7 @@ class Sawtooth extends BlockchainInterface {
 				);
 			},
 			100,
-			1000
+			3000
 		);
 	}
 
@@ -68,17 +68,12 @@ class Sawtooth extends BlockchainInterface {
 	}
 
 	invokeSmartContract(context, contractID, contractVer, args, timeout) {
-		// const address = calculateAddresses(contractID, args);
-
-		// const batchBytes = createBatch(
-		// 	this.signer,
-		// 	contractID,
-		// 	contractVer,
-		// 	address,
-		// 	args
-		// );
-		// // console.log(contractID, sawtoothContractVersion, address, args);
-		// return submitBatches(batchBytes, this.config.sawtooth.network.restapi.url);
+		// const batchBytes = createBatch(this.signer, [{
+		// 			contractID: contractID,
+		// 			contractVer: contractVer,
+		// 			args: args
+		// 		}]);
+		// return submitBatches(batchBytes, this.config.sawtooth.network.restapi.url)
 
 		return new Promise(resolve => {
 			this.cargo.push(

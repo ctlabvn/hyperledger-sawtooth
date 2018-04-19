@@ -11,10 +11,10 @@
         "rounds": [
             {
                 "label": "openstate",
-                "txNumber": [100],
+                "txNumber": [5000],
                 // "txDuration": [5],
                 "rateControl": [
-                    { "type": "fixed-rate", "opts": { "tps": 60 } }
+                    { "type": "fixed-rate", "opts": { "tps": 1200 } }
                 ],
                 "callback": "benchmark/simple/openstate.js",
                 "arguments": {
