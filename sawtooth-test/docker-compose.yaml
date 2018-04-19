@@ -1,4 +1,4 @@
-# Copyright 2017 Intel Corporation
+# Copyright 2018 Agiletech Viet Nam
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,19 +17,33 @@ version: "3"
 
 services:
 
-  unit-validator:
+  settings-tp:
+    image: hyperledger/sawtooth-settings-tp:latest
+    container_name: sawtooth-settings-tp-default    
+    depends_on:
+      - validator
+    entrypoint: settings-tp -vv -C tcp://validator:4004  
+  
+
+  validator:
     image: thanhtu/sawtooth-dev-python
-    container_name: sawtooth-test
+    container_name: sawtooth-validator-default
+    expose:
+      - 4004
+    ports:
+      - "34004:4004" 
     volumes:
       - ../sawtooth-core:/project
       - ./tests:/usr/bin/tests
       - ./benchs:/usr/bin/benchs
+      - ./start-validator:/usr/bin/start-validator
       - ./result:/result
     tty: true
     command: /bin/bash
     working_dir: /project    
-    # command: tests -s validator/tests
+    # command: start-validator
     environment:
+        PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/project/bin
         PYTHONPATH: "/project/signing:\
             /project/consensus/poet/common:\
             /project/consensus/poet/core:\
@@ -52,4 +66,14 @@ services:
             /project/utility/ias_proxy:\
             /project/validator/tests:\
             /project/validator"
-            
+
+
+  rest-api:
+    image: hyperledger/sawtooth-rest_api:latest
+    container_name: sawtooth-rest-api-default
+    ports:
+      - "38080:8080"
+    depends_on:
+      - validator
+    entrypoint: sawtooth-rest-api -C tcp://validator:4004 --bind rest-api:8080
+

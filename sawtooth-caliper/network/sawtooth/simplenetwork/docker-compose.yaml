@@ -44,9 +44,7 @@ services:
     expose:
       - 4004
     ports:
-      - "34004:4004"
-    volumes:
-      - "../../../../sawtooth-core/validator/sawtooth_validator:/usr/lib/python3/dist-packages/sawtooth_validator"
+      - "34004:4004"    
     # start the validator with an empty genesis batch
     entrypoint: "bash -c \"\
         sawadm keygen --force && \
