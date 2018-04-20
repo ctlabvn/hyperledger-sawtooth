@@ -7,26 +7,20 @@ Original source code can be found here: https://github.com/delventhalz/transfer-
 
 "use strict";
 
-const { createHash } = require("crypto");
 const { TransactionHandler } = require("sawtooth-sdk/processor/handler");
 const { InvalidTransaction } = require("sawtooth-sdk/processor/exceptions");
 const { TransactionHeader } = require("sawtooth-sdk/protobuf");
-
+const cbor = require("cbor");
 const {
   calculateAddress,
-  calculateAddresses
+  calculateAddresses,
+  getAddress
 } = require("../../../../../lib/sawtooth/address");
-
-// Encoding helpers and constants
-const getAddress = (key, length = 64) => {
-  return createHash("sha512")
-    .update(key)
-    .digest("hex")
-    .slice(0, length);
-};
 
 const FAMILY = "simple";
 const PREFIX = getAddress(FAMILY, 6);
+
+// const getAssetAddress = name => PREFIX + "00" + getAddress(name, 62);
 const getAssetAddress = name => calculateAddress(FAMILY, name);
 const encode = obj => Buffer.from(JSON.stringify(obj, Object.keys(obj).sort()));
 const decode = buf => JSON.parse(buf.toString());
@@ -52,17 +46,15 @@ const openAccount = (owner, asset, context) => {
 class JSONHandler extends TransactionHandler {
   constructor() {
     console.log("Initializing JSON handler for simple chain");
-    super(FAMILY, ["1.0", "application/json"], [PREFIX]);
+    super(FAMILY, ["1.0", "application/octet-stream"], [PREFIX]);
   }
 
   apply(txn, context) {
     // Parse the transaction header and payload
-
-    // const header = TransactionHeader.decode(txn.header);
     const header = txn.header;
     const signer = header.signerPublicKey;
-    const cbor = require("cbor");
     const data = cbor.decode(txn.payload);
+    // const data = JSON.parse(txn.payload);
     const { verb: action, money: asset, account: owner } = data;
 
     // Call the appropriate function based on the payload's action

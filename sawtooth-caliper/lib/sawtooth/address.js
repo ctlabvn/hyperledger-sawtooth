@@ -9,19 +9,24 @@ const _hash = x =>
 
 module.exports = {
   calculateAddress(family, name) {
-    const INT_KEY_NAMESPACE = _hash(family).substring(0, 6);
-    let address = INT_KEY_NAMESPACE + _hash(name).slice(-64);
+    const PREFIX = _hash(family).substring(0, 6);
+    let address = PREFIX + _hash(name).slice(-64);
     return address;
   },
 
   calculateAddresses(family, args) {
-    const INT_KEY_NAMESPACE = _hash(family).substring(0, 6);
+    const PREFIX = _hash(family).substring(0, 6);
     let addresses = [];
 
     for (let key in args) {
-      let address = INT_KEY_NAMESPACE + _hash(args[key]).slice(-64);
+      let address = PREFIX + _hash(args[key]).slice(-64);
       addresses.push(address);
     }
     return addresses;
+  },
+
+  // Encoding helpers and constants
+  getAddress(key, length) {
+    return _hash(key).slice(0, length || 64);
   }
 };

@@ -11,7 +11,8 @@ var fs = require("fs");
 var BlockchainInterface = require("../comm/blockchain-interface.js");
 const {
 	calculateAddress,
-	calculateAddresses
+	calculateAddresses,
+	getAddress
 } = require("../../lib/sawtooth/address");
 const Cargo = require("../../lib/cargo");
 const request = require("request-promise");
@@ -264,9 +265,14 @@ function getBatchStatusByRequest(
 		});
 }
 
+const FAMILY = "simple";
+const PREFIX = getAddress(FAMILY, 6);
+
 function createTransaction(signer, contractID, contractVer, data) {
+	// const addresses = calculateAddresses(contractID, data);
+	const addresses = [calculateAddress(contractID, data.account)];
 	const payloadBytes = cbor.encode(data);
-	const addresses = calculateAddresses(contractID, data);
+	// const payloadBytes = Buffer.from(JSON.stringify(data));
 	const transactionHeaderBytes = protobuf.TransactionHeader.encode({
 		familyName: contractID,
 		familyVersion: contractVer,
@@ -283,6 +289,7 @@ function createTransaction(signer, contractID, contractVer, data) {
 		// For example,
 		// dependencies: ['540a6803971d1880ec73a96cb97815a95d374cbad5d865925e5aa0432fcf1931539afe10310c122c5eaae15df61236079abbf4f258889359c4d175516934484a'],
 		dependencies: [],
+		// payloadEncoding: "application/json",
 		payloadSha512: createHash("sha512")
 			.update(payloadBytes)
 			.digest("hex")
