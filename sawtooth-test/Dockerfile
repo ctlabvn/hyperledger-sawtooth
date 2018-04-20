@@ -34,9 +34,9 @@ FROM ubuntu:xenial
 LABEL "install-type"="mounted"
 
 RUN echo "deb [arch=amd64] http://repo.sawtooth.me/ubuntu/ci xenial universe" >> /etc/apt/sources.list \
- && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 8AA7AF1F1091A5FD \
- && apt-get update \
- && apt-get install -y -q \
+    && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 8AA7AF1F1091A5FD \
+    && apt-get update \
+    && apt-get install -y -q \
     apt-transport-https \
     build-essential \
     ca-certificates \
@@ -80,9 +80,9 @@ RUN echo "deb [arch=amd64] http://repo.sawtooth.me/ubuntu/ci xenial universe" >>
     python3-yarl=0.10.0-1 \
     python3-zmq \
     software-properties-common \
- && apt-get clean \
- && rm -rf /var/lib/apt/lists/* \
- && pip3 install \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && pip3 install \
     pylint \
     pycodestyle \
     pytest-benchmark \
@@ -90,15 +90,15 @@ RUN echo "deb [arch=amd64] http://repo.sawtooth.me/ubuntu/ci xenial universe" >>
     coverage --upgrade
 
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - \
- && add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-      $(lsb_release -cs) \
-         stable"
+    && add-apt-repository \
+    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) \
+    stable"
 
 RUN apt-get update && apt-get install -y -q \
     docker-ce \
- && apt-get clean \
- && rm -rf /var/lib/apt/lists/*
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # pypy
 RUN apt-get update && apt-get install -y wget && cd /home && \
@@ -110,7 +110,7 @@ RUN wget https://bootstrap.pypa.io/get-pip.py && pypy get-pip.py && \
 
 # build optimize secp256k1
 RUN git clone https://github.com/bitcoin-core/secp256k1.git && cd secp256k1 && \
-    apt-get install -y autoconf libtool && ./autogen.sh && ./configure && make && make install && \
+    apt-get install -y autoconf libtool && ./autogen.sh && ./configure --enable-module-recovery && make && make install && \
     wget -O- http://neuro.debian.net/lists/xenial.au.full | tee /etc/apt/sources.list.d/neurodebian.sources.list && \
     apt-key adv --recv-keys --keyserver hkp://pool.sks-keyservers.net:80 0xA5D32F012649A5A9 && \
     apt-get update && apt-get install -y pypy-pkg-resources
@@ -137,10 +137,10 @@ EXPOSE 4004/tcp
 EXPOSE 8008
 
 RUN mkdir -p /project/sawtooth-core/ \
- && mkdir -p /var/log/sawtooth \
- && mkdir -p /var/lib/sawtooth \
- && mkdir -p /etc/sawtooth \
- && mkdir -p /etc/sawtooth/keys
+    && mkdir -p /var/log/sawtooth \
+    && mkdir -p /var/lib/sawtooth \
+    && mkdir -p /etc/sawtooth \
+    && mkdir -p /etc/sawtooth/keys
 
 ENV PATH=$PATH:/project/sawtooth-core/bin
 
