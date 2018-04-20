@@ -14,7 +14,10 @@
     "test-both":
       "npm test -- simple -c ./benchmark/simple/config.json --output-format console",
     "list": "node ./scripts/list.js",
-    "startclient": "node ./src/comm/client/zoo-client.js"
+    "startclient": "node ./src/comm/client/zoo-client.js",
+    "start": "node ./src/contract/sawtooth/simple/processor/index.js",
+    "test-all":
+      "npm test -- simple -c ./benchmark/simple/config.json  --output-format console"
   },
   "engines": {
     "node": ">=8.0.0",

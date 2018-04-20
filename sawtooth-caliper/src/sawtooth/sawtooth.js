@@ -323,6 +323,7 @@ function createChunkBatch(signer, tasks) {
 	return batch;
 }
 
+// by default put all transactions into 1 batch
 function createBatch(signer, tasks) {
 	const batches = [];
 	const chunk = tasks.length;
