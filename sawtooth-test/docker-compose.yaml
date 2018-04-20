@@ -17,17 +17,18 @@ version: "3"
 
 services:
 
+  # this one will run by validator, so no need to re-create
   settings-tp:
     image: hyperledger/sawtooth-settings-tp:latest
-    container_name: sawtooth-settings-tp-default    
-    depends_on:
-      - validator
+    container_name: sawtooth-settings-tp    
+    # depends_on:
+      # - validator
     entrypoint: settings-tp -vv -C tcp://validator:4004  
   
 
   validator:
     image: thanhtu/sawtooth-validator-pypy3
-    container_name: sawtooth-validator-default
+    container_name: sawtooth-validator
     expose:
       - 4004
     ports:
@@ -39,12 +40,11 @@ services:
       - ./start-validator:/usr/bin/start-validator
       - ./start-only-validator:/usr/bin/start-only-validator
       - ./result:/result
-    tty: true
-    command: /bin/bash
+    tty: true    
     working_dir: /project    
-    # command: start-validator
-    environment:
-        PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/project/bin
+    command: /bin/bash
+    # command: /bin/bash -c 'start-validator'
+    environment:        
         PYTHONPATH: "/project/signing:\
             /project/consensus/poet/common:\
             /project/consensus/poet/core:\
@@ -71,10 +71,11 @@ services:
 
   rest-api:
     image: hyperledger/sawtooth-rest_api:latest
-    container_name: sawtooth-rest-api-default
+    container_name: sawtooth-rest-api
     ports:
       - "38080:8080"
-    depends_on:
-      - validator
+    # no need to re-create rest-api for validator
+    # depends_on:
+    #   - validator
     entrypoint: sawtooth-rest-api -C tcp://validator:4004 --bind rest-api:8080
 

@@ -14,7 +14,7 @@
                 // "txDuration": [4],
                 "txNumber": [1000],
                 "rateControl": [
-                    { "type": "fixed-rate", "opts": { "tps": 150 } }
+                    { "type": "fixed-rate", "opts": { "tps": 50 } }
                 ],
                 "callback": "benchmark/simple/querystate.js",
                 "arguments": {

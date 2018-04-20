@@ -7,6 +7,11 @@
   },
   "scripts": {
     "start": "docker-compose up -d",
+    "restart": "docker-compose up -d --force-recreate validator",
+    "start-validator":
+      "docker exec -it sawtooth-validator bash -c 'start-validator'",
+    "restart-validator":
+      "docker exec -it sawtooth-validator bash -c 'start-validator restart'",
     "stop": "docker-compose down"
   },
   "engines": {

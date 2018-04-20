@@ -297,7 +297,7 @@ function createTransaction(signer, contractID, contractVer, data) {
 	return transaction;
 }
 
-function createBatch(signer, tasks) {
+function createChunkBatch(signer, tasks) {
 	const transactions = tasks.map(task =>
 		createTransaction(signer, task.contractID, task.contractVer, task.args)
 	);
@@ -313,8 +313,20 @@ function createBatch(signer, tasks) {
 		transactions: transactions
 	});
 
+	return batch;
+}
+
+function createBatch(signer, tasks) {
+	const batches = [];
+	const chunk = tasks.length;
+	for (let i = 0; i < tasks.length; i += chunk) {
+		const chunkTasks = tasks.slice(i, i + chunk);
+		const batch = createChunkBatch(signer, chunkTasks);
+		batches.push(batch);
+	}
+
 	const batchListBytes = protobuf.BatchList.encode({
-		batches: [batch]
+		batches: batches
 	}).finish();
 
 	return batchListBytes;
