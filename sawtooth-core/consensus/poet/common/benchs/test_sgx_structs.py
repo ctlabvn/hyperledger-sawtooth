@@ -43,11 +43,9 @@ def test_sgx_cpu_svn(benchmark):
         cpu_svn = create_random_buffer(sgx_structs.SgxCpuSvn.STRUCT_SIZE)
 
         sgx_cpu_svn.parse_from_bytes(cpu_svn)
-        assert sgx_cpu_svn.svn == cpu_svn        
         # Reset the object using the field values and verify that we
         # get expected serialized buffer
         sgx_cpu_svn = sgx_structs.SgxCpuSvn(svn=cpu_svn)
-        assert cpu_svn == sgx_cpu_svn.serialize_to_bytes()
 
 def test_sgx_attributes(benchmark):
 
@@ -61,14 +59,9 @@ def test_sgx_attributes(benchmark):
         attributes = struct.pack(b'<QQ', flags, xfrm)
         sgx_attributes.parse_from_bytes(attributes)
 
-        # parse from sgx with flags and xfrm
-        assert sgx_attributes.flags == flags
-        assert sgx_attributes.xfrm == xfrm
-
         # Reset the object using the field values and verify that we
         # get expected serialized buffer
         sgx_attributes = sgx_structs.SgxAttributes(flags=flags, xfrm=xfrm)
-        assert attributes == sgx_attributes.serialize_to_bytes()
 
 def test_sgx_measurement(benchmark):
 
@@ -81,13 +74,9 @@ def test_sgx_measurement(benchmark):
         measurement = create_random_buffer(sgx_structs.SgxMeasurement.STRUCT_SIZE)
         sgx_measurement.parse_from_bytes(measurement)
 
-        assert sgx_measurement.m == measurement
-
         # Reset the object using the field values and verify that we
         # get expected serialized buffer
         sgx_measurement = sgx_structs.SgxMeasurement(m=measurement)
-        assert measurement == sgx_measurement.serialize_to_bytes()
-
 
 def test_sgx_report_data(benchmark):
 
@@ -99,13 +88,9 @@ def test_sgx_report_data(benchmark):
         report_data = create_random_buffer(sgx_structs.SgxReportData.STRUCT_SIZE)
         sgx_report_data.parse_from_bytes(report_data)
 
-        assert sgx_report_data.d == report_data
-
         # Reset the object using the field values and verify that we
         # get expected serialized buffer
         sgx_report_data = sgx_structs.SgxReportData(d=report_data)
-        assert report_data, sgx_report_data.serialize_to_bytes()
-
 
 def test_sgx_report_body(benchmark):
 

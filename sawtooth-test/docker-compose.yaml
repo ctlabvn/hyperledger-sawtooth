@@ -22,6 +22,7 @@ services:
     container_name: sawtooth-test
     volumes:
       - ../sawtooth-core:/project
+      - ../sawtooth-cprofile:/cprofile
       - ./tests:/usr/bin/tests
       - ./benchs:/usr/bin/benchs
       - ./result:/result

@@ -17,6 +17,7 @@
 /.idea/
 *.sublime*
 .DS_Store
+.vscode/
 # Exclude poet build artifacts
 /consensus/**/__pycache__/
 /consensus/**/build/
