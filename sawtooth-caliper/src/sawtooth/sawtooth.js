@@ -21,6 +21,8 @@ const { createHash } = require("crypto");
 const { protobuf } = require("sawtooth-sdk");
 const { createContext, CryptoFactory } = require("sawtooth-sdk/signing");
 
+const MAX_TRANSACTIONS_IN_BATCH = 0;
+
 class Sawtooth extends BlockchainInterface {
 	constructor(config) {
 		super(config);
@@ -326,7 +328,7 @@ function createChunkBatch(signer, tasks) {
 // by default put all transactions into 1 batch
 function createBatch(signer, tasks) {
 	const batches = [];
-	const chunk = tasks.length;
+	const chunk = MAX_TRANSACTIONS_IN_BATCH || tasks.length;
 	for (let i = 0; i < tasks.length; i += chunk) {
 		const chunkTasks = tasks.slice(i, i + chunk);
 		const batch = createChunkBatch(signer, chunkTasks);
