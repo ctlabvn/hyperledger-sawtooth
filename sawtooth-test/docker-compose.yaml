@@ -38,6 +38,8 @@ services:
       - ./benchs:/usr/bin/benchs
       - ./start-validator:/usr/bin/start-validator
       - ./start-only-validator:/usr/bin/start-only-validator
+      - ./start-pypy3-validator:/usr/bin/start-pypy3-validator
+      - ./start-pypy3-only-validator:/usr/bin/start-pypy3-only-validator
       - ./result:/result
     tty: true
     command: /bin/bash

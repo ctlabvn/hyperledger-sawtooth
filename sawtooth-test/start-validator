@@ -1,7 +1,6 @@
 # keys are under /etc/sawtooth/keys, /root/.sawtooth/keys
 # block, genesis, merkle, receipts are under /var/lib/sawtooth/
 
-chmod u+x /usr/bin/start-only-validator
 sawadm keygen --force 
 sawtooth keygen my_key --force 
 sawset genesis -k /root/.sawtooth/keys/my_key.priv -o /root/.sawtooth/config-genesis.batch 
