@@ -36,6 +36,7 @@ services:
       - "34004:4004" 
     volumes:
       - ../sawtooth-core:/project
+      - ../sawtooth-cprofile:/cprofile
       - ./tests:/usr/bin/tests
       - ./benchs:/usr/bin/benchs
       - ./start-validator:/usr/bin/start-validator      
