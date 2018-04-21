@@ -4,6 +4,8 @@ const {
   calculateAddress,
   calculateAddresses
 } = require("../lib/sawtooth/address");
+const { createContext, CryptoFactory } = require("sawtooth-sdk/signing");
+const { Secp256k1PrivateKey } = require("sawtooth-sdk/signing/secp256k1");
 const accounts = [
   "zlscb",
   "zlscc",
@@ -111,5 +113,15 @@ test("address test", function(t) {
   var acc = accounts[Math.floor(Math.random() * accounts.length)];
   const address = calculateAddress("simple", acc);
   console.log(address);
+  t.end();
+});
+
+test("secp256k1 test", function(t) {
+  const cryptoContext = createContext("secp256k1");
+  const privateKey = cryptoContext.newRandomPrivateKey();
+  const stringKey = privateKey.asBytes().toString("hex");
+  console.log(stringKey);
+  const retrieveKey = Secp256k1PrivateKey.fromHex(stringKey);
+  t.equal(stringKey, retrieveKey.asBytes().toString("hex"));
   t.end();
 });

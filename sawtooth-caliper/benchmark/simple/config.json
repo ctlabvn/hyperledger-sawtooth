@@ -19,15 +19,18 @@
         "label": "open",
         "txNumber": [500],
         "rateControl": [{ "type": "fixed-rate", "opts": { "tps": 200 } }],
-        "arguments": { "money": 10000 },
+        "arguments": {
+          // "money": 10000
+        },
         "callback": "benchmark/simple/open.js"
-      },
-      {
-        "label": "query",
-        "txNumber": [500],
-        "rateControl": [{ "type": "fixed-rate", "opts": { "tps": 200 } }],
-        "callback": "benchmark/simple/query.js"
       }
+      // ,
+      // {
+      //   "label": "query",
+      //   "txNumber": [500],
+      //   "rateControl": [{ "type": "fixed-rate", "opts": { "tps": 200 } }],
+      //   "callback": "benchmark/simple/query.js"
+      // }
     ]
   },
   "monitor": {

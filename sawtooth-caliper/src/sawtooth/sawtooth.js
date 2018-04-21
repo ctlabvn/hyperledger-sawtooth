@@ -20,6 +20,7 @@ const cbor = require("cbor");
 const { createHash } = require("crypto");
 const { protobuf } = require("sawtooth-sdk");
 const { createContext, CryptoFactory } = require("sawtooth-sdk/signing");
+const { Secp256k1PrivateKey } = require("sawtooth-sdk/signing/secp256k1");
 
 const MAX_TRANSACTIONS_IN_BATCH = 0;
 
@@ -28,7 +29,10 @@ class Sawtooth extends BlockchainInterface {
 		super(config);
 
 		const cryptoContext = createContext("secp256k1");
-		const privateKey = cryptoContext.newRandomPrivateKey();
+		// const privateKey = cryptoContext.newRandomPrivateKey();
+		const privateKey = Secp256k1PrivateKey.fromHex(
+			this.config.sawtooth.privateKey
+		);
 		this.signer = new CryptoFactory(cryptoContext).newSigner(privateKey);
 
 		this.cargo = new Cargo(

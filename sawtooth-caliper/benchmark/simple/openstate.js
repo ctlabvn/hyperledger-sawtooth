@@ -20,7 +20,7 @@ module.exports.init = function(blockchain, context, args) {
         );
     }
 
-    initMoney = args["money"].toString();
+    initMoney = args.money.toString();
     bc = blockchain;
     contx = context;
     accounts = args.accounts;
@@ -42,7 +42,11 @@ module.exports.run = function() {
         contx,
         "simple",
         "1.0",
-        { verb: "open", account: newAcc, money: initMoney },
+        {
+            verb: "open",
+            account: newAcc,
+            money: Math.floor(Math.random() * 1000)
+        },
         30
     );
 };
