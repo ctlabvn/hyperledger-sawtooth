@@ -27,7 +27,8 @@ services:
   
 
   validator:
-    image: thanhtu/sawtooth-validator-pypy3
+    # image: thanhtu/sawtooth-validator-pypy3
+    image: thanhtu/sawtooth-dev-python
     container_name: sawtooth-validator
     expose:
       - 4004
