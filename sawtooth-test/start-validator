@@ -13,21 +13,17 @@ fi
 pid=$(ps aux | grep $PYTHON | grep -v grep | awk '{print $2}')
 if [[ ! -z $pid ]];then
   kill $pid
-  # clear the existing chain then restart
-  rm -rf /var/lib/sawtooth/*
-elif [[ $1 != 'restart' ]];then
+fi 
+
+if [[ $1 != 'restart' ]];then          
   # create from scratch if not restart
   $PYTHON bin/sawadm keygen --force 
   $PYTHON bin/sawtooth keygen my_key --force 
   $PYTHON bin/sawset genesis -k /root/.sawtooth/keys/my_key.priv -o /root/.sawtooth/config-genesis.batch 
-  $PYTHON bin/sawset proposal create -k /root/.sawtooth/keys/my_key.priv sawtooth.publisher.max_batches_per_block=1000 -o /root/.sawtooth/poet-settings.batch 
-else
-  # just restart
-  rm -rf /var/lib/sawtooth/*
+  $PYTHON bin/sawset proposal create -k /root/.sawtooth/keys/my_key.priv sawtooth.publisher.max_batches_per_block=1000 -o /root/.sawtooth/poet-settings.batch     
 fi
-
-
-# rm -rf /var/lib/sawtooth/*
+  
+rm -rf /var/lib/sawtooth/*
 $PYTHON bin/sawadm genesis /root/.sawtooth/config-genesis.batch /root/.sawtooth/poet-settings.batch
 # finally run validator
 $PYTHON bin/sawtooth-validator -vv --scheduler parallel --endpoint tcp://validator:8800 --bind component:tcp://eth0:4004 --bind network:tcp://eth0:8800

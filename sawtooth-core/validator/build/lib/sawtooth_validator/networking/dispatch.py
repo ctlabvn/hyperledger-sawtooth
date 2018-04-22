@@ -158,7 +158,7 @@ class Dispatcher(InstrumentedThread):
             self._in_queue.put_nowait((priority, message_id))
 
             queue_size = self._in_queue.qsize()
-            if queue_size > 10:
+            if queue_size > 100:
                 LOGGER.debug("Dispatch incoming queue size: %s", queue_size)
         else:
             LOGGER.info("received a message of type %s "

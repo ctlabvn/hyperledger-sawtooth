@@ -55,6 +55,7 @@ class Tree:
     prefix of the addresses of its children, and every node either has
     data or has multiple children.
     '''
+
     def __init__(self):
         self._root = Node('')
 
@@ -73,7 +74,6 @@ class Tree:
 
     def _walk_to_address(self, address):
         node = self._root
-
         yield node
 
         # A node's address is always a proper prefix of the addresses
@@ -715,6 +715,7 @@ class ParallelScheduler(Scheduler):
             return BatchExecutionResult(is_valid=True, state_hash=state_hash)
 
     def get_transaction_execution_results(self, batch_signature):
+
         with self._condition:
             annotated_batch = self._batches_by_id.get(batch_signature)
             if annotated_batch is None:
