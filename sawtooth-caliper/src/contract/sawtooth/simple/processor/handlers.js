@@ -46,7 +46,7 @@ const openAccount = (owner, asset, context) => {
 class JSONHandler extends TransactionHandler {
   constructor() {
     console.log("Initializing JSON handler for simple chain");
-    super(FAMILY, ["1.0", "application/octet-stream"], [PREFIX]);
+    super(FAMILY, ["1.0"], [PREFIX]);
   }
 
   apply(txn, context) {

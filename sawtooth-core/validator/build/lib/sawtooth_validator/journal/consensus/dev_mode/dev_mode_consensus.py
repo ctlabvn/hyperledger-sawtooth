@@ -95,7 +95,7 @@ class BlockPublisher(BlockPublisherInterface):
             "sawtooth.consensus.valid_block_publishers",
             self._valid_block_publishers,
             list)
-
+        
         block_header.consensus = b"Devmode"
         self._start_time = time.time()
         self._wait_time = random.uniform(

@@ -250,14 +250,18 @@ function getBatchStatusByRequest(
 			let batchStatuses = body.data;
 			// console.log("Got Status: " + JSON.stringify(batchStatuses));
 			let hasPending = false;
+			let isProcessed = false;
 			for (let index in batchStatuses) {
 				let batchStatus = batchStatuses[index].status;
 				if (batchStatus == "PENDING") {
 					hasPending = true;
+					// pending means transaction is processed
+					isProcessed = true;
 					break;
 				}
 			}
-			if (hasPending != true) {
+			// if (hasPending != true) {
+			if (isProcessed) {
 				invoke_status.status = "success";
 				invoke_status.time_final = Date.now();
 				clearInterval(intervalID);

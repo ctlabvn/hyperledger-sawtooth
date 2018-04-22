@@ -45,7 +45,7 @@ Lockfile:
 
 Trace: 
   Error: Command failed.
-  Exit code: 1
+  Exit code: 130
   Command: sh
   Arguments: -c docker exec -it sawtooth-validator bash -c 'start-validator restart'
   Directory: /Users/thanhtu/MyProjects/Hyperledger/SawTooth/sawtooth-test

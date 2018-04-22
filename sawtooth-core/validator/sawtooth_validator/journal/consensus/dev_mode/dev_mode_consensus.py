@@ -95,11 +95,11 @@ class BlockPublisher(BlockPublisherInterface):
             "sawtooth.consensus.valid_block_publishers",
             self._valid_block_publishers,
             list)
-
         block_header.consensus = b"Devmode"
         self._start_time = time.time()
-        self._wait_time = random.uniform(
-            self._min_wait_time, self._max_wait_time)
+        self._wait_time = 0
+        # self._wait_time = random.uniform(
+        #     self._min_wait_time, self._max_wait_time)
         return True
 
     def check_publish_block(self, block_header):
@@ -110,21 +110,22 @@ class BlockPublisher(BlockPublisherInterface):
         Returns:
             Boolean: True if the candidate block_header should be claimed.
         """
-        if self._valid_block_publishers \
-                and block_header.signer_public_key \
-                not in self._valid_block_publishers:
-            return False
-        elif self._min_wait_time == 0:
-            return True
-        elif self._min_wait_time > 0 and self._max_wait_time <= 0:
-            if self._start_time + self._min_wait_time <= time.time():
-                return True
-        elif self._min_wait_time > 0 \
-                and self._max_wait_time > self._min_wait_time:
-            if self._start_time + self._wait_time <= time.time():
-                return True
-        else:
-            return False
+        return True
+        # if self._valid_block_publishers \
+        #         and block_header.signer_public_key \
+        #         not in self._valid_block_publishers:
+        #     return False
+        # elif self._min_wait_time == 0:
+        #     return True
+        # elif self._min_wait_time > 0 and self._max_wait_time <= 0:
+        #     if self._start_time + self._min_wait_time <= time.time():
+        #         return True
+        # elif self._min_wait_time > 0 \
+        #         and self._max_wait_time > self._min_wait_time:
+        #     if self._start_time + self._wait_time <= time.time():
+        #         return True
+        # else:
+        #     return False
 
     def finalize_block(self, block_header):
         """Finalize a block to be claimed. Provide any signatures and
