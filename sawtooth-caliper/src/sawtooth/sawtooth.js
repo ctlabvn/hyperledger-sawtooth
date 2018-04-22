@@ -22,7 +22,7 @@ const { protobuf } = require("sawtooth-sdk");
 const { createContext, CryptoFactory } = require("sawtooth-sdk/signing");
 const { Secp256k1PrivateKey } = require("sawtooth-sdk/signing/secp256k1");
 
-const MAX_TRANSACTIONS_IN_BATCH = 0;
+const MAX_TRANSACTIONS_IN_BATCH = 10;
 
 class Sawtooth extends BlockchainInterface {
 	constructor(config) {
@@ -43,7 +43,7 @@ class Sawtooth extends BlockchainInterface {
 					submitBatches(batchBytes, this.config.sawtooth.network.restapi.url)
 				);
 			},
-			100,
+			1000,
 			3000
 		);
 	}
@@ -280,7 +280,10 @@ const PREFIX = getAddress(FAMILY, 6);
 
 function createTransaction(signer, contractID, contractVer, data) {
 	// const addresses = calculateAddresses(contractID, data);
-	const addresses = [calculateAddress(contractID, data.account)];
+	// const addresses = [calculateAddress(contractID, data.account)];
+	const addresses = data.map(item =>
+		calculateAddress(contractID, item.account)
+	);
 	const payloadBytes = cbor.encode(data);
 	// const payloadBytes = Buffer.from(JSON.stringify(data));
 	const transactionHeaderBytes = protobuf.TransactionHeader.encode({
@@ -333,19 +336,51 @@ function createChunkBatch(signer, tasks) {
 	return batch;
 }
 
-// by default put all transactions into 1 batch
 function createBatch(signer, tasks) {
-	const batches = [];
+	const transactions = [];
 	const chunk = MAX_TRANSACTIONS_IN_BATCH || tasks.length;
 	for (let i = 0; i < tasks.length; i += chunk) {
 		const chunkTasks = tasks.slice(i, i + chunk);
-		const batch = createChunkBatch(signer, chunkTasks);
-		batches.push(batch);
+		const transaction = createTransaction(
+			signer,
+			chunkTasks[0].contractID,
+			chunkTasks[0].contractVer,
+			chunkTasks.map(task => task.args)
+		);
+		transactions.push(transaction);
 	}
 
+	const batchHeaderBytes = protobuf.BatchHeader.encode({
+		signerPublicKey: signer.getPublicKey().asHex(),
+		transactionIds: transactions.map(txn => txn.headerSignature)
+	}).finish();
+
+	const batch = protobuf.Batch.create({
+		header: batchHeaderBytes,
+		headerSignature: signer.sign(batchHeaderBytes),
+		transactions: transactions
+	});
+
 	const batchListBytes = protobuf.BatchList.encode({
-		batches: batches
+		batches: [batch]
 	}).finish();
 
 	return batchListBytes;
 }
+
+// by default put all transactions into 1 batch
+// function createBatch(signer, tasks) {
+// 	const batches = [];
+// 	const chunk = MAX_TRANSACTIONS_IN_BATCH || tasks.length;
+// 	for (let i = 0; i < tasks.length; i += chunk) {
+// 		const chunkTasks = tasks.slice(i, i + chunk);
+// 		const batch = createChunkBatch(signer, chunkTasks);
+// 		batches.push(batch);
+// 	}
+
+// 	const batchListBytes = protobuf.BatchList.encode({
+// 		batches: batches
+// 	}).finish();
+
+// 	return batchListBytes;
+// }
