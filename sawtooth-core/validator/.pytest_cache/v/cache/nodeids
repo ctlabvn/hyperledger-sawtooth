@@ -1,0 +1,6 @@
+[
+  "benchs/test_nolock_database/bench.py::test_put",
+  "benchs/test_nolock_database/bench.py::test_get_multi",
+  "benchs/test_nolock_database/bench.py::test_delete",
+  "benchs/test_nolock_database/bench.py::test_update"
+]

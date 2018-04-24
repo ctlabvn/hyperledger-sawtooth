@@ -38,7 +38,7 @@ var prefix;
 function generateAccount() {
     // should be [a-z]{1,9}
     if (typeof prefix === "undefined") {
-        const number = 100; //process.pid;
+        const number = process.pid;
         prefix = get26Num(number);
     }
     return prefix + get26Num(accounts.length + 1);

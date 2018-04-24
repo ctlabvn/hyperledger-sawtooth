@@ -46,7 +46,7 @@ const openAccount = (owner, asset, context) => {
 class JSONHandler extends TransactionHandler {
   constructor() {
     console.log("Initializing JSON handler for simple chain");
-    super(FAMILY, ["1.0", "application/octet-stream"], [PREFIX]);
+    super(FAMILY, ["1.0"], [PREFIX]);
   }
 
   apply(txn, context) {
@@ -54,23 +54,26 @@ class JSONHandler extends TransactionHandler {
     const header = txn.header;
     const signer = header.signerPublicKey;
     const data = cbor.decode(txn.payload);
-    // const data = JSON.parse(txn.payload);
-    const { verb: action, money: asset, account: owner } = data;
 
-    // Call the appropriate function based on the payload's action
-    console.log(
-      `Handling transaction:  ${action} > ${asset}`,
-      owner ? `> ${owner.slice(0, 8)}... ` : "",
-      `:: ${signer.slice(0, 8)}...`
-    );
-    // queries do not affect on the assets
-    switch (action) {
-      case "open":
-        return openAccount(owner, asset, context);
-      default:
-        return Promise.resolve().then(() => {
-          throw new InvalidTransaction('Action must be "open"');
-        });
+    // const data = JSON.parse(txn.payload);
+    for (let item of data) {
+      const { verb: action, money: asset, account: owner } = item;
+
+      // Call the appropriate function based on the payload's action
+      console.log(
+        `Handling transaction:  ${action} > ${asset}`,
+        owner ? `> ${owner.slice(0, 8)}... ` : "",
+        `:: ${signer.slice(0, 8)}...`
+      );
+      // queries do not affect on the assets
+      switch (action) {
+        case "open":
+          return openAccount(owner, asset, context);
+        default:
+          return Promise.resolve().then(() => {
+            throw new InvalidTransaction('Action must be "open"');
+          });
+      }
     }
   }
 }

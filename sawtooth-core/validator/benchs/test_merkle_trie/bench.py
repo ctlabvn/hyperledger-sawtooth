@@ -95,117 +95,129 @@ class TestSawtoothMerkleTrie:
 
 
 
-def test_merkle_trie_root_advance(benchmark):
-    value = {'name': 'foo', 'value': 1}
+# def test_merkle_trie_root_advance(benchmark):
+#     value = {'name': 'foo', 'value': 1}
 
-    @benchmark
-    def do_merkle_trie_root_advance():
-        with TestSawtoothMerkleTrie() as testSawtoothMerkleTrie:
-            orig_root = testSawtoothMerkleTrie.get_merkle_root()
-            new_root = testSawtoothMerkleTrie.set('foo', value)
+#     @benchmark
+#     def do_merkle_trie_root_advance():
+#         with TestSawtoothMerkleTrie() as testSawtoothMerkleTrie:
+#             orig_root = testSawtoothMerkleTrie.get_merkle_root()
+#             new_root = testSawtoothMerkleTrie.set('foo', value)
 
-            testSawtoothMerkleTrie.assert_root(orig_root)
-            testSawtoothMerkleTrie.assert_no_key('foo')
+#             testSawtoothMerkleTrie.assert_root(orig_root)
+#             testSawtoothMerkleTrie.assert_no_key('foo')
 
-            testSawtoothMerkleTrie.set_merkle_root(new_root)
+#             testSawtoothMerkleTrie.set_merkle_root(new_root)
 
-            testSawtoothMerkleTrie.assert_root(new_root)
-            testSawtoothMerkleTrie.assert_value_at_address('foo', value)
+#             testSawtoothMerkleTrie.assert_root(new_root)
+#             testSawtoothMerkleTrie.assert_value_at_address('foo', value)
 
-def test_merkle_trie_delete(benchmark):
-    value = {'name': 'bar', 'value': 1}
 
-    @benchmark
-    def do_merkle_trie_delete():
-        with TestSawtoothMerkleTrie() as testSawtoothMerkleTrie:
-            new_root = testSawtoothMerkleTrie.set('bar', value)
-            testSawtoothMerkleTrie.set_merkle_root(new_root)
 
-            testSawtoothMerkleTrie.assert_root(new_root)
-            testSawtoothMerkleTrie.assert_value_at_address('bar', value)
 
-            # deleting an invalid key should raise an error
-            with pytest.raises(KeyError):
-                testSawtoothMerkleTrie.delete('barf')
+# def test_merkle_trie_delete(benchmark):
+#     value = {'name': 'bar', 'value': 1}
+#     with TestSawtoothMerkleTrie() as testSawtoothMerkleTrie:
 
-            del_root = testSawtoothMerkleTrie.delete('bar')
+#         @benchmark
+#         def do_merkle_trie_delete():
+        
+#             new_root = testSawtoothMerkleTrie.set('bar', value)
+#             testSawtoothMerkleTrie.set_merkle_root(new_root)
 
-            # del_root hasn't been set yet, so address should still have value
-            testSawtoothMerkleTrie.assert_root(new_root)
-            testSawtoothMerkleTrie.assert_value_at_address('bar', value)
+#             testSawtoothMerkleTrie.assert_root(new_root)
+#             testSawtoothMerkleTrie.assert_value_at_address('bar', value)
 
-            testSawtoothMerkleTrie.set_merkle_root(del_root)
+#             # deleting an invalid key should raise an error
+#             with pytest.raises(KeyError):
+#                 testSawtoothMerkleTrie.delete('barf')
 
-            testSawtoothMerkleTrie.assert_root(del_root)
-            testSawtoothMerkleTrie.assert_no_key('bar')
+#             del_root = testSawtoothMerkleTrie.delete('bar')
+
+#             # del_root hasn't been set yet, so address should still have value
+#             testSawtoothMerkleTrie.assert_root(new_root)
+#             testSawtoothMerkleTrie.assert_value_at_address('bar', value)
+
+#             testSawtoothMerkleTrie.set_merkle_root(del_root)
+
+#             testSawtoothMerkleTrie.assert_root(del_root)
+#             testSawtoothMerkleTrie.assert_no_key('bar')
 
 def test_merkle_trie_update(benchmark):    
-    @benchmark
-    def do_merkle_trie_update():
-        with TestSawtoothMerkleTrie() as testSawtoothMerkleTrie:
+    with TestSawtoothMerkleTrie() as testSawtoothMerkleTrie:
 
-            init_root = testSawtoothMerkleTrie.get_merkle_root()
+        key = _random_string(10)
+        hashed = _hash(key)
+        value = {key: _random_string(512)}         
+        # print(hashed, key)
+        @benchmark
+        def do_merkle_trie_update():
+        
+            # init_root = testSawtoothMerkleTrie.get_merkle_root()
 
-            values = {}
-            key_hashes = {
-                key: _hash(key)
-                for key in (_random_string(10) for _ in range(10))
-            }
+            # values = {}
+            # key_hashes = {
+            #     key: _hash(key)
+            #     for key in (_random_string(10) for _ in range(1))
+            # }
+            
+            # for key, hashed in key_hashes.items():
+                                               
+            testSawtoothMerkleTrie.set(hashed, value, ishash=True)
+                # values[hashed] = value
+                # testSawtoothMerkleTrie.set_merkle_root(new_root)
 
-            for key, hashed in key_hashes.items():
-                value = {key: _random_string(512)}
-                new_root = testSawtoothMerkleTrie.set(hashed, value, ishash=True)
-                values[hashed] = value
-                testSawtoothMerkleTrie.set_merkle_root(new_root)
+        # custom benchmark
+        # benchmark.pedantic(do_merkle_trie_update, iterations=1, rounds=1)
 
-            testSawtoothMerkleTrie.assert_not_root(init_root)
+            # testSawtoothMerkleTrie.assert_not_root(init_root)
 
-            for address, value in values.items():
-                testSawtoothMerkleTrie.assert_value_at_address(
-                    address, value, ishash=True)
+            # for address, value in values.items():
+            #     testSawtoothMerkleTrie.assert_value_at_address(
+            #         address, value, ishash=True)
 
-            set_items = {
-                hashed: {
-                    key: 5.0
-                }
-                for key, hashed in random.sample(key_hashes.items(), 5)
-            }
-            values.update(set_items)
-            delete_items = {
-                hashed
-                for hashed in random.sample(list(key_hashes.values()), 5)
-            }
+            # set_items = {
+            #     hashed: {
+            #         key: 5.0
+            #     }
+            #     for key, hashed in random.sample(key_hashes.items(), 5)
+            # }
+            # values.update(set_items)
+            # delete_items = {
+            #     hashed
+            #     for hashed in random.sample(list(key_hashes.values()), 5)
+            # }
 
-            # make sure there are no sets and deletes of the same key
-            delete_items = delete_items - set_items.keys()
-            for addr in delete_items:
-                del values[addr]
+            # # make sure there are no sets and deletes of the same key
+            # delete_items = delete_items - set_items.keys()
+            # for addr in delete_items:
+            #     del values[addr]
 
-            virtual_root = testSawtoothMerkleTrie.update(set_items, delete_items, virtual=True)
+            # virtual_root = testSawtoothMerkleTrie.update(set_items, delete_items, virtual=True)
 
-            # virtual root shouldn't match actual contents of tree
-            with pytest.raises(KeyError):
-                testSawtoothMerkleTrie.set_merkle_root(virtual_root)
+            # # virtual root shouldn't match actual contents of tree
+            # with pytest.raises(KeyError):
+            #     testSawtoothMerkleTrie.set_merkle_root(virtual_root)
 
-            actual_root = testSawtoothMerkleTrie.update(set_items, delete_items, virtual=False)
+            # actual_root = testSawtoothMerkleTrie.update(set_items, delete_items, virtual=False)
 
-            # the virtual root should be the same as the actual root
-            assert virtual_root == actual_root
+            # # the virtual root should be the same as the actual root
+            # assert virtual_root == actual_root
 
-            # neither should be the root yet
-            testSawtoothMerkleTrie.assert_not_root(
-                virtual_root,
-                actual_root)
+            # # neither should be the root yet
+            # testSawtoothMerkleTrie.assert_not_root(
+            #     virtual_root,
+            #     actual_root)
 
-            testSawtoothMerkleTrie.set_merkle_root(actual_root)
-            testSawtoothMerkleTrie.assert_root(actual_root)
+            # testSawtoothMerkleTrie.set_merkle_root(actual_root)
+            # testSawtoothMerkleTrie.assert_root(actual_root)
 
-            for address, value in values.items():
-                testSawtoothMerkleTrie.assert_value_at_address(
-                    address, value, ishash=True)
+            # for address, value in values.items():
+            #     testSawtoothMerkleTrie.assert_value_at_address(
+            #         address, value, ishash=True)
 
-            for address in delete_items:
-                with pytest.raises(KeyError):
-                    testSawtoothMerkleTrie.get(address, ishash=True)
+            # for address in delete_items:
+            #     with pytest.raises(KeyError):
+            #         testSawtoothMerkleTrie.get(address, ishash=True)
 
 
