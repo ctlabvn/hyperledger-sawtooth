@@ -79,11 +79,11 @@ class ContextManager(object):
         return self._first_merkle_root
 
     def address_is_valid(self, address):
-
+        # return True
         return self._address_regex.match(address) is not None
 
     def namespace_is_valid(self, namespace):
-
+        # return True
         return self._namespace_regex.match(namespace) is not None
 
     def create_context(self, state_hash, base_contexts, inputs, outputs):

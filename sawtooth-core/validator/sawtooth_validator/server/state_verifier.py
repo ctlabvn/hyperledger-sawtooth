@@ -114,9 +114,9 @@ def verify_state(global_state_db, blockstore, bind_component, scheduler_type):
         component_dispatcher,
         secured=False,
         heartbeat=False,
-        max_incoming_connections=20,
+        max_incoming_connections=200,
         monitor=True,
-        max_future_callback_workers=10)
+        max_future_callback_workers=100)
 
     context_manager = ContextManager(global_state_db)
 
