@@ -26,6 +26,23 @@ services:
     entrypoint: settings-tp -vv -C tcp://validator:4004  
   
 
+  # validator:
+  #   image: hyperledger/sawtooth-validator:latest
+  #   container_name: sawtooth-validator
+  #   expose:
+  #     - 4004
+  #   ports:
+  #     - "34004:4004"
+  #   # start the validator with an empty genesis batch
+  #   entrypoint: "bash -c \"\
+  #       sawadm keygen --force && \        
+  #       sawadm genesis && \
+  #       sawtooth-validator -vv \
+  #         --endpoint tcp://validator:8800 \
+  #         --bind component:tcp://eth0:4004 \
+  #         --bind network:tcp://eth0:8800 \
+  #       \""
+
   validator:
     # image: thanhtu/sawtooth-validator-pypy3
     image: thanhtu/sawtooth-dev-python
