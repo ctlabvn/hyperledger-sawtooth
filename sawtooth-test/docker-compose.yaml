@@ -50,7 +50,9 @@ services:
     expose:
       - 4004
     ports:
-      - "34004:4004" 
+      - "34004:4004"
+      # for simple rest-api testing
+      - "35005:5005" 
     volumes:
       - ../sawtooth-core:/project
       - ../sawtooth-cprofile:/cprofile
@@ -63,6 +65,7 @@ services:
     command: /bin/bash
     # command: /bin/bash -c 'start-validator'
     environment:        
+        PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/project/bin"
         PYTHONPATH: "/project/signing:\
             /project/consensus/poet/common:\
             /project/consensus/poet/core:\
@@ -77,6 +80,7 @@ services:
             /project/families/block_info:\
             /project/families/identity:\
             /project/families/settings:\
+            /project/rest_api:\            
             /project/cli:\
             /project/sdk/python:\
             /project/integration:\
