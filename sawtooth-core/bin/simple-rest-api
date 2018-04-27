@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Copyright 2017 Intel Corporation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,11 +14,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ------------------------------------------------------------------------------
-[unittest]
-start-dir = tests/unit
-code-directories = ../..
-test-file-pattern = test_state_requests.py
-plugins = nose2.plugins.coverage
 
-[coverage]
-always-on = True
+import os
+import sys
+import sysconfig
+
+build_str = "lib.{}-{}.{}".format(
+    sysconfig.get_platform(),
+    sys.version_info.major, sys.version_info.minor)
+
+sys.path.insert(0, os.path.join(
+    os.path.dirname(os.path.dirname(os.path.realpath(__file__))),
+    'rest_api'))
+
+from simple_rest_api.rest_api import main
+
+if __name__ == '__main__':
+    main()
