@@ -2,7 +2,17 @@ FROM pypy:3
 
 # install dependencies
 RUN pypy3 -m pip install --upgrade pip && \
-    pypy3 -m pip install requests cbor colorlog lmdb netifaces protobuf pyformance PyYAML pyzmq toml secp256k1
+    pypy3 -m pip install requests cbor colorlog lmdb netifaces protobuf pyformance PyYAML pyzmq toml aiohttp uvloop secp256k1
+
+# install python 3.6.5
+ARG PYTHON_VERSION=3.6.5
+RUN cd /opt && \
+    wget https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz && \
+    tar -xvf Python-${PYTHON_VERSION}.tgz && cd Python-${PYTHON_VERSION} && ./configure --enable-optimizations && \
+    make && make install
+
+RUN pip3 install --upgrade pip && \
+    pip3 install requests cbor colorlog lmdb netifaces protobuf pyformance PyYAML pyzmq toml aiohttp uvloop tornado secp256k1
 
 # config for container
 EXPOSE 4004/tcp

@@ -28,6 +28,7 @@ from zmq.asyncio import ZMQEventLoop
 from simple_rest_api.route_handlers import RouteHandler
 from simple_rest_api.config import RestApiConfig
 
+import uvloop
 
 LOGGER = logging.getLogger(__name__)
 
@@ -83,8 +84,10 @@ def start_rest_api(host, port, timeout):
 
 
 def main():
-    loop = ZMQEventLoop()
-    asyncio.set_event_loop(loop)
+    # loop = ZMQEventLoop()
+    # asyncio.set_event_loop(loop)
+
+    asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
     
     try:
         opts = parse_args(sys.argv[1:])
