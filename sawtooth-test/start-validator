@@ -32,4 +32,4 @@ rm -rf /var/lib/sawtooth/*
 $PYTHON bin/sawadm genesis
 # $PYTHON bin/sawadm genesis /root/.sawtooth/config-genesis.batch /root/.sawtooth/poet-settings.batch
 # finally run validator
-$PYTHON bin/sawtooth-validator -vv --scheduler parallel --endpoint tcp://0.0.0.0:8800 --bind component:tcp://0.0.0.0:4004 --bind network:tcp://0.0.0.0:8800
+$PYTHON bin/sawtooth-validator --scheduler parallel --endpoint tcp://0.0.0.0:8800 --bind component:tcp://0.0.0.0:4004 --bind network:tcp://0.0.0.0:8800
