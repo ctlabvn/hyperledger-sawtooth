@@ -1,0 +1,14 @@
+====== cProfile: ./utility/ias_proxy/cprof_ias_proxy.py ======
+
+         8 function calls in 0.000 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.000    0.000 utils.py:43(get)
+        1    0.000    0.000    0.000    0.000 utils.py:31(__setitem__)
+        2    0.000    0.000    0.000    0.000 {method 'appendleft' of 'collections.deque' objects}
+        1    0.000    0.000    0.000    0.000 {method 'remove' of 'collections.deque' objects}
+        1    0.000    0.000    0.000    0.000 {method 'get' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.len}

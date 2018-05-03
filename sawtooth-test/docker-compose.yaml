@@ -50,6 +50,7 @@ services:
             /project/integration:\
             /project/signing:\
             /project/utility/ias_client:\
+            /project/utility/ias_client/tests/unit:\
             /project/utility/ias_proxy:\
             /project/validator/tests:\
             /project/validator"
