@@ -1,3 +1,4 @@
+import cProfile
 from sawtooth_ias_client.ias_client import IasClient
 from tests.unit import mock_ias_server
 

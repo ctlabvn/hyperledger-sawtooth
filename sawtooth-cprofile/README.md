@@ -1,14 +1,18 @@
 ## Most time consuming functions
 ### consensus
-* NONE
+* validator_did_claim_block
 ---
 ### families
-* NONE
+* load_block_info_config
 ---
 ### signing
-* NONE
+* Secp256k1PrivateKey.from_hex
+* Secp256k1PublicKey.from_hex
 ---
 ### validator
-* Create connection request with Authorization
-* Getting block info
+* Create connection request with Authorization (do_connect)
+* Create/Get block info
 * Block caching
+---
+### utility
+* READING PYTHON PROFILE ...
