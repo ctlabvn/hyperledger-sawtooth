@@ -50,7 +50,7 @@ from sawtooth_validator.protobuf.authorization_pb2 import \
 from sawtooth_validator.protobuf.authorization_pb2 import RoleType
 from sawtooth_validator import metrics
 
-from tornado.platform.asyncio import AnyThreadEventLoopPolicy
+# from tornado.platform.asyncio import AnyThreadEventLoopPolicy
 import uvloop
 import sys
 import time

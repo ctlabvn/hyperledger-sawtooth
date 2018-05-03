@@ -12,7 +12,7 @@ RUN cd /opt && \
     make && make install
 
 RUN pip3 install --upgrade pip && \
-    pip3 install requests cbor colorlog lmdb netifaces protobuf pyformance PyYAML pyzmq toml aiohttp uvloop tornado secp256k1
+    pip3 install requests cbor colorlog lmdb netifaces protobuf pyformance PyYAML pyzmq toml aiohttp uvloop secp256k1
 
 # config for container
 EXPOSE 4004/tcp
