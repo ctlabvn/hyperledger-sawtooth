@@ -22,7 +22,7 @@ const { protobuf } = require("sawtooth-sdk");
 const { createContext, CryptoFactory } = require("sawtooth-sdk/signing");
 const { Secp256k1PrivateKey } = require("sawtooth-sdk/signing/secp256k1");
 
-const MAX_TRANSACTIONS_IN_BATCH = 100;
+const MAX_TRANSACTIONS_IN_BATCH = 0;
 
 class Sawtooth extends BlockchainInterface {
 	constructor(config) {
