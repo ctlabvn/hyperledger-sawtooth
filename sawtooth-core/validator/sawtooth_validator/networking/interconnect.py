@@ -50,6 +50,11 @@ from sawtooth_validator.protobuf.authorization_pb2 import \
 from sawtooth_validator.protobuf.authorization_pb2 import RoleType
 from sawtooth_validator import metrics
 
+# from tornado.platform.asyncio import AnyThreadEventLoopPolicy
+import uvloop
+import sys
+import time
+
 LOGGER = logging.getLogger(__name__)
 COLLECTOR = metrics.get_collector(__name__)
 
@@ -473,8 +478,18 @@ class _SendReceive(object):
                         "Attempting to start socket in secure mode, "
                         "but complete server keys were not provided")
 
-            self._event_loop = zmq.asyncio.ZMQEventLoop()
+            # self._event_loop = None
+
+            # self._event_loop = zmq.asyncio.ZMQEventLoop()            
+            # asyncio.set_event_loop(self._event_loop)
+
+            # asyncio.set_event_loop_policy(AnyThreadEventLoopPolicy())
+            # self._event_loop = asyncio.get_event_loop()            
+            
+            self._event_loop = uvloop.new_event_loop()
             asyncio.set_event_loop(self._event_loop)
+
+             
             self._context = zmq.asyncio.Context()
             self._socket = self._context.socket(socket_type)
 
@@ -555,10 +570,11 @@ class _SendReceive(object):
 
         asyncio.ensure_future(self._notify_started(), loop=self._event_loop)
 
-        self._event_loop.run_forever()
-        # event_loop.stop called elsewhere will cause the loop to break out
-        # of run_forever then it can be closed and the context destroyed.
-        self._event_loop.close()
+        if self._event_loop is not None:
+            self._event_loop.run_forever()
+            # event_loop.stop called elsewhere will cause the loop to break out
+            # of run_forever then it can be closed and the context destroyed.
+            self._event_loop.close()
         self._close_sockets()
 
     def _close_sockets(self):
@@ -594,7 +610,8 @@ class _SendReceive(object):
 
     @asyncio.coroutine
     def _stop_event_loop(self):
-        self._event_loop.stop()
+        if self._event_loop is not None:
+            self._event_loop.stop()
 
     @asyncio.coroutine
     def _stop(self):

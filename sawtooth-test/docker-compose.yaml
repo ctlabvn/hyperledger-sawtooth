@@ -44,21 +44,24 @@ services:
   #       \""
 
   validator:
+    image: thanhtu/sawtooth-validator    
     # image: thanhtu/sawtooth-validator-pypy3
-    image: thanhtu/sawtooth-dev-python
+    # image: thanhtu/sawtooth-dev-python
     container_name: sawtooth-validator
     expose:
       - 4004
     ports:
       - "34004:4004"
       # for simple rest-api testing
+      - "38080:8080"
       - "35005:5005" 
     volumes:
       - ../sawtooth-core:/project
       - ../sawtooth-cprofile:/cprofile
       - ./tests:/usr/bin/tests
       - ./benchs:/usr/bin/benchs
-      - ./start-validator:/usr/bin/start-validator      
+      - ./start-validator:/usr/bin/start-validator    
+      - ./start-api:/usr/bin/start-api  
       - ./result:/result
     tty: true    
     working_dir: /project    
@@ -91,13 +94,13 @@ services:
             /project/validator"
 
 
-  rest-api:
-    image: hyperledger/sawtooth-rest_api:latest
-    container_name: sawtooth-rest-api
-    ports:
-      - "38080:8080"
-    # no need to re-create rest-api for validator
-    # depends_on:
-    #   - validator
-    entrypoint: sawtooth-rest-api -C tcp://validator:4004 --bind rest-api:8080
+  # rest-api:
+  #   image: hyperledger/sawtooth-rest_api:latest
+  #   container_name: sawtooth-rest-api
+  #   ports:
+  #     - "38080:8080"
+  #   # no need to re-create rest-api for validator
+  #   # depends_on:
+  #   #   - validator
+  #   entrypoint: sawtooth-rest-api -C tcp://validator:4004 --bind rest-api:8080
 
