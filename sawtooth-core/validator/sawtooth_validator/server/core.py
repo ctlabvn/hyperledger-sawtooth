@@ -180,8 +180,8 @@ class Validator(object):
             heartbeat=True,
             public_endpoint=endpoint,
             connection_timeout=120,
-            max_incoming_connections=500,
-            max_future_callback_workers=100,
+            max_incoming_connections=100,
+            max_future_callback_workers=10,
             authorize=True,
             signer=identity_signer,
             roles=roles)
