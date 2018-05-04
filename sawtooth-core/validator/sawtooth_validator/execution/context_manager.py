@@ -178,7 +178,11 @@ class ContextManager(object):
                 if address is not None:
                     address_values.append((address, None))
 
-            reads = list(set(reads) - set(deleted_addresses))
+            # optimized version
+            s = set(deleted_addresses)        
+            reads = [x for x in reads if x not in s]
+
+            # reads = list(set(reads) - set(deleted_addresses))
 
             # Second, check for addresses that have been set in the context,
             # and remove those addresses from being asked about again. Here
@@ -290,7 +294,12 @@ class ContextManager(object):
         context = self._contexts[context_id]
 
         addresses_in_ctx = [add for add in address_list if add in context]
-        addresses_not_in_ctx = list(set(address_list) - set(addresses_in_ctx))
+
+        # no init set
+        s = set(addresses_in_ctx)        
+        addresses_not_in_ctx = [x for x in address_list if x not in s]
+
+        # addresses_not_in_ctx = list(set(address_list) - set(addresses_in_ctx))
 
         values = context.get(addresses_in_ctx)
         values_list = list(zip(addresses_in_ctx, values))

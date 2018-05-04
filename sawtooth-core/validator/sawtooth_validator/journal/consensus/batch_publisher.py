@@ -30,6 +30,7 @@ class BatchPublisher(object):
         """
         self._batch_sender = batch_sender
         self._identity_signer = identity_signer
+        self._public_key = identity_signer.get_public_key().as_hex()
 
     @property
     def identity_signer(self):
@@ -43,7 +44,8 @@ class BatchPublisher(object):
         """
         txn_signatures = [txn.header_signature for txn in transactions]
         header = BatchHeader(
-            signer_public_key=self._identity_signer.get_public_key().as_hex(),
+            # signer_public_key=self._identity_signer.get_public_key().as_hex(),
+            signer_public_key=self._public_key,
             transaction_ids=txn_signatures
         ).SerializeToString()
 

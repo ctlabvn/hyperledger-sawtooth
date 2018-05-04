@@ -153,6 +153,7 @@ class BlockValidator(object):
         self._transaction_executor = transaction_executor
         self._squash_handler = squash_handler
         self._identity_signer = identity_signer
+        self._public_key = identity_signer.get_public_key().as_hex()
         self._data_dir = data_dir
         self._config_dir = config_dir
         self._permission_verifier = permission_verifier
@@ -331,14 +332,15 @@ class BlockValidator(object):
                 prev_block = None
 
             consensus = self._load_consensus(prev_block)
-            public_key = \
-                self._identity_signer.get_public_key().as_hex()
+            # public_key = \
+                # self._identity_signer.get_public_key().as_hex()
             consensus_block_verifier = consensus.BlockVerifier(
                 block_cache=self._block_cache,
                 state_view_factory=self._state_view_factory,
                 data_dir=self._data_dir,
                 config_dir=self._config_dir,
-                validator_id=public_key)
+                # validator_id=public_key)
+                validator_id=self._public_key)
 
             if not consensus_block_verifier.verify_block(blkw):
                 raise BlockValidationFailure(
@@ -452,14 +454,14 @@ class BlockValidator(object):
     def _compare_forks_consensus(self, chain_head, new_block):
         """Ask the consensus module which fork to choose.
         """
-        public_key = self._identity_signer.get_public_key().as_hex()
+        # public_key = self._identity_signer.get_public_key().as_hex()
         consensus = self._load_consensus(chain_head)
         fork_resolver = consensus.ForkResolver(
             block_cache=self._block_cache,
             state_view_factory=self._state_view_factory,
             data_dir=self._data_dir,
             config_dir=self._config_dir,
-            validator_id=public_key)
+            validator_id=self._public_key)
 
         return fork_resolver.compare_forks(chain_head, new_block)
 

@@ -52,7 +52,7 @@ class LMDBNoLockDatabase(database.Database):
             map_async=True,
             writemap=True,
             readahead=False,
-            max_readers=500,
+            max_readers=200,
             subdir=False,
             create=create,
             lock=True)

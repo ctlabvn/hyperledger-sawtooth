@@ -74,6 +74,7 @@ class GenesisController(object):
         self._block_store = block_store
         self._state_view_factory = state_view_factory
         self._identity_signer = identity_signer
+        self._public_key = identity_signer.get_public_key().as_hex()
         self._data_dir = data_dir
         self._config_dir = config_dir
         self._chain_id_manager = chain_id_manager
@@ -246,7 +247,8 @@ class GenesisController(object):
                 batch_publisher=BatchPublisher(),
                 data_dir=self._data_dir,
                 config_dir=self._config_dir,
-                validator_id=self._identity_signer.get_public_key().as_hex())
+                # validator_id=self._identity_signer.get_public_key().as_hex())
+                validator_id=self._public_key)
         except UnknownConsensusModuleError as e:
             raise InvalidGenesisStateError(e)
 
@@ -257,7 +259,8 @@ class GenesisController(object):
         genesis_header = block_pb2.BlockHeader(
             block_num=0,
             previous_block_id=NULL_BLOCK_IDENTIFIER,
-            signer_public_key=self._identity_signer.get_public_key().as_hex())
+            # signer_public_key=self._identity_signer.get_public_key().as_hex())
+            signer_public_key=self._public_key)
 
         return BlockBuilder(genesis_header)
 
