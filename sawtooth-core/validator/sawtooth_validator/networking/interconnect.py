@@ -713,7 +713,8 @@ class Interconnect(object):
                     self._roles[role] = AuthorizationType.TRUST
 
         self._authorize = authorize
-        self._signer = signer
+        self._signer = signer        
+        self._public_key = signer.get_public_key().as_hex() if signer is not None else None
 
         self._send_receive_thread = _SendReceive(
             "ServerThread",
@@ -884,7 +885,7 @@ class Interconnect(object):
                 if auth_type["trust"]:
                     auth_trust_request = AuthorizationTrustRequest(
                         roles=auth_type["trust"],
-                        public_key=self._signer.get_public_key().as_hex())
+                        public_key=self._public_key)
 
                     connection.send(
                         validator_pb2.Message.AUTHORIZATION_TRUST_REQUEST,
@@ -923,7 +924,7 @@ class Interconnect(object):
         if auth_type["trust"]:
             auth_trust_request = AuthorizationTrustRequest(
                 roles=[RoleType.Value("NETWORK")],
-                public_key=self._signer.get_public_key().as_hex())
+                public_key=self._public_key)
             self._safe_send(
                 validator_pb2.Message.AUTHORIZATION_TRUST_REQUEST,
                 auth_trust_request.SerializeToString(),
@@ -958,7 +959,7 @@ class Interconnect(object):
         signature = self._signer.sign(payload)
 
         auth_challenge_submit = AuthorizationChallengeSubmit(
-            public_key=self._signer.get_public_key().as_hex(),
+            public_key=self._public_key,
             signature=signature,
             roles=[RoleType.Value("NETWORK")]
         )
@@ -983,7 +984,7 @@ class Interconnect(object):
         signature = self._signer.sign(payload)
 
         auth_challenge_submit = AuthorizationChallengeSubmit(
-            public_key=self._signer.get_public_key().as_hex(),
+            public_key=self._public_key,
             signature=signature,
             roles=[RoleType.Value("NETWORK")])
 

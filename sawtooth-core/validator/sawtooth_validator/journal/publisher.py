@@ -496,6 +496,7 @@ class BlockPublisher(object):
         self._chain_head = chain_head  # block (BlockWrapper)
         self._squash_handler = squash_handler
         self._identity_signer = identity_signer
+        self._public_key = identity_signer.get_public_key().as_hex()
         self._data_dir = data_dir
         self._config_dir = config_dir
         self._permission_verifier = permission_verifier
@@ -577,14 +578,15 @@ class BlockPublisher(object):
             chain_head.state_root_hash,
             default_value=0))
 
-        public_key = self._identity_signer.get_public_key().as_hex()
+        # public_key = self._identity_signer.get_public_key().as_hex()
         consensus = consensus_module.\
             BlockPublisher(block_cache=self._block_cache,
                            state_view_factory=self._state_view_factory,
                            batch_publisher=self._batch_publisher,
                            data_dir=self._data_dir,
                            config_dir=self._config_dir,
-                           validator_id=public_key)
+                           # validator_id=public_key)
+                           validator_id=self._public_key)
 
         batch_injectors = []
         if self._batch_injector_factory is not None:
@@ -596,7 +598,9 @@ class BlockPublisher(object):
         block_header = BlockHeader(
             block_num=chain_head.block_num + 1,
             previous_block_id=chain_head.header_signature,
-            signer_public_key=public_key)
+            # signer_public_key=public_key)
+            signer_public_key=self._public_key)
+
         block_builder = BlockBuilder(block_header)
 
         if not consensus.initialize_block(block_builder.block_header):
@@ -626,7 +630,8 @@ class BlockPublisher(object):
             max_batches,
             batch_injectors,
             SettingsView(state_view),
-            public_key)
+            # public_key)
+            self._public_key)
 
         for batch in self._pending_batches:
             if self._candidate_block.can_add_batch:
