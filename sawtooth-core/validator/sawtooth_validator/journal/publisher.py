@@ -541,11 +541,13 @@ class BlockPublisher(object):
             observer.notify_batch_pending(batch)
 
     def can_accept_batch(self):
+        # when rate is 100, if pending is 201, it can not accep batch
         return len(self._pending_batches) < self._get_current_queue_limit()
 
     def _get_current_queue_limit(self):
         # Limit the number of batches to 2 times the publishing average.  This
         # allows the queue to grow geometrically, if the queue is drained.
+        # such as if TPS is 100, queue_limit will be 200
         return 2 * self._publish_count_average.value
 
     def get_current_queue_info(self):
