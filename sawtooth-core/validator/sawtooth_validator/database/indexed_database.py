@@ -78,7 +78,7 @@ class IndexedDatabase(database.Database):
             readahead=False,
             subdir=False,
             create=create,
-            max_readers=200,
+            max_readers=200,            
             max_dbs=len(indexes) + 1,
             lock=True)
 

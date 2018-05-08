@@ -26,7 +26,7 @@ from sawtooth_validator.protobuf import transaction_receipt_pb2
 from sawtooth_validator.exceptions import WaitCancelledException
 
 from sawtooth_validator.concurrent.threadpool import \
-    InstrumentedThreadPoolExecutor
+    InstrumentedThreadPoolExecutor, InstrumentedProcessPoolExecutor
 from sawtooth_validator.execution.context_manager import \
     CreateContextException
 from sawtooth_validator.execution.scheduler_serial import SerialScheduler
@@ -397,8 +397,8 @@ class TransactionExecutor(object):
         self._context_manager = context_manager
         self.processor_manager = ProcessorManager(RoundRobinProcessorIterator)
         self._settings_view_factory = settings_view_factory
-        self._executing_threadpool = \
-            InstrumentedThreadPoolExecutor(max_workers=15, name='Executing')
+        self._executing_threadpool1 = InstrumentedThreadPoolExecutor(max_workers=15, name='Executing')
+        self._executing_threadpool = InstrumentedProcessPoolExecutor(max_workers=4, name='Executing')
         self._alive_threads = []
         self._lock = threading.Lock()
 
@@ -479,7 +479,7 @@ class TransactionExecutor(object):
             processor_manager=self.processor_manager,
             settings_view_factory=self._settings_view_factory,
             invalid_observers=self._invalid_observers)
-        self._executing_threadpool.submit(t.execute_thread)
+        self._executing_threadpool1.submit(t.execute_thread)
         with self._lock:
             self._alive_threads.append(t)
 

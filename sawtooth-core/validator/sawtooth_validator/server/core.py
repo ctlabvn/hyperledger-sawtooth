@@ -21,7 +21,7 @@ import time
 import threading
 
 from sawtooth_validator.concurrent.threadpool import \
-    InstrumentedThreadPoolExecutor
+    InstrumentedThreadPoolExecutor, InstrumentedProcessPoolExecutor
 from sawtooth_validator.execution.context_manager import ContextManager
 from sawtooth_validator.database.indexed_database import IndexedDatabase
 from sawtooth_validator.database.lmdb_nolock_database import LMDBNoLockDatabase
@@ -136,15 +136,23 @@ class Validator(object):
             block_store, keep_time=300, purge_frequency=30)
 
         # -- Setup Thread Pools -- #
+        # component_thread_pool = InstrumentedProcessPoolExecutor(
+            # max_workers=4,
         component_thread_pool = InstrumentedThreadPoolExecutor(
             max_workers=10,
             name='Component')
-        network_thread_pool = InstrumentedThreadPoolExecutor(
-            max_workers=10,
+        network_thread_pool = InstrumentedProcessPoolExecutor(
+            max_workers=4,
+        # network_thread_pool = InstrumentedThreadPoolExecutor(
+        #     max_workers=10,
             name='Network')
+        # client_thread_pool = InstrumentedProcessPoolExecutor(
+        #     max_workers=4,
         client_thread_pool = InstrumentedThreadPoolExecutor(
             max_workers=5,
             name='Client')
+        # sig_pool = InstrumentedProcessPoolExecutor(
+        #     max_workers=4,
         sig_pool = InstrumentedThreadPoolExecutor(
             max_workers=3,
             name='Signature')
