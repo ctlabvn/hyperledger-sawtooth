@@ -392,10 +392,10 @@ class _CandidateBlock(object):
                     # one in the list.
                     bad_batches.append(batch)
                     pending_batches.clear()
-                    pending_batches.extend([
+                    pending_batches.extend((
                         x for x in self._pending_batches
                         if x not in bad_batches
-                    ])
+                    ))
                     return None
                 else:
                     builder.add_batch(batch)
@@ -416,8 +416,8 @@ class _CandidateBlock(object):
                          "it", builder)
             # return all valid batches to the pending_batches list
             pending_batches.clear()
-            pending_batches.extend([x for x in self._pending_batches
-                                    if x not in bad_batches])
+            pending_batches.extend((x for x in self._pending_batches
+                                    if x not in bad_batches))
             return None
 
         builder.set_state_hash(state_hash)

@@ -27,7 +27,7 @@ class BlockBuilder(object):
         self.block_header = block_header
 
     def add_batches(self, batches):
-        batch_id_list = [batch.header_signature for batch in batches]
+        batch_id_list = (batch.header_signature for batch in batches)
         self.block_header.batch_ids.extend(batch_id_list)
         self.batches = self.batches + batches
 
