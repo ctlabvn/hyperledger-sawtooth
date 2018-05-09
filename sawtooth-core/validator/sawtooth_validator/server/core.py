@@ -141,10 +141,10 @@ class Validator(object):
         component_thread_pool = InstrumentedThreadPoolExecutor(
             max_workers=10,
             name='Component')
-        network_thread_pool = InstrumentedProcessPoolExecutor(
-            max_workers=4,
-        # network_thread_pool = InstrumentedThreadPoolExecutor(
-        #     max_workers=10,
+        # network_thread_pool = InstrumentedProcessPoolExecutor(
+        #     max_workers=4,
+        network_thread_pool = InstrumentedThreadPoolExecutor(
+            max_workers=10,
             name='Network')
         # client_thread_pool = InstrumentedProcessPoolExecutor(
         #     max_workers=4,
