@@ -32,7 +32,7 @@ from zmq.auth.asyncio import AsyncioAuthenticator
 import zmq.asyncio
 
 from sawtooth_validator.concurrent.threadpool import \
-    InstrumentedThreadPoolExecutor
+    InstrumentedThreadPoolExecutor, InstrumentedProcessPoolExecutor
 from sawtooth_validator.concurrent.thread import InstrumentedThread
 from sawtooth_validator.exceptions import LocalConfigurationError
 from sawtooth_validator.protobuf import validator_pb2
@@ -684,6 +684,7 @@ class Interconnect(object):
         """
         self._endpoint = endpoint
         self._public_endpoint = public_endpoint
+        # self._future_callback_threadpool = InstrumentedProcessPoolExecutor(
         self._future_callback_threadpool = InstrumentedThreadPoolExecutor(
             max_workers=max_future_callback_workers,
             name='FutureCallback')
