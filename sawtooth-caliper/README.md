@@ -95,6 +95,8 @@ simple
 
 ```bash
 $ npm test -- simple -c ./benchmark/simple/config.json -n ./benchmark/simple/fabric.json
+# short syntax:
+yarn test-both
 ......
 ```
 
