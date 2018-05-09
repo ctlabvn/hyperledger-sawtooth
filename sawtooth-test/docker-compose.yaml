@@ -83,7 +83,7 @@ services:
             /project/families/block_info:\
             /project/families/identity:\
             /project/families/settings:\
-            /project/rest_api:\            
+            /project/rest_api:\
             /project/cli:\
             /project/sdk/python:\
             /project/integration:\

@@ -32,7 +32,8 @@ from zmq.auth.asyncio import AsyncioAuthenticator
 import zmq.asyncio
 
 from sawtooth_validator.concurrent.threadpool import \
-    InstrumentedThreadPoolExecutor, InstrumentedProcessPoolExecutor
+    InstrumentedThreadPoolExecutor
+    # , InstrumentedProcessPoolExecutor
 from sawtooth_validator.concurrent.thread import InstrumentedThread
 from sawtooth_validator.exceptions import LocalConfigurationError
 from sawtooth_validator.protobuf import validator_pb2

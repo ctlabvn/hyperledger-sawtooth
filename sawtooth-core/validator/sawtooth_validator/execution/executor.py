@@ -26,7 +26,8 @@ from sawtooth_validator.protobuf import transaction_receipt_pb2
 from sawtooth_validator.exceptions import WaitCancelledException
 
 from sawtooth_validator.concurrent.threadpool import \
-    InstrumentedThreadPoolExecutor, InstrumentedProcessPoolExecutor
+    InstrumentedThreadPoolExecutor
+    # , InstrumentedProcessPoolExecutor
 from sawtooth_validator.execution.context_manager import \
     CreateContextException
 from sawtooth_validator.execution.scheduler_serial import SerialScheduler

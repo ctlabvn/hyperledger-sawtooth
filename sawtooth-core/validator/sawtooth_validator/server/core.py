@@ -21,7 +21,8 @@ import time
 import threading
 
 from sawtooth_validator.concurrent.threadpool import \
-    InstrumentedThreadPoolExecutor, InstrumentedProcessPoolExecutor
+    InstrumentedThreadPoolExecutor
+    # , InstrumentedProcessPoolExecutor
 from sawtooth_validator.execution.context_manager import ContextManager
 from sawtooth_validator.database.indexed_database import IndexedDatabase
 from sawtooth_validator.database.lmdb_nolock_database import LMDBNoLockDatabase

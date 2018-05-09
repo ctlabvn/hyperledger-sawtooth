@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/thanhtu/.nvm/versions/node/v9.2.0/bin/node /Users/thanhtu/.yarn/bin/yarn.js start
+  /Users/thanhtu/.nvm/versions/node/v9.2.0/bin/node /Users/thanhtu/.yarn/bin/yarn.js startB
 
 PATH: 
   /Users/thanhtu/.cargo/bin:/Users/thanhtu/.npm-packages/bin:/Users/thanhtu/.cargo/bin:/Users/thanhtu/.rvm/gems/ruby-2.4.0/bin:/Users/thanhtu/.rvm/gems/ruby-2.4.0@global/bin:/Users/thanhtu/.rvm/rubies/ruby-2.4.0/bin:/opt/local/bin:/opt/local/sbin:/Users/thanhtu/perl5/perlbrew/bin:/Users/thanhtu/.yarn/bin:/Users/thanhtu/.nvm/versions/node/v9.2.0/bin:/Users/thanhtu/Library/Android/sdk/tools:/Users/thanhtu/Library/Android/sdk/platform-tools:/Applications/android-ndk:/Users/thanhtu/MyProjects/Nodejs/reactjs/Clingme/scala-2.9.1:/opt/local/bin:/opt/local/sbin:/Users/thanhtu/.rbenv/shims:/opt/local/bin:/opt/local/sbin:/Users/thanhtu/.rbenv/bin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/opt/X11/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/thanhtu/MyProjects/Nodejs/reactjs/Clingme/play-2.0.4:/Users/thanhtu/go-workspace/bin:/usr/local/opt/go/libexec/bin:/Users/thanhtu/.rvm/bin:/Applications/spark-2.3.0-bin-hadoop2.7/bin:/Users/thanhtu/.rvm/bin
@@ -23,12 +23,16 @@ npm manifest:
     },
     "scripts": {
       "start": "docker-compose up -d",
+      "startA": "docker-compose -f docker-compose-envA.yaml up -d",
+      "startB": "docker-compose -f docker-compose-envB.yaml up -d",
       "restart": "docker-compose up -d --force-recreate validator",
       "start-validator":
         "docker exec -it sawtooth-validator bash -c 'start-validator'",
       "restart-validator":
         "docker exec -it sawtooth-validator bash -c 'start-validator restart'",
-      "stop": "docker-compose down"
+      "stop": "docker-compose down",
+      "stopA": "docker-compose -f docker-compose-envA.yaml down",
+      "stopB": "docker-compose -f docker-compose-envB.yaml down"
     },
     "engines": {
       "node": ">=8.0.0",
@@ -47,7 +51,7 @@ Trace:
   Error: Command failed.
   Exit code: 1
   Command: sh
-  Arguments: -c docker-compose up -d
+  Arguments: -c docker-compose -f docker-compose-envB.yaml up -d
   Directory: /Users/thanhtu/MyProjects/Hyperledger/SawTooth/sawtooth-test
   Output:
   

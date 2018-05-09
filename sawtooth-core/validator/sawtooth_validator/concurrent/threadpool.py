@@ -16,7 +16,7 @@
 import logging
 import os
 # from pathos.multiprocessing import ProcessPool as ProcessPoolExecutor
-from ppft import Server as ProcessPoolExecutor
+# from ppft import Server as ProcessPoolExecutor
 from concurrent.futures import ThreadPoolExecutor
 
 from sawtooth_validator import metrics
@@ -100,16 +100,16 @@ class InstrumentedThreadPoolExecutor(ThreadPoolExecutor):
 
 
 
-class InstrumentedProcessPoolExecutor(ProcessPoolExecutor):
-    def __init__(self, max_workers=None, name='', trace=None):        
-        # ppservers = []
-        # for i in range(1, max_workers):
-        #     tunnelport = 30000 + i
-        #     ppservers.append("localhost:%s" % tunnelport)
-        # ppservers = tuple(ppservers)
-        # super().__init__(max_workers, ppservers=ppservers)        
-        super().__init__(max_workers)        
+# class InstrumentedProcessPoolExecutor(ProcessPoolExecutor):
+#     def __init__(self, max_workers=None, name='', trace=None):        
+#         # ppservers = []
+#         # for i in range(1, max_workers):
+#         #     tunnelport = 30000 + i
+#         #     ppservers.append("localhost:%s" % tunnelport)
+#         # ppservers = tuple(ppservers)
+#         # super().__init__(max_workers, ppservers=ppservers)        
+#         super().__init__(max_workers)        
 
-    def submit(self, fn, *args, **kwargs):           
-        print(args)                                        
-        return super().submit(fn, (args, kwargs))
+#     def submit(self, fn, *args, **kwargs):           
+#         print(args)                                        
+#         return super().submit(fn, (args, kwargs))

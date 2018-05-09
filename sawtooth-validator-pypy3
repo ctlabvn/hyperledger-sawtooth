@@ -1,0 +1,22 @@
+FROM pypy:3
+
+# install dependencies
+RUN pypy3 -m pip install --upgrade pip && \
+    pypy3 -m pip install requests cbor colorlog lmdb netifaces protobuf pyformance PyYAML pyzmq toml aiohttp uvloop secp256k1
+
+# config for container
+EXPOSE 4004/tcp
+EXPOSE 8008
+
+RUN mkdir -p /var/log/sawtooth \
+ && mkdir -p /var/lib/sawtooth \
+ && mkdir -p /etc/sawtooth \
+ && mkdir -p /etc/sawtooth/keys
+
+COPY sawtooth-core /project
+
+ENV PATH=$PATH:/project/bin
+
+ENV PYTHONPATH=/project/signing:/project/consensus/poet/common:/project/consensus/poet/core:/project/consensus/poet/sgx:/project/consensus/poet/sgx/sawtooth_poet_sgx:/project/consensus/poet/sgx/tests:/project/consensus/poet/simulator:/project/consensus/poet/families:/project/consensus/poet/families/sawtooth_validator_registry:/project/consensus/poet/families/tests:/project/families/battleship:/project/families/block_info:/project/families/identity:/project/families/settings:/project/rest_api:/project/cli:/project/sdk/python:/project/integration:/project/signing:/project/utility/ias_client:/project/utility/ias_client/tests/unit:/project/utility/ias_proxy:/project/validator/tests:/project/validator
+
+
