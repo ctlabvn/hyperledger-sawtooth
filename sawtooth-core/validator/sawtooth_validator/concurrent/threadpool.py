@@ -102,13 +102,13 @@ class InstrumentedThreadPoolExecutor(ThreadPoolExecutor):
 
 class InstrumentedProcessPoolExecutor(ProcessPoolExecutor):
     def __init__(self, max_workers=None, name='', trace=None):        
-        ppservers = []
-        for i in range(1, max_workers):
-            tunnelport = 30000 + i
-            ppservers.append("localhost:%s" % tunnelport)
-        ppservers = tuple(ppservers)
-        super().__init__(max_workers, ppservers=ppservers)        
-        # super().__init__(max_workers)        
+        # ppservers = []
+        # for i in range(1, max_workers):
+        #     tunnelport = 30000 + i
+        #     ppservers.append("localhost:%s" % tunnelport)
+        # ppservers = tuple(ppservers)
+        # super().__init__(max_workers, ppservers=ppservers)        
+        super().__init__(max_workers)        
 
     def submit(self, fn, *args, **kwargs):           
         print(args)                                        
