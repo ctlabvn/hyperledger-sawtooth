@@ -1,0 +1,80 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+    name: node1
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  namespace: node1
+  name: validator
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+       app: hyperledger       
+       org: node1
+    spec:
+      # nodeSelector:
+      #   # assume all org node can access to docker
+      #   org: node1
+      containers:
+
+      - name: settings-tp
+        image: hyperledger/sawtooth-settings-tp:latest        
+        command: 
+        - bash
+        - "-c"
+        - |
+          settings-tp -C tcp://validator:4004                 
+
+      - name: processor 
+        # imagePullPolicy: Never
+        image: thanhtu/sawtooth-processor:latest
+        command: 
+        - bash 
+        - "-c"
+        - |
+          sawtooth-processor -C tcp://validator:4004
+              
+      - name: validator 
+        # imagePullPolicy: Never
+        image: thanhtu/sawtooth-validator-optimized:latest
+        ports:
+          - containerPort: 4004
+        command: 
+        - bash 
+        - "-c"
+        - |
+          sawadm keygen --force 
+          sawadm genesis 
+          sawtooth-validator --scheduler parallel --bind network:tcp://eth0:8800 --bind component:tcp://eth0:4004 --endpoint tcp://validator:8800 
+
+
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+   namespace: node1
+   name: validator
+spec:
+ selector:
+   app: hyperledger   
+   org: node1
+   name: validator
+ type: NodePort
+ # type: ClusterIP
+ ports:
+   - name: endpoint
+     protocol: TCP
+     port: 4004
+     targetPort: 4004
+     nodePort: 30004
+
+
+      

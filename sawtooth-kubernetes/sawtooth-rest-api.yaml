@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+    name: node4
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  namespace: node4
+  name: rest-api
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+       app: hyperledger       
+       org: node4
+    spec:
+      # nodeSelector:
+      #   # assume all org node can access to docker
+      #   org: node4
+      containers:
+      - name: rest-api
+        image: hyperledger/sawtooth-rest_api:latest
+        ports:
+          - containerPort: 8080
+        command: 
+        - bash
+        - "-c"
+        - |
+          sawtooth-rest-api -C tcp://validator:4004 --bind 0.0.0.0:8080
+
+--- 
+
+apiVersion: v1
+kind: Service
+metadata:
+   namespace: node4
+   name: rest-api
+spec:
+ selector:
+   app: hyperledger   
+   org: node4
+   name: rest-api
+ type: NodePort
+ # type: ClusterIP
+ ports:
+   - name: endpoint
+     protocol: TCP
+     port: 8080
+     targetPort: 8080
+     nodePort: 30080
+
+
+
+
+
+
+
+
+

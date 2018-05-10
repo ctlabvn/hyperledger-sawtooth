@@ -40,9 +40,7 @@ services:
     expose:
       - 4004
     ports:
-      - "34004:4004"
-    volumes:      
-      - ./start-validator:/usr/bin/start-validator              
+      - "34004:4004"           
     command: |
       bash -c "
         sawadm keygen --force && \
