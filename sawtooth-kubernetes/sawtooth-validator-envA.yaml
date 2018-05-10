@@ -17,7 +17,8 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-       app: hyperledger       
+       app: hyperledger  
+       name: validator     
        org: node1
     spec:
       # nodeSelector:
@@ -65,8 +66,8 @@ metadata:
 spec:
  selector:
    app: hyperledger   
-   org: node1
    name: validator
+   org: node1   
  type: NodePort
  # type: ClusterIP
  ports:

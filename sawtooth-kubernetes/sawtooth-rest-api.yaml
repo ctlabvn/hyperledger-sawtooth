@@ -18,6 +18,7 @@ spec:
       creationTimestamp: null
       labels:
        app: hyperledger       
+       name: rest-api
        org: node4
     spec:
       # nodeSelector:
@@ -43,9 +44,9 @@ metadata:
    name: rest-api
 spec:
  selector:
-   app: hyperledger   
-   org: node4
+   app: hyperledger      
    name: rest-api
+   org: node4
  type: NodePort
  # type: ClusterIP
  ports:
