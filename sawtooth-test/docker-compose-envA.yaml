@@ -45,8 +45,7 @@ services:
             --scheduler parallel \
             --bind network:tcp://eth0:8800 \
             --bind component:tcp://eth0:4004 \
-            --endpoint tcp://validator:8800 \
-      "
+            --endpoint tcp://validator:8800 \"
 
   rest-api:
     image: hyperledger/sawtooth-rest_api:latest
