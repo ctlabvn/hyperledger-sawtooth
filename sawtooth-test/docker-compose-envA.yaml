@@ -25,6 +25,12 @@ services:
       # - validator
     entrypoint: settings-tp -C tcp://validator:4004  
   
+  processor:
+    image: thanhtu/sawtooth-processor:latest
+    container_name: sawtooth-processor    
+    # tty: true        
+    # command: /bin/bash
+    command: bash -c "sawtooth-processor -C tcp://validator:4004"  
 
   validator:
     image: thanhtu/sawtooth-validator-optimized:latest  
