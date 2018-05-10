@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+    name: sawtooth-test
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  namespace: sawtooth-test
+  name: validator
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: validator
+    spec:      
+      containers:
+      - name: validator
+        image: thanhtu/sawtooth-validator-optimized:latest
+        ports:
+        - containerPort: 4004
+          protocol: TCP
+        command: 
+        - bash
+        - "-c"
+        - |
+          sawadm keygen --force && \
+            sawadm genesis && \
+            sawtooth-validator \
+                -vv \
+                --scheduler parallel \
+                --bind network:tcp://eth0:8800 \
+                --bind component:tcp://eth0:4004 \
+                --endpoint tcp://validator:8800 \
+                --peering dynamic \
+                --scheduler parallel \
+                --network trust
+      - name: sawtooth-settings-tp
+        image: hyperledger/sawtooth-settings-tp:latest
+        command:
+        - settings-tp
+        - "-C"
+        - "tcp://validator:4004"
+      - name: processor 
+        image: thanhtu/sawtooth-processor:latest
+        command: 
+        - bash 
+        - "-c"
+        - |
+          sawtooth-processor -C tcp://validator:4004
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sawtooth
+  namespace: sawtooth-test
+spec:
+ selector:
+   app: validator
+ type: NodePort
+ ports:
+  - name: http
+    protocol: TCP
+    port: 4004
+    targetPort: 4004
+    nodePort: 30004
+    # targetPort: 38080
