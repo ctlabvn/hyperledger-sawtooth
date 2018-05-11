@@ -54,7 +54,7 @@ spec:
         - |
           sawadm keygen --force 
           sawadm genesis 
-          sawtooth-validator --scheduler parallel --bind network:tcp://eth0:8800 --bind component:tcp://eth0:4004 --endpoint tcp://sawtooth:8800 
+          sawtooth-validator --scheduler parallel --bind network:tcp://eth0:8800 --bind component:tcp://eth0:4004 --endpoint tcp://0.0.0.0:8800 
 
 
 --- 

@@ -32,7 +32,7 @@ spec:
         - bash
         - "-c"
         - |
-          sawtooth-rest-api -C tcp://sawtooth:4004 --bind rest-api:8080
+          sawtooth-rest-api -C tcp://sawtooth.node1:4004 --bind 0.0.0.0:8080
 
 --- 
 
