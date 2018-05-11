@@ -25,6 +25,12 @@ services:
       # - validator
     entrypoint: settings-tp -C tcp://validator:4004  
   
+  processor:
+    image: thanhtu/sawtooth-processor:latest
+    container_name: sawtooth-processor    
+    # tty: true        
+    # command: /bin/bash
+    command: bash -c "sawtooth-processor -C tcp://validator:4004"  
 
   validator:
     image: thanhtu/sawtooth-validator-optimized:latest  
@@ -34,9 +40,7 @@ services:
     expose:
       - 4004
     ports:
-      - "34004:4004"
-    volumes:      
-      - ./start-validator:/usr/bin/start-validator              
+      - "34004:4004"           
     command: |
       bash -c "
         sawadm keygen --force && \

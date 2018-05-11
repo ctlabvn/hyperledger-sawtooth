@@ -1,0 +1,11 @@
+FROM node
+
+LABEL version="1.0"
+
+COPY sawtooth-processor /project
+
+# install node_modules and link script
+RUN cd /project && yarn && ln -s $PWD/sawtooth-processor /usr/bin/sawtooth-processor
+
+
+
