@@ -4,3 +4,7 @@ wait
 python3 ./cprof_batch_tracker.py
 wait
 python3 ./cprof_block_cache.py
+wait
+python3 ./cprof_block_store.py
+wait
+python3 ./cprof_client_request_handlers.py
