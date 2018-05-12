@@ -5,12 +5,15 @@ metadata:
 
 ---
 
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: sawtooth-test
   name: sawtooth-rest-api
 spec:
+  selector:
+    matchLabels:
+      app: sawtooth-rest-api
   replicas: 1
   template:
     metadata:
@@ -26,7 +29,7 @@ spec:
         command:
         - sawtooth-rest-api
         - "-C"
-        - "tcp://validator:30004"
+        - "tcp://sawtooth.sawtooth-test:4004"
         - "--bind"
         - 0.0.0.0:8080
 

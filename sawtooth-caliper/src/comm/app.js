@@ -63,7 +63,7 @@ app.listen(3000, function() {
 		"sawtooth": {
 			"network": {
 				"restapi": {
-					"url":"http://127.0.0.1:38080"
+					"url":"http://127.0.0.1:30080"
 				}
 			}
 		},

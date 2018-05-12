@@ -17,7 +17,7 @@
     "rounds": [
       {
         "label": "open",
-        "txNumber": [500],
+        "txNumber": [1000],
         "rateControl": [{ "type": "fixed-rate", "opts": { "tps": 200 } }],
         "arguments": {
           // "money": 10000
