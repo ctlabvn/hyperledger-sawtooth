@@ -37,7 +37,7 @@ spec:
                 --scheduler parallel \
                 --bind network:tcp://0.0.0.0:8800 \
                 --bind component:tcp://0.0.0.0:4004 \
-                --endpoint tcp://0.0.0.0:8800 \
+                --endpoint tcp://sawtooth.sawtooth-test:8800 \
                 --peering dynamic \
                 --scheduler parallel \
                 --network trust
@@ -46,14 +46,14 @@ spec:
         command:
         - settings-tp
         - "-C"
-        - "tcp://localhost:4004"
+        - "tcp://0.0.0.0:4004"
       - name: processor 
         image: thanhtu/sawtooth-processor:latest
         command: 
         - bash 
         - "-c"
         - |
-          sawtooth-processor -C tcp://localhost:4004
+          sawtooth-processor -C tcp://0.0.0.0:4004
 
 ---
 apiVersion: v1
