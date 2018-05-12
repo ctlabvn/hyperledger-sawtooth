@@ -21,17 +21,33 @@ services:
   settings-tp:
     image: hyperledger/sawtooth-settings-tp:latest
     container_name: sawtooth-settings-tp        
-    entrypoint: settings-tp -vv -C tcp://validator:4004  
+    entrypoint: settings-tp -C tcp://validator:4004  
 
   settings-tp-1:
     image: hyperledger/sawtooth-settings-tp:latest
     container_name: sawtooth-settings-tp-1        
-    entrypoint: settings-tp -vv -C tcp://validator-1:4004 
+    entrypoint: settings-tp -C tcp://validator-1:4004 
 
   settings-tp-2:
     image: hyperledger/sawtooth-settings-tp:latest
     container_name: sawtooth-settings-tp-2        
-    entrypoint: settings-tp -vv -C tcp://validator-2:4004 
+    entrypoint: settings-tp -C tcp://validator-2:4004 
+
+  # setup 3 processors as transaction families
+  processor:
+    image: thanhtu/sawtooth-processor:latest
+    container_name: sawtooth-processor        
+    command: bash -c "sawtooth-processor -C tcp://validator:4004"
+
+  processor-1:
+    image: thanhtu/sawtooth-processor:latest
+    container_name: sawtooth-processor-1        
+    command: bash -c "sawtooth-processor -C tcp://validator-1:4004"
+
+  processor-2:
+    image: thanhtu/sawtooth-processor:latest
+    container_name: sawtooth-processor-2        
+    command: bash -c "sawtooth-processor -C tcp://validator-2:4004"
 
   # setup 3 validators, and 1 rest-api that connect to the first validator
   validator:

@@ -1,9 +1,10 @@
 ## Build images
 
 ```sh
-docker build -f sawtooth-validator-optimized -t thanhtu/sawtooth-validator-optimized .
-docker build -f sawtooth-dev-python -t thanhtu/sawtooth-dev-python .
-docker build -f sawtooth-validator-pypy3 -t thanhtu/sawtooth-validator-pypy3 .
+docker build -f sawtooth-docker/sawtooth-validator-optimized -t thanhtu/sawtooth-validator-optimized .
+docker build -f sawtooth-docker/sawtooth-dev-python -t thanhtu/sawtooth-dev-python .
+docker build -f sawtooth-docker/sawtooth-validator-pypy3 -t thanhtu/sawtooth-validator-pypy3 .
+docker build -f sawtooth-docker/sawtooth-processor -t thanhtu/sawtooth-processor .
 ```
 
 ### Start environment
