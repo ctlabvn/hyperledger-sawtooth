@@ -34,13 +34,11 @@ spec:
             sawadm genesis && \
             sawtooth-validator \
                 -vv \
-                --scheduler parallel \
                 --bind network:tcp://0.0.0.0:8800 \
                 --bind component:tcp://0.0.0.0:4004 \
                 --endpoint tcp://sawtooth.sawtooth-test:8800 \
-                --peering dynamic \
                 --scheduler parallel \
-                --network trust
+                --peering dynamic \
       - name: sawtooth-settings-tp
         image: hyperledger/sawtooth-settings-tp:latest
         command:

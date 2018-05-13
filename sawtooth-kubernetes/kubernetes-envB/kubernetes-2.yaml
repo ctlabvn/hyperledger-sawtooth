@@ -31,17 +31,14 @@ spec:
         - "-c"
         - |
           sawadm keygen --force && \
-            # sawadm genesis && \
             sawtooth-validator \
                 -vv \
-                --scheduler parallel \
                 --bind network:tcp://0.0.0.0:8800 \
                 --bind component:tcp://0.0.0.0:4004 \
                 --endpoint tcp://sawtooth-2.sawtooth-test:8800 \
                 --seeds tcp://sawtooth.sawtooth-test:8800 \
                 --peering dynamic \
                 --scheduler parallel \
-                --network trust
       - name: sawtooth-settings-tp-2
         image: hyperledger/sawtooth-settings-tp:latest
         command:
