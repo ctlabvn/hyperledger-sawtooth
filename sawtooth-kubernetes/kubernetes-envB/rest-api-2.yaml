@@ -45,10 +45,9 @@ spec:
    app: sawtooth-rest-api-2
  type: NodePort
  ports:
-  - name: http
+  - name: endpoint
     protocol: TCP
     port: 8080
     targetPort: 8080
-    # targetPort: 38080
     nodePort: 30090
 
