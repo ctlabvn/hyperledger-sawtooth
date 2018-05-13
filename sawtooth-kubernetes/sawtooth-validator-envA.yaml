@@ -38,7 +38,6 @@ spec:
           settings-tp -C tcp://localhost:4004                 
 
       - name: processor 
-        # imagePullPolicy: Never
         image: thanhtu/sawtooth-processor:latest
         command: 
         - bash 
@@ -47,7 +46,6 @@ spec:
           sawtooth-processor -C tcp://localhost:4004
               
       - name: validator 
-        # imagePullPolicy: Never
         image: thanhtu/sawtooth-validator-optimized:latest
         ports:
           - containerPort: 4004
@@ -56,10 +54,13 @@ spec:
         - bash 
         - "-c"
         - |
-          sawadm keygen --force 
-          sawadm genesis 
-          sawtooth-validator --scheduler parallel --bind network:tcp://0.0.0.0:8800 --bind component:tcp://0.0.0.0:4004 --endpoint tcp://0.0.0.0:8800 
-
+          sawadm keygen --force && \
+          sawadm genesis && \
+          sawtooth-validator \
+              --scheduler parallel \
+              --bind network:tcp://0.0.0.0:8800 \
+              --bind component:tcp://0.0.0.0:4004 \
+              --endpoint tcp://0.0.0.0:8800 
 
 --- 
 apiVersion: v1
@@ -72,13 +73,11 @@ spec:
    app: hyperledger      
    org: node2   
  type: ClusterIP
- # type: NodePort
  ports:
    - name: component
      protocol: TCP
      port: 4004
-     targetPort: 4004     
-     
+     targetPort: 4004          
    - name: endpoint
      protocol: TCP
      port: 8800

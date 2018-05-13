@@ -69,7 +69,6 @@ services:
             --bind component:tcp://eth0:4004 \
             --endpoint tcp://validator:8800 \
             --peering dynamic \
-            --scheduler parallel \
             --network trust
       "
 
