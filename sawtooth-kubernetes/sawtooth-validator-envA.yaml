@@ -30,7 +30,8 @@ spec:
       containers:
 
       - name: settings-tp
-        image: hyperledger/sawtooth-settings-tp:latest        
+        image: hyperledger/sawtooth-settings-tp:latest    
+        imagePullPolicy: IfNotPresent    
         command: 
         - bash
         - "-c"
@@ -39,6 +40,7 @@ spec:
 
       - name: processor 
         image: thanhtu/sawtooth-processor:latest
+        imagePullPolicy: IfNotPresent
         command: 
         - bash 
         - "-c"
@@ -47,6 +49,7 @@ spec:
               
       - name: validator 
         image: thanhtu/sawtooth-validator-optimized:latest
+        imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 4004
           - containerPort: 8800
@@ -60,7 +63,7 @@ spec:
               --scheduler parallel \
               --bind network:tcp://0.0.0.0:8800 \
               --bind component:tcp://0.0.0.0:4004 \
-              --endpoint tcp://0.0.0.0:8800 
+              --endpoint tcp://sawtooth.node2:8800 
 
 --- 
 apiVersion: v1

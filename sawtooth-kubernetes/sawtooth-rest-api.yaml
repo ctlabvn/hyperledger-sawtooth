@@ -30,6 +30,7 @@ spec:
       containers:
       - name: rest-api
         image: hyperledger/sawtooth-rest_api:latest
+        imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 8080
         command: 
