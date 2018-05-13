@@ -30,13 +30,14 @@ spec:
       containers:
       - name: rest-api
         image: hyperledger/sawtooth-rest_api:latest
+        imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 8080
         command: 
         - bash
         - "-c"
         - |
-          sawtooth-rest-api -C tcp://sawtooth.node2:4004 --bind 0.0.0.0:8080
+          sawtooth-rest-api -C tcp://sawtooth.node4:4004 --bind 0.0.0.0:8080
 
 --- 
 

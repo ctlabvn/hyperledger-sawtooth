@@ -1,20 +1,20 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-    name: node2
+    name: node4
 
 ---
 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: node2
+  namespace: node4
   name: sawtooth
 spec:
   selector:
     matchLabels:
       app: hyperledger
-      org: node2
+      org: node4
   replicas: 1
   strategy: {}
   template:
@@ -22,15 +22,16 @@ spec:
       creationTimestamp: null
       labels:
        app: hyperledger          
-       org: node2
+       org: node4
     spec:
       # nodeSelector:
       #   # assume all org node can access to docker
-      #   org: node2
+      #   org: node4
       containers:
 
       - name: settings-tp
-        image: hyperledger/sawtooth-settings-tp:latest        
+        image: hyperledger/sawtooth-settings-tp:latest    
+        imagePullPolicy: IfNotPresent    
         command: 
         - bash
         - "-c"
@@ -39,6 +40,7 @@ spec:
 
       - name: processor 
         image: thanhtu/sawtooth-processor:latest
+        imagePullPolicy: IfNotPresent
         command: 
         - bash 
         - "-c"
@@ -47,6 +49,7 @@ spec:
               
       - name: validator 
         image: thanhtu/sawtooth-validator-optimized:latest
+        imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 4004
           - containerPort: 8800
@@ -60,18 +63,18 @@ spec:
               --scheduler parallel \
               --bind network:tcp://0.0.0.0:8800 \
               --bind component:tcp://0.0.0.0:4004 \
-              --endpoint tcp://0.0.0.0:8800 
+              --endpoint tcp://sawtooth.node4:8800 
 
 --- 
 apiVersion: v1
 kind: Service
 metadata:
-   namespace: node2
+   namespace: node4
    name: sawtooth
 spec:
  selector:
    app: hyperledger      
-   org: node2   
+   org: node4   
  type: ClusterIP
  ports:
    - name: component

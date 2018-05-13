@@ -4,12 +4,16 @@ metadata:
     name: node2
 
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: node2
   name: sawtooth
 spec:
+  selector:
+    matchLabels:
+      app: hyperledger
+      org: node2
   replicas: 1
   strategy: {}
   template:
@@ -25,15 +29,17 @@ spec:
       containers:
 
       - name: settings-tp
-        image: hyperledger/sawtooth-settings-tp:latest        
+        image: hyperledger/sawtooth-settings-tp:latest     
+        imagePullPolicy: IfNotPresent   
         command: 
         - bash
         - "-c"
         - |
-          settings-tp -C tcp://localhost:4004                 
+          settings-tp -C tcp://localhost:4004
 
       - name: processor 
         image: thanhtu/sawtooth-processor:latest
+        imagePullPolicy: IfNotPresent
         command: 
         - bash 
         - "-c"
@@ -41,10 +47,16 @@ spec:
           sawtooth-processor -C tcp://localhost:4004
               
       - name: validator 
-        image: hyperledger/sawtooth-validator:latest
+        image: thanhtu/sawtooth-validator-optimized:latest
+        imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 4004
           - containerPort: 8800
+        # Using sawset to set config  
+        # sawset genesis \
+        #     -k /etc/sawtooth/keys/validator.priv \
+        #     -o config-genesis.batch && \
+        # sawadm genesis config-genesis.batch && \
         command: 
         - bash 
         - "-c"
@@ -55,9 +67,7 @@ spec:
               --scheduler parallel \
               --bind network:tcp://0.0.0.0:8800 \
               --bind component:tcp://0.0.0.0:4004 \
-              --endpoint tcp://0.0.0.0:8800 \
-              --peering dynamic \
-              --network trust
+              --endpoint tcp://sawtooth.node2:8800
 
 
 --- 
@@ -90,12 +100,16 @@ metadata:
     name: node3
 
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: node3
-  name: sawtooth-1
+  name: sawtooth
 spec:
+  selector:
+    matchLabels:
+      app: hyperledger
+      org: node3
   replicas: 1
   strategy: {}
   template:
@@ -111,15 +125,17 @@ spec:
       containers:
 
       - name: settings-tp
-        image: hyperledger/sawtooth-settings-tp:latest        
+        image: hyperledger/sawtooth-settings-tp:latest  
+        imagePullPolicy: IfNotPresent      
         command: 
         - bash
         - "-c"
         - |
-          settings-tp -C tcp://localhost:4004                 
+          settings-tp -C tcp://localhost:4004
 
       - name: processor 
         image: thanhtu/sawtooth-processor:latest
+        imagePullPolicy: IfNotPresent
         command: 
         - bash 
         - "-c"
@@ -127,7 +143,8 @@ spec:
           sawtooth-processor -C tcp://localhost:4004
               
       - name: validator 
-        image: hyperledger/sawtooth-validator:latest
+        image: thanhtu/sawtooth-validator-optimized:latest
+        imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 4004
           - containerPort: 8800
@@ -136,15 +153,12 @@ spec:
         - "-c"
         - |
           sawadm keygen --force && \
-          sawadm genesis && \
           sawtooth-validator \
               --scheduler parallel \
               --bind network:tcp://0.0.0.0:8800 \
               --bind component:tcp://0.0.0.0:4004 \
-              --endpoint tcp://0.0.0.0:8800 \
-              --peering dynamic \
-              --seeds tcp://sawtooth.node2:8800 \
-              --network trust
+              --endpoint tcp://sawtooth.node3:8800 \
+              --peers tcp://sawtooth.node2:8800
 
 
 --- 
@@ -152,7 +166,7 @@ apiVersion: v1
 kind: Service
 metadata:
    namespace: node3
-   name: sawtooth-1
+   name: sawtooth
 spec:
  selector:
    app: hyperledger      
@@ -176,12 +190,16 @@ metadata:
     name: node4
 
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: node4
-  name: sawtooth-2
+  name: sawtooth
 spec:
+  selector:
+    matchLabels:
+      app: hyperledger
+      org: node4
   replicas: 1
   strategy: {}
   template:
@@ -197,15 +215,17 @@ spec:
       containers:
 
       - name: settings-tp
-        image: hyperledger/sawtooth-settings-tp:latest        
+        image: hyperledger/sawtooth-settings-tp:latest     
+        imagePullPolicy: IfNotPresent   
         command: 
         - bash
         - "-c"
         - |
-          settings-tp -C tcp://localhost:4004                 
+          settings-tp -C tcp://localhost:4004
 
       - name: processor 
         image: thanhtu/sawtooth-processor:latest
+        imagePullPolicy: IfNotPresent
         command: 
         - bash 
         - "-c"
@@ -213,7 +233,8 @@ spec:
           sawtooth-processor -C tcp://localhost:4004
               
       - name: validator 
-        image: hyperledger/sawtooth-validator:latest
+        image: thanhtu/sawtooth-validator-optimized:latest
+        imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 4004
           - containerPort: 8800
@@ -222,15 +243,12 @@ spec:
         - "-c"
         - |
           sawadm keygen --force && \
-          sawadm genesis && \
           sawtooth-validator \
               --scheduler parallel \
               --bind network:tcp://0.0.0.0:8800 \
               --bind component:tcp://0.0.0.0:4004 \
-              --endpoint tcp://0.0.0.0:8800 \
-              --peering dynamic \
-              --seeds tcp://sawtooth.node2:8800 \
-              --network trust
+              --endpoint tcp://sawtooth.node4:8800 \
+              --peers tcp://sawtooth.node2:8800
 
 
 --- 
@@ -238,7 +256,7 @@ apiVersion: v1
 kind: Service
 metadata:
    namespace: node4
-   name: sawtooth-2
+   name: sawtooth
 spec:
  selector:
    app: hyperledger      
