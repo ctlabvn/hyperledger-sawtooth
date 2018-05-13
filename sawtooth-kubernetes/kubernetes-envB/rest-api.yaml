@@ -22,7 +22,7 @@ spec:
     spec:      
       containers:
       - name: sawtooth-rest-api
-        image: hyperledger/sawtooth-rest_api:latest
+        image: thanhtu/sawtooth-validator-optimized:latest
         ports:
         - containerPort: 8080
           protocol: TCP
@@ -45,10 +45,9 @@ spec:
    app: sawtooth-rest-api
  type: NodePort
  ports:
-  - name: http
+  - name: endpoint
     protocol: TCP
     port: 8080
     targetPort: 8080
-    # targetPort: 38080
     nodePort: 30080
 
