@@ -4,12 +4,16 @@ metadata:
     name: node2
 
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: node2
   name: sawtooth
 spec:
+  selector:
+    matchLabels:
+      app: hyperledger
+      org: node2
   replicas: 1
   strategy: {}
   template:
@@ -31,7 +35,7 @@ spec:
         - bash
         - "-c"
         - |
-          settings-tp -C tcp://localhost:4004                 
+          settings-tp -C tcp://localhost:4004
 
       - name: processor 
         image: thanhtu/sawtooth-processor:latest
@@ -58,14 +62,12 @@ spec:
         - "-c"
         - |
           sawadm keygen --force && \
-          sawadm genesis && \          
-          sawtooth-validator -vv \
+          sawadm genesis && \
+          sawtooth-validator \
               --scheduler parallel \
               --bind network:tcp://0.0.0.0:8800 \
               --bind component:tcp://0.0.0.0:4004 \
-              --endpoint tcp://sawtooth.node2:8800 \
-              --peering dynamic \
-              --network trust
+              --endpoint tcp://sawtooth.node2:8800
 
 
 --- 
@@ -98,12 +100,16 @@ metadata:
     name: node3
 
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: node3
   name: sawtooth
 spec:
+  selector:
+    matchLabels:
+      app: hyperledger
+      org: node3
   replicas: 1
   strategy: {}
   template:
@@ -125,7 +131,7 @@ spec:
         - bash
         - "-c"
         - |
-          settings-tp -C tcp://localhost:4004                 
+          settings-tp -C tcp://localhost:4004
 
       - name: processor 
         image: thanhtu/sawtooth-processor:latest
@@ -147,14 +153,12 @@ spec:
         - "-c"
         - |
           sawadm keygen --force && \
-          sawtooth-validator -vv \
+          sawtooth-validator \
               --scheduler parallel \
               --bind network:tcp://0.0.0.0:8800 \
               --bind component:tcp://0.0.0.0:4004 \
               --endpoint tcp://sawtooth.node3:8800 \
-              --peering dynamic \
-              --network trust \
-              --seeds tcp://sawtooth.node2:8800
+              --peers tcp://sawtooth.node2:8800
 
 
 --- 
@@ -186,12 +190,16 @@ metadata:
     name: node4
 
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: node4
   name: sawtooth
 spec:
+  selector:
+    matchLabels:
+      app: hyperledger
+      org: node4
   replicas: 1
   strategy: {}
   template:
@@ -213,7 +221,7 @@ spec:
         - bash
         - "-c"
         - |
-          settings-tp -C tcp://localhost:4004                 
+          settings-tp -C tcp://localhost:4004
 
       - name: processor 
         image: thanhtu/sawtooth-processor:latest
@@ -235,14 +243,12 @@ spec:
         - "-c"
         - |
           sawadm keygen --force && \
-          sawtooth-validator -vv \
+          sawtooth-validator \
               --scheduler parallel \
               --bind network:tcp://0.0.0.0:8800 \
               --bind component:tcp://0.0.0.0:4004 \
               --endpoint tcp://sawtooth.node4:8800 \
-              --peering dynamic \
-              --network trust \
-              --seeds tcp://sawtooth.node2:8800
+              --peers tcp://sawtooth.node2:8800
 
 
 --- 
