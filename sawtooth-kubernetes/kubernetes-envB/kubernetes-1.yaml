@@ -19,7 +19,9 @@ spec:
     metadata:
       labels:
         app: validator-1
-    spec:      
+    spec:
+      nodeSelector:
+        node2: node2      
       containers:
       - name: validator-1
         image: thanhtu/sawtooth-validator-optimized:latest
@@ -36,9 +38,8 @@ spec:
                 --bind network:tcp://0.0.0.0:8800 \
                 --bind component:tcp://0.0.0.0:4004 \
                 --endpoint tcp://sawtooth-1.sawtooth-test:8800 \
-                --seeds tcp://sawtooth.sawtooth-test:8800 \
-                --peering dynamic \
-                --scheduler parallel \
+                --peers tcp://sawtooth.sawtooth-test:8800 \
+                --scheduler parallel
       - name: sawtooth-settings-tp-1
         image: hyperledger/sawtooth-settings-tp:latest
         command:

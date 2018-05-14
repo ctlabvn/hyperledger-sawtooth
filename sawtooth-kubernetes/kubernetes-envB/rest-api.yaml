@@ -19,7 +19,9 @@ spec:
     metadata:
       labels:
         app: sawtooth-rest-api
-    spec:      
+    spec:
+      nodeSelector:
+        node4: node4      
       containers:
       - name: sawtooth-rest-api
         image: thanhtu/sawtooth-validator-optimized:latest
