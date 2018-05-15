@@ -1,0 +1,19 @@
+{
+  "name": "sawtooth-kubernetes",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agiletechvn/sawtooth-caliper.git"
+  },
+  "scripts": {
+    "startA": "kubectl apply -f sawtooth-rest-api.yaml -f sawtooth-validator-envA.yaml",
+    "startB": "kubectl apply -f sawtooth-rest-api.yaml -f sawtooth-validator-envB.yaml",    
+    "stopA": "kubectl delete -f sawtooth-rest-api.yaml -f sawtooth-validator-envA.yaml",
+    "stopB": "kubectl delete -f sawtooth-rest-api.yaml -f sawtooth-validator-envB.yaml"
+  },
+  "engines": {
+    "node": ">=8.0.0",
+    "npm": ">=2.15.9"
+  },
+  "license": "Apache-2.0"
+}

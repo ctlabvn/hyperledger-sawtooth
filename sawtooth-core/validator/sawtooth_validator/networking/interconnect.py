@@ -33,6 +33,7 @@ import zmq.asyncio
 
 from sawtooth_validator.concurrent.threadpool import \
     InstrumentedThreadPoolExecutor
+    # , InstrumentedProcessPoolExecutor
 from sawtooth_validator.concurrent.thread import InstrumentedThread
 from sawtooth_validator.exceptions import LocalConfigurationError
 from sawtooth_validator.protobuf import validator_pb2
@@ -49,6 +50,11 @@ from sawtooth_validator.protobuf.authorization_pb2 import \
     AuthorizationChallengeSubmit
 from sawtooth_validator.protobuf.authorization_pb2 import RoleType
 from sawtooth_validator import metrics
+
+# from tornado.platform.asyncio import AnyThreadEventLoopPolicy
+import uvloop
+import sys
+import time
 
 LOGGER = logging.getLogger(__name__)
 COLLECTOR = metrics.get_collector(__name__)
@@ -473,8 +479,18 @@ class _SendReceive(object):
                         "Attempting to start socket in secure mode, "
                         "but complete server keys were not provided")
 
-            self._event_loop = zmq.asyncio.ZMQEventLoop()
+            # self._event_loop = None
+
+            # self._event_loop = zmq.asyncio.ZMQEventLoop()            
+            # asyncio.set_event_loop(self._event_loop)
+
+            # asyncio.set_event_loop_policy(AnyThreadEventLoopPolicy())
+            # self._event_loop = asyncio.get_event_loop()            
+            
+            self._event_loop = uvloop.new_event_loop()
             asyncio.set_event_loop(self._event_loop)
+
+             
             self._context = zmq.asyncio.Context()
             self._socket = self._context.socket(socket_type)
 
@@ -555,10 +571,11 @@ class _SendReceive(object):
 
         asyncio.ensure_future(self._notify_started(), loop=self._event_loop)
 
-        self._event_loop.run_forever()
-        # event_loop.stop called elsewhere will cause the loop to break out
-        # of run_forever then it can be closed and the context destroyed.
-        self._event_loop.close()
+        if self._event_loop is not None:
+            self._event_loop.run_forever()
+            # event_loop.stop called elsewhere will cause the loop to break out
+            # of run_forever then it can be closed and the context destroyed.
+            self._event_loop.close()
         self._close_sockets()
 
     def _close_sockets(self):
@@ -594,7 +611,8 @@ class _SendReceive(object):
 
     @asyncio.coroutine
     def _stop_event_loop(self):
-        self._event_loop.stop()
+        if self._event_loop is not None:
+            self._event_loop.stop()
 
     @asyncio.coroutine
     def _stop(self):
@@ -667,6 +685,7 @@ class Interconnect(object):
         """
         self._endpoint = endpoint
         self._public_endpoint = public_endpoint
+        # self._future_callback_threadpool = InstrumentedProcessPoolExecutor(
         self._future_callback_threadpool = InstrumentedThreadPoolExecutor(
             max_workers=max_future_callback_workers,
             name='FutureCallback')
@@ -696,7 +715,8 @@ class Interconnect(object):
                     self._roles[role] = AuthorizationType.TRUST
 
         self._authorize = authorize
-        self._signer = signer
+        self._signer = signer        
+        self._public_key = signer.get_public_key().as_hex() if signer is not None else None
 
         self._send_receive_thread = _SendReceive(
             "ServerThread",
@@ -867,7 +887,7 @@ class Interconnect(object):
                 if auth_type["trust"]:
                     auth_trust_request = AuthorizationTrustRequest(
                         roles=auth_type["trust"],
-                        public_key=self._signer.get_public_key().as_hex())
+                        public_key=self._public_key)
 
                     connection.send(
                         validator_pb2.Message.AUTHORIZATION_TRUST_REQUEST,
@@ -906,7 +926,7 @@ class Interconnect(object):
         if auth_type["trust"]:
             auth_trust_request = AuthorizationTrustRequest(
                 roles=[RoleType.Value("NETWORK")],
-                public_key=self._signer.get_public_key().as_hex())
+                public_key=self._public_key)
             self._safe_send(
                 validator_pb2.Message.AUTHORIZATION_TRUST_REQUEST,
                 auth_trust_request.SerializeToString(),
@@ -941,7 +961,7 @@ class Interconnect(object):
         signature = self._signer.sign(payload)
 
         auth_challenge_submit = AuthorizationChallengeSubmit(
-            public_key=self._signer.get_public_key().as_hex(),
+            public_key=self._public_key,
             signature=signature,
             roles=[RoleType.Value("NETWORK")]
         )
@@ -966,7 +986,7 @@ class Interconnect(object):
         signature = self._signer.sign(payload)
 
         auth_challenge_submit = AuthorizationChallengeSubmit(
-            public_key=self._signer.get_public_key().as_hex(),
+            public_key=self._public_key,
             signature=signature,
             roles=[RoleType.Value("NETWORK")])
 

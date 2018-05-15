@@ -78,6 +78,7 @@ class IndexedDatabase(database.Database):
             readahead=False,
             subdir=False,
             create=create,
+            max_readers=200,            
             max_dbs=len(indexes) + 1,
             lock=True)
 
@@ -107,7 +108,7 @@ class IndexedDatabase(database.Database):
     # pylint: disable=no-value-for-parameter
     def __len__(self):
         with self._lmdb.begin(db=self._main_db) as txn:
-            return txn.stat()['entries']
+            return txn.stat(self._main_db)['entries']
 
     def count(self, index=None):
         if index is None:
@@ -117,7 +118,7 @@ class IndexedDatabase(database.Database):
                 raise ValueError('Index {} does not exist'.format(index))
 
             with self._lmdb.begin(db=self._indexes[index][0]) as txn:
-                return txn.stat()['entries']
+                return txn.stat(self._main_db)['entries']
 
     def contains_key(self, key, index=None):
         if index is not None and index not in self._indexes:

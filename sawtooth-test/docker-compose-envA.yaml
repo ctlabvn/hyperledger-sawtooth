@@ -1,0 +1,62 @@
+# Copyright 2018 Agiletech Viet Nam
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# ------------------------------------------------------------------------------
+
+version: "3"
+
+services:
+
+  # this one will run by validator, so no need to re-create
+  settings-tp:
+    image: hyperledger/sawtooth-settings-tp:latest
+    container_name: sawtooth-settings-tp    
+    # depends_on:
+      # - validator
+    entrypoint: settings-tp -C tcp://validator:4004  
+  
+  processor:
+    image: thanhtu/sawtooth-processor:latest
+    container_name: sawtooth-processor    
+    # tty: true        
+    # command: /bin/bash
+    command: bash -c "sawtooth-processor -C tcp://validator:4004"  
+
+  validator:
+    image: thanhtu/sawtooth-validator-optimized:latest  
+    # image: thanhtu/sawtooth-validator-pypy3
+    # image: thanhtu/sawtooth-dev-python
+    container_name: sawtooth-validator
+    expose:
+      - 4004
+    ports:
+      - "34004:4004"           
+    command: |
+      bash -c "
+        sawadm keygen --force && \
+        sawadm genesis && \
+        sawtooth-validator \
+            --scheduler parallel \
+            --bind network:tcp://eth0:8800 \
+            --bind component:tcp://eth0:4004 \
+            --endpoint tcp://validator:8800 \"
+
+  rest-api:
+    image: hyperledger/sawtooth-rest_api:latest
+    container_name: sawtooth-rest-api
+    ports:
+      - "38080:8080"
+    # no need to re-create rest-api for validator
+    # depends_on:
+    #   - validator
+    entrypoint: sawtooth-rest-api -C tcp://validator:4004 --bind rest-api:8080  

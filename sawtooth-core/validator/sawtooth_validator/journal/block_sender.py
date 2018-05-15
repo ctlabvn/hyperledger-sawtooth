@@ -53,8 +53,9 @@ class BroadcastBlockSender(BlockSender):
         clone = Block()
         clone.header = block.header
         clone.header_signature = block.header_signature
-        clone.batches.extend([
+        # tupple is faster than list
+        clone.batches.extend((
             batch for batch in block.batches
             if batch.header_signature in keep_batches
-        ])
+        ))
         return clone

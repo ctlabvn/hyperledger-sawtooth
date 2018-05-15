@@ -1,3 +1,0 @@
-[console_scripts]
-sawtooth-validator = sawtooth_validator.server.cli:main
-

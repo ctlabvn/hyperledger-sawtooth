@@ -1,0 +1,26 @@
+{
+  "name": "sawtooth-test",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agiletechvn/sawtooth-caliper.git"
+  },
+  "scripts": {
+    "start": "docker-compose up -d",
+    "startA": "docker-compose -f docker-compose-envA.yaml up -d",
+    "startB": "docker-compose -f docker-compose-envB.yaml up -d",
+    "restart": "docker-compose up -d --force-recreate validator",
+    "start-validator":
+      "docker exec -it sawtooth-validator bash -c 'start-validator'",
+    "restart-validator":
+      "docker exec -it sawtooth-validator bash -c 'start-validator restart'",
+    "stop": "docker-compose down",
+    "stopA": "docker-compose -f docker-compose-envA.yaml down",
+    "stopB": "docker-compose -f docker-compose-envB.yaml down"
+  },
+  "engines": {
+    "node": ">=8.0.0",
+    "npm": ">=2.15.9"
+  },
+  "license": "Apache-2.0"
+}

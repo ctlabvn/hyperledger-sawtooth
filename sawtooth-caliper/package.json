@@ -7,8 +7,19 @@
   },
   "scripts": {
     "test": "node ./scripts/test.js",
+    "test-query":
+      "npm test -- simple -c ./benchmark/simple/config-querystate.json  --output-format console",
+    "test-open":
+      "npm test -- simple -c ./benchmark/simple/config-openstate.json  --output-format console",
+    "test-both-1":
+      "npm test -- simple -c ./benchmark/simple/config.json --output-format console",
+    "test-both-3":
+      "npm test -- simple -c ./benchmark/simple/config-3.json --output-format console",
     "list": "node ./scripts/list.js",
-    "startclient": "node ./src/comm/client/zoo-client.js"
+    "startclient": "node ./src/comm/client/zoo-client.js",
+    "start": "node ./src/contract/sawtooth/simple/processor/index.js",
+    "test-all":
+      "npm test -- simple -c ./benchmark/simple/config.json  --output-format console"
   },
   "engines": {
     "node": ">=8.0.0",
@@ -20,6 +31,7 @@
     "cbor": "^3.0.3",
     "commander": "^2.11.0",
     "dockerode": "^2.5.0",
+    "express": "^4.16.3",
     "fs-extra": "^4.0.2",
     "jsrsasign": "^8.0.4",
     "mustache": "^2.3.0",

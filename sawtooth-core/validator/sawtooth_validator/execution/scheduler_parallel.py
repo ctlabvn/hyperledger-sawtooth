@@ -74,7 +74,6 @@ class Tree:
 
     def _walk_to_address(self, address):
         node = self._root
-
         yield node
 
         # A node's address is always a proper prefix of the addresses

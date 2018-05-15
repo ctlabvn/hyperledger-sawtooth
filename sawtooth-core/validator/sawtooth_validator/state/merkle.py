@@ -39,7 +39,7 @@ def _encode(value):
     return cbor.dumps(value, sort_keys=True)
 
 
-def _hash(stuff):
+def _hash(stuff):    
     return hashlib.sha512(stuff).hexdigest()[:64]
 
 
@@ -59,8 +59,8 @@ class MerkleDatabase(object):
         self.set_merkle_root(merkle_root)
 
     def __iter__(self):
-        for item in self._yield_iter('', self._root_hash):
-            yield item
+        yield from self._yield_iter('', self._root_hash)
+            # yield item
 
     def _yield_iter(self, path, hash_key):
         try:
@@ -76,8 +76,8 @@ class MerkleDatabase(object):
             yield (path, _decode(node["v"]))
 
         for child in node["c"]:
-            for value in self._yield_iter(path + child, node["c"][child]):
-                yield value
+            yield from self._yield_iter(path + child, node["c"][child])
+                # yield value
 
     def __contains__(self, item):
         """Does the tree contain an address.
@@ -110,6 +110,7 @@ class MerkleDatabase(object):
     @classmethod
     def hash(cls, stuff):
         return hashlib.sha512(stuff).hexdigest()[:64]
+        # return stuff.decode("base64").encode("hex")[:64]
 
     def _get_by_hash(self, key_hash):
         try:

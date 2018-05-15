@@ -2,8 +2,10 @@
   "sawtooth": {
     "network": {
       "restapi": {
-        "url": "http://127.0.0.1:38080"
+        "url": "http://192.168.1.106:30080"
       }
-    }
+    },
+    "privateKey":
+      "49208c94630784c5055f99be52b6877129598c1e7e3aab4e3fd16ca32d36accb"
   }
 }

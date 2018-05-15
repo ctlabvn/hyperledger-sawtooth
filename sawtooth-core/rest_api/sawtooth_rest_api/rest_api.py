@@ -41,6 +41,7 @@ from sawtooth_rest_api.config import load_toml_rest_api_config
 from sawtooth_rest_api.config import merge_rest_api_config
 from sawtooth_rest_api.config import RestApiConfig
 
+import uvloop
 
 LOGGER = logging.getLogger(__name__)
 DISTRIBUTION_NAME = 'sawtooth-rest-api'
@@ -167,7 +168,10 @@ class MetricsRegistryWrapper():
 
 
 def main():
-    loop = ZMQEventLoop()
+    # loop = ZMQEventLoop()
+    # asyncio.set_event_loop(loop)
+
+    loop = uvloop.new_event_loop()
     asyncio.set_event_loop(loop)
 
     connection = None

@@ -1,0 +1,10 @@
+if [ `command -v python3` ]; then        
+  PYTHON=python3
+elif [ `command -v pypy3` ]; then    
+  PYTHON=pypy3
+else
+  echo "Can not find python3 or pypy3"
+  exit 1
+fi  
+
+$PYTHON bin/sawtooth-rest-api -C tcp://localhost:4004 --bind 0.0.0.0:8080

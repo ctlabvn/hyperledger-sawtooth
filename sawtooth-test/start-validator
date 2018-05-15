@@ -1,0 +1,35 @@
+# keys are under /etc/sawtooth/keys, /root/.sawtooth/keys
+# block, genesis, merkle, receipts are under /var/lib/sawtooth/
+
+if [ `command -v python3` ]; then        
+  PYTHON=python3
+elif [ `command -v pypy3` ]; then    
+  PYTHON=pypy3
+else
+  echo "Can not find python3 or pypy3"
+  exit 1
+fi  
+
+if [ ! -d "cli/sawtooth_cli/protobuf" ]; then
+  $PYTHON -m pip install grpcio-tools
+  $PYTHON bin/protogen
+fi
+
+pid=$(ps aux | grep $PYTHON | grep -v grep | awk '{print $2}')
+if [[ ! -z $pid ]];then
+  kill $pid
+fi 
+
+if [[ $1 != 'restart' ]];then          
+  # create from scratch if not restart
+  $PYTHON bin/sawadm keygen --force 
+  # $PYTHON bin/sawtooth keygen my_key --force 
+  # $PYTHON bin/sawset genesis -k /root/.sawtooth/keys/my_key.priv -o /root/.sawtooth/config-genesis.batch 
+  # $PYTHON bin/sawset proposal create -k /root/.sawtooth/keys/my_key.priv sawtooth.publisher.max_batches_per_block=100 -o /root/.sawtooth/poet-settings.batch     
+fi
+  
+rm -rf /var/lib/sawtooth/*
+$PYTHON bin/sawadm genesis
+# $PYTHON bin/sawadm genesis /root/.sawtooth/config-genesis.batch /root/.sawtooth/poet-settings.batch
+# finally run validator
+$PYTHON bin/sawtooth-validator --scheduler parallel --endpoint tcp://0.0.0.0:8800 --bind component:tcp://0.0.0.0:4004 --bind network:tcp://0.0.0.0:8800

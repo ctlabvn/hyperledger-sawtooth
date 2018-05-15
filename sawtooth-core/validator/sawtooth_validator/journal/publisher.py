@@ -392,10 +392,10 @@ class _CandidateBlock(object):
                     # one in the list.
                     bad_batches.append(batch)
                     pending_batches.clear()
-                    pending_batches.extend([
+                    pending_batches.extend((
                         x for x in self._pending_batches
                         if x not in bad_batches
-                    ])
+                    ))
                     return None
                 else:
                     builder.add_batch(batch)
@@ -416,8 +416,8 @@ class _CandidateBlock(object):
                          "it", builder)
             # return all valid batches to the pending_batches list
             pending_batches.clear()
-            pending_batches.extend([x for x in self._pending_batches
-                                    if x not in bad_batches])
+            pending_batches.extend((x for x in self._pending_batches
+                                    if x not in bad_batches))
             return None
 
         builder.set_state_hash(state_hash)
@@ -496,6 +496,7 @@ class BlockPublisher(object):
         self._chain_head = chain_head  # block (BlockWrapper)
         self._squash_handler = squash_handler
         self._identity_signer = identity_signer
+        self._public_key = identity_signer.get_public_key().as_hex()
         self._data_dir = data_dir
         self._config_dir = config_dir
         self._permission_verifier = permission_verifier
@@ -540,11 +541,13 @@ class BlockPublisher(object):
             observer.notify_batch_pending(batch)
 
     def can_accept_batch(self):
+        # when rate is 100, if pending is 201, it can not accep batch
         return len(self._pending_batches) < self._get_current_queue_limit()
 
     def _get_current_queue_limit(self):
         # Limit the number of batches to 2 times the publishing average.  This
         # allows the queue to grow geometrically, if the queue is drained.
+        # such as if TPS is 100, queue_limit will be 200
         return 2 * self._publish_count_average.value
 
     def get_current_queue_info(self):
@@ -577,14 +580,15 @@ class BlockPublisher(object):
             chain_head.state_root_hash,
             default_value=0))
 
-        public_key = self._identity_signer.get_public_key().as_hex()
+        # public_key = self._identity_signer.get_public_key().as_hex()
         consensus = consensus_module.\
             BlockPublisher(block_cache=self._block_cache,
                            state_view_factory=self._state_view_factory,
                            batch_publisher=self._batch_publisher,
                            data_dir=self._data_dir,
                            config_dir=self._config_dir,
-                           validator_id=public_key)
+                           # validator_id=public_key)
+                           validator_id=self._public_key)
 
         batch_injectors = []
         if self._batch_injector_factory is not None:
@@ -596,7 +600,9 @@ class BlockPublisher(object):
         block_header = BlockHeader(
             block_num=chain_head.block_num + 1,
             previous_block_id=chain_head.header_signature,
-            signer_public_key=public_key)
+            # signer_public_key=public_key)
+            signer_public_key=self._public_key)
+
         block_builder = BlockBuilder(block_header)
 
         if not consensus.initialize_block(block_builder.block_header):
@@ -626,7 +632,8 @@ class BlockPublisher(object):
             max_batches,
             batch_injectors,
             SettingsView(state_view),
-            public_key)
+            # public_key)
+            self._public_key)
 
         for batch in self._pending_batches:
             if self._candidate_block.can_add_batch:

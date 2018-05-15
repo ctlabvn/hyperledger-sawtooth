@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+    name: node1
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: node1
+  name: rest-api
+spec:
+  selector:
+    matchLabels:
+      app: hyperledger
+      org: node1
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+       app: hyperledger       
+       org: node1
+    spec:
+      # nodeSelector:
+      #   # assume all org node can access to docker
+      #   org: node1
+      containers:
+      - name: rest-api
+        image: hyperledger/sawtooth-rest_api:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 8080
+        command: 
+        - bash
+        - "-c"
+        - |
+          sawtooth-rest-api -C tcp://sawtooth.node4:4004 --bind 0.0.0.0:8080
+
+--- 
+
+apiVersion: v1
+kind: Service
+metadata:
+   namespace: node1
+   name: rest-api
+spec:
+ selector:
+   app: hyperledger      
+   org: node1
+ type: NodePort
+ ports:
+   - name: endpoint
+     protocol: TCP
+     port: 8080
+     targetPort: 8080
+     nodePort: 30080
+
+
+
+
+
+
+
+
+

@@ -25,7 +25,7 @@ from sawtooth_validator.networking.dispatch import HandlerStatus
 
 LOGGER = logging.getLogger(__name__)
 
-DEFAULT_MAX_OCCUPANCY = 10
+DEFAULT_MAX_OCCUPANCY = 100
 
 
 class ProcessorRegisterHandler(Handler):
