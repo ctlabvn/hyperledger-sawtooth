@@ -1,1 +1,0 @@
-docker-compose -f docker-compose-mounted.yaml up --remove-orphans -d
