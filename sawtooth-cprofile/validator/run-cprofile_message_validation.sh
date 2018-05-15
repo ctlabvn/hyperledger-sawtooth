@@ -1,0 +1,1 @@
+python3 ./cprof_message_validation.py
