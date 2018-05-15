@@ -40,10 +40,7 @@ def test_get_multi():
     """
     do_put()
 
-    def do_get_multi():
-        return db.get_multi(['3', '2'])
-
-    multi_result = benchmark(do_get_multi)
+    db.get_multi(['3', '2'])
     # get multi via the primary key, nolock return array instead of tupple
 
 
@@ -51,8 +48,7 @@ def test_delete():
     """Test that items are deleted, including their index references.
     """
     do_put()
-
-    benchmark(db.delete, '3')
+    db.delete('3')
 
 
 def test_update():
@@ -64,11 +60,13 @@ def test_update():
 
 
 if __name__ == '__main__':
-    print("\n====== cProfile: message_validation.py ======\n")
+    print("\n====== cProfile: nolock_db.py ======\n")
     pr = cProfile.Profile()
     pr.enable()
 
     test_update()
+    test_get_multi()
+    test_delete()
 
     pr.disable()
     pr.print_stats(sort='time')
