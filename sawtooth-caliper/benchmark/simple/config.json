@@ -24,13 +24,6 @@
         },
         "callback": "benchmark/simple/open.js"
       }
-      // ,
-      // {
-      //   "label": "query",
-      //   "txNumber": [500],
-      //   "rateControl": [{ "type": "fixed-rate", "opts": { "tps": 200 } }],
-      //   "callback": "benchmark/simple/query.js"
-      // }
     ]
   },
   "monitor": {
