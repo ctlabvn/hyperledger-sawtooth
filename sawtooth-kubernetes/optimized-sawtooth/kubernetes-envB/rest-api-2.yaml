@@ -24,7 +24,7 @@ spec:
         node4: node4      
       containers:
       - name: sawtooth-rest-api
-        image: hyperledger/sawtooth-validator:latest
+        image: thanhtu/sawtooth-validator-optimized:latest
         ports:
         - containerPort: 8080
           protocol: TCP

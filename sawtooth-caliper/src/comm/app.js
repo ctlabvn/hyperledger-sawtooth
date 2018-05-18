@@ -63,7 +63,7 @@ app.listen(3000, function() {
     sawtooth: {
       network: {
         restapi: {
-          url: 'http://192.168.1.106:30080'
+          url: 'http://192.168.1.159:30080'
         }
       }
     },
