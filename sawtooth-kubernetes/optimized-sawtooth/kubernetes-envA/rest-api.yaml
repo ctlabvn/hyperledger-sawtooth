@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-    name: sawtooth-test
+    name: sawtooth-test-a
 
 ---
 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: sawtooth-test
+  namespace: sawtooth-test-a
   name: sawtooth-rest-api
 spec:
   selector:
@@ -31,7 +31,7 @@ spec:
         command:
         - sawtooth-rest-api
         - "-C"
-        - "tcp://sawtooth.sawtooth-test:4004"
+        - "tcp://sawtooth.sawtooth-test-a:4004"
         - "--bind"
         - 0.0.0.0:8080
 
@@ -41,7 +41,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: sawtooth-api
-  namespace: sawtooth-test
+  namespace: sawtooth-test-a
 spec:
  selector:
    app: sawtooth-rest-api
@@ -51,5 +51,5 @@ spec:
     protocol: TCP
     port: 8080
     targetPort: 8080
-    nodePort: 30080
+    nodePort: 32080
 

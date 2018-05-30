@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-    name: sawtooth-test
+    name: sawtooth-test-a
 
 ---
 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: sawtooth-test
+  namespace: sawtooth-test-a
   name: validator
 spec:
   selector:
@@ -37,7 +37,7 @@ spec:
             sawtooth-validator \
                 --bind network:tcp://0.0.0.0:8800 \
                 --bind component:tcp://0.0.0.0:4004 \
-                --endpoint tcp://sawtooth.sawtooth-test:8800 \
+                --endpoint tcp://sawtooth.sawtooth-test-a:8800 \
                 --scheduler parallel
       - name: sawtooth-settings-tp
         image: hyperledger/sawtooth-settings-tp:latest
@@ -58,7 +58,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: sawtooth
-  namespace: sawtooth-test
+  namespace: sawtooth-test-a
 spec:
  selector:
    app: validator
