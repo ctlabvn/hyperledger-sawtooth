@@ -44,7 +44,7 @@ services:
   #       \""
 
   validator:
-    image: thanhtu/sawtooth-validator    
+    image: thanhtu/sawtooth-validator-optimized:latest    
     # image: thanhtu/sawtooth-validator-pypy3
     # image: thanhtu/sawtooth-dev-python
     container_name: sawtooth-validator

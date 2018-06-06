@@ -1,0 +1,75 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+    name: sawtooth-test
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: sawtooth-test
+  name: validator-1
+spec:
+  selector:
+    matchLabels:
+      app: validator-1
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: validator-1
+    spec:
+      nodeSelector:
+        node2: node2      
+      containers:
+      - name: validator-1
+        image: thanhtu/sawtooth-validator-optimized:latest
+        ports:
+        - containerPort: 4004
+        - containerPort: 8800
+        command: 
+        - bash
+        - "-c"
+        - |
+          sawadm keygen --force && \
+            sawtooth-validator \
+                --bind network:tcp://0.0.0.0:8800 \
+                --bind component:tcp://0.0.0.0:4004 \
+                --endpoint tcp://sawtooth-1.sawtooth-test:8800 \
+                --peers tcp://sawtooth.sawtooth-test:8800 \
+                --scheduler parallel
+      - name: sawtooth-settings-tp-1
+        image: hyperledger/sawtooth-settings-tp:latest
+        command:
+        - settings-tp
+        - "-C"
+        - "tcp://localhost:4004"
+      - name: processor 
+        image: thanhtu/sawtooth-processor:latest
+        command: 
+        - bash 
+        - "-c"
+        - |
+          sawtooth-processor -C tcp://localhost:4004
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sawtooth-1
+  namespace: sawtooth-test
+spec:
+ selector:
+   app: validator-1
+ type: ClusterIP
+ ports:
+  - name: component
+    protocol: TCP
+    port: 4004
+    targetPort: 4004     
+     
+  - name: endpoint
+    protocol: TCP
+    port: 8800
+    targetPort: 8800

@@ -1,0 +1,55 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+    name: sawtooth-test
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: sawtooth-test
+  name: sawtooth-rest-api-2
+spec:
+  selector:
+    matchLabels:
+      app: sawtooth-rest-api-2
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sawtooth-rest-api-2
+    spec:
+      nodeSelector:
+        node4: node4      
+      containers:
+      - name: sawtooth-rest-api
+        image: thanhtu/sawtooth-validator-optimized:latest
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        command:
+        - sawtooth-rest-api
+        - "-C"
+        - "tcp://sawtooth-2.sawtooth-test:4004"
+        - "--bind"
+        - 0.0.0.0:8080
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sawtooth-api-2
+  namespace: sawtooth-test
+spec:
+ selector:
+   app: sawtooth-rest-api-2
+ type: NodePort
+ ports:
+  - name: endpoint
+    protocol: TCP
+    port: 8080
+    targetPort: 8080
+    nodePort: 30090
+

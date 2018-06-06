@@ -1,8 +1,8 @@
-const express = require("express")
-const app = express()
-const bodyParser = require("body-parser")
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
 
-var BlockChain = require("./blockchain.js")
+var BlockChain = require('./blockchain.js');
 
 // var childProcess = require("child_process")
 // var exec = childProcess.exec
@@ -27,52 +27,52 @@ var BlockChain = require("./blockchain.js")
 // var outputFolder
 // var outputFormat
 
-var blockchain
+var blockchain;
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => res.send("Hello World!"))
+app.get('/', (req, res) => res.send('Hello World!'));
 
-app.post("/invokeSmartContract", function(req, res) {
-	console.log(req.body.key)
-	res.send("POST invokeSmartContract request received")
+app.post('/invokeSmartContract', function(req, res) {
+  console.log(req.body.key);
+  res.send('POST invokeSmartContract request received');
 
-	let context = undefined
-	let contractID = "simple"
-	let contractVer = "1.0"
-	let date = new Date()
-	let args = {
-		"verb": "open",
-		"account": date.getTime() + "",
-		"money": "10000"
-	}
-	let timeout = 30
+  let context = undefined;
+  let contractID = 'simple';
+  let contractVer = '1.0';
+  let date = new Date();
+  let args = {
+    verb: 'open',
+    account: date.getTime() + '',
+    money: '10000'
+  };
+  let timeout = 30;
 
-	return blockchain.invokeSmartContract(
-		context,
-		contractID,
-		contractVer,
-		args,
-		timeout
-	)
-})
+  return blockchain.invokeSmartContract(
+    context,
+    contractID,
+    contractVer,
+    args,
+    timeout
+  );
+});
 
 app.listen(3000, function() {
-	var network = {
-		"sawtooth": {
-			"network": {
-				"restapi": {
-					"url":"http://127.0.0.1:30080"
-				}
-			}
-		},
-		"file":"/Users/macbook/Documents/work/AgileTech/sawtooth-core-benchmark/sawtooth-caliper/benchmark/simple/sawtooth.json"
-	}
+  var network = {
+    sawtooth: {
+      network: {
+        restapi: {
+          url: 'http://192.168.1.159:30080'
+        }
+      }
+    },
+    file:
+      '/Users/macbook/Documents/work/AgileTech/sawtooth-core-benchmark/sawtooth-caliper/benchmark/simple/sawtooth.json'
+  };
 
-	blockchain = new BlockChain(network)
-})
-
+  blockchain = new BlockChain(network);
+});
 
 // function createReport(config, sut) {
 //     report = new Report();
@@ -171,7 +171,7 @@ app.listen(3000, function() {
 // 							t.fail(
 // 								"failed '" +
 // 									testLabel +
-// 									"' testing, " + 
+// 									"' testing, " +
 // 									(err.stack ? err.stack : err)
 // 							)
 // 							return Promise.resolve()
@@ -383,7 +383,7 @@ app.listen(3000, function() {
 // 					(err, stdout, stderr) => {
 // 						if (err) {
 // 							return reject(err)
-// 						} 
+// 						}
 // 						return resolve()
 // 					}
 // 				)
@@ -459,7 +459,7 @@ app.listen(3000, function() {
 // 			.then(() => {
 // 				client.stop()
 // 				if (
-// 					config.hasOwnProperty("command") && 
+// 					config.hasOwnProperty("command") &&
 // 					config.command.hasOwnProperty("end")
 // 				) {
 // 					console.log(config.command.end)
@@ -475,7 +475,7 @@ app.listen(3000, function() {
 // 					"unexpected error, " + (err.stack ? err.stack : err)
 // 				)
 // 				if (
-// 					config.hasOwnProperty("command") && 
+// 					config.hasOwnProperty("command") &&
 // 					config.command.hasOwnProperty("end")
 // 				) {
 // 					console.log(config.command.end)
@@ -487,4 +487,3 @@ app.listen(3000, function() {
 // 			})
 // 	});
 // })
-

@@ -9,37 +9,37 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: sawtooth-test
-  name: validator-2
+  name: validator
 spec:
   selector:
     matchLabels:
-      app: validator-2
+      app: validator
   replicas: 1
   template:
     metadata:
       labels:
-        app: validator-2
-    spec:      
+        app: validator
+    spec:
+      nodeSelector:
+        node4: node4      
       containers:
-      - name: validator-2
+      - name: validator
         image: thanhtu/sawtooth-validator-optimized:latest
         ports:
-        - containerPort: 4004
-        - containerPort: 8800
+          - containerPort: 4004
+          - containerPort: 8800
         command: 
         - bash
         - "-c"
         - |
           sawadm keygen --force && \
+            sawadm genesis && \
             sawtooth-validator \
-                -vv \
                 --bind network:tcp://0.0.0.0:8800 \
                 --bind component:tcp://0.0.0.0:4004 \
-                --endpoint tcp://sawtooth-2.sawtooth-test:8800 \
-                --seeds tcp://sawtooth.sawtooth-test:8800 \
-                --peering dynamic \
-                --scheduler parallel \
-      - name: sawtooth-settings-tp-2
+                --endpoint tcp://sawtooth.sawtooth-test:8800 \
+                --scheduler parallel
+      - name: sawtooth-settings-tp
         image: hyperledger/sawtooth-settings-tp:latest
         command:
         - settings-tp
@@ -57,11 +57,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: sawtooth-2
+  name: sawtooth
   namespace: sawtooth-test
 spec:
  selector:
-   app: validator-2
+   app: validator
  type: ClusterIP
  ports:
   - name: component
