@@ -6,10 +6,14 @@
     "url": "https://github.com/agiletechvn/sawtooth-caliper.git"
   },
   "scripts": {
-    "startA": "kubectl apply -f sawtooth-rest-api.yaml -f sawtooth-validator-envA.yaml",
-    "startB": "kubectl apply -f sawtooth-rest-api.yaml -f sawtooth-validator-envB.yaml",    
-    "stopA": "kubectl delete -f sawtooth-rest-api.yaml -f sawtooth-validator-envA.yaml",
-    "stopB": "kubectl delete -f sawtooth-rest-api.yaml -f sawtooth-validator-envB.yaml"
+    "startA":
+      "kubectl --context=dind apply -f sawtooth-rest-api.yaml -f sawtooth-validator-envA.yaml",
+    "startB":
+      "kubectl apply -f sawtooth-rest-api.yaml -f sawtooth-validator-envB.yaml",
+    "stopA":
+      "kubectl delete -f sawtooth-rest-api.yaml -f sawtooth-validator-envA.yaml",
+    "stopB":
+      "kubectl delete -f sawtooth-rest-api.yaml -f sawtooth-validator-envB.yaml"
   },
   "engines": {
     "node": ">=8.0.0",

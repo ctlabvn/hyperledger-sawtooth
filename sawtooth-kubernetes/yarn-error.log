@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/thanhtu/.nvm/versions/node/v9.2.0/bin/node /Users/thanhtu/.yarn/bin/yarn.js stopA
+  /Users/thanhtu/.nvm/versions/node/v9.2.0/bin/node /Users/thanhtu/.yarn/bin/yarn.js startA
 
 PATH: 
   /Users/thanhtu/.cargo/bin:/Users/thanhtu/.npm-packages/bin:/Users/thanhtu/.cargo/bin:/Users/thanhtu/.rvm/gems/ruby-2.4.0/bin:/Users/thanhtu/.rvm/gems/ruby-2.4.0@global/bin:/Users/thanhtu/.rvm/rubies/ruby-2.4.0/bin:/opt/local/bin:/opt/local/sbin:/Users/thanhtu/perl5/perlbrew/bin:/Users/thanhtu/.yarn/bin:/Users/thanhtu/.nvm/versions/node/v9.2.0/bin:/Users/thanhtu/Library/Android/sdk/tools:/Users/thanhtu/Library/Android/sdk/platform-tools:/Applications/android-ndk:/Users/thanhtu/MyProjects/Nodejs/reactjs/Clingme/scala-2.9.1:/opt/local/bin:/opt/local/sbin:/Users/thanhtu/.rbenv/shims:/opt/local/bin:/opt/local/sbin:/Users/thanhtu/.rbenv/bin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/opt/X11/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/thanhtu/MyProjects/Nodejs/reactjs/Clingme/play-2.0.4:/Users/thanhtu/go-workspace/bin:/usr/local/opt/go/libexec/bin:/Users/thanhtu/.rvm/bin:/Applications/spark-2.3.0-bin-hadoop2.7/bin:/Users/thanhtu/.rvm/bin
@@ -22,10 +22,14 @@ npm manifest:
       "url": "https://github.com/agiletechvn/sawtooth-caliper.git"
     },
     "scripts": {
-      "startA": "kubectl apply -f sawtooth-rest-api.yaml -f sawtooth-validator-envA.yaml",
-      "startB": "kubectl apply -f sawtooth-rest-api.yaml -f sawtooth-validator-envB.yaml",    
-      "stopA": "kubectl delete -f sawtooth-rest-api.yaml -f sawtooth-validator-envA.yaml",
-      "stopB": "kubectl delete -f sawtooth-rest-api.yaml -f sawtooth-validator-envB.yaml"
+      "startA":
+        "kubectl --context=federation-cluster apply -f sawtooth-rest-api.yaml -f sawtooth-validator-envA.yaml",
+      "startB":
+        "kubectl apply -f sawtooth-rest-api.yaml -f sawtooth-validator-envB.yaml",
+      "stopA":
+        "kubectl delete -f sawtooth-rest-api.yaml -f sawtooth-validator-envA.yaml",
+      "stopB":
+        "kubectl delete -f sawtooth-rest-api.yaml -f sawtooth-validator-envB.yaml"
     },
     "engines": {
       "node": ">=8.0.0",
@@ -44,7 +48,7 @@ Trace:
   Error: Command failed.
   Exit code: 1
   Command: sh
-  Arguments: -c kubectl delete -f sawtooth-rest-api.yaml -f sawtooth-validator-envA.yaml
+  Arguments: -c kubectl --context=federation-cluster apply -f sawtooth-rest-api.yaml -f sawtooth-validator-envA.yaml
   Directory: /Users/thanhtu/MyProjects/Hyperledger/SawTooth/sawtooth-kubernetes
   Output:
   
