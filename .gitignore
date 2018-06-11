@@ -122,6 +122,7 @@
 /perf/intkey_workload/Cargo.lock
 /perf/intkey_workload/target
 
+**/package-lock.json
 **/node_modules
 **/__pycache__/
 **/.cache
